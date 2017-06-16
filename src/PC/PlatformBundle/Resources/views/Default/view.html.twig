@@ -1,0 +1,46 @@
+{# src/PC/PlatformBundle/Resources/views/Default/list.html.twig #}
+
+{% extends "PCPlatformBundle::layout.html.twig" %}
+
+{% block pcplatform_body %}
+
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <h1>{{recipe.name}}</h1>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <img class="img-responsive" src="{{recipe.image.url}}" alt="{{recipe.image.alt}}">
+            </div>
+            <div class="col-xs-8">
+                <div class="row">
+                    <p class="lead">{{recipe.shortDescription}}</p>
+                </div>
+                <div class="row">
+                    <p>Les ingrédients</p>
+                    <ul>
+                        <li>200 g de fraises</li>
+                        <li>150 g de sucre</li>
+                        <li>150 g de farin</li>
+                        <li>3 kg de beurre</li>
+                        <li>300 g confiture au gingembre</li>
+                        <li>10 cl d'huile d'olive pimentée</li>
+                    </ul>
+                </div>
+                <div class="row">
+                    {% for i in recipe.rating %}
+                    <span class="glyphicon glyphicon-star"></span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <p class="text-justify">{{recipe.longDescription}}</p>
+            <div class="col-xs-6 col-sm2 text-center">
+                <a href="{{path('pc_platform_listRecipe')}}" class="btn btn-primary"><span class="glyphicon glyphicon-list"></span> Retour à la liste de recettes</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

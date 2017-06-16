@@ -1,0 +1,11 @@
+pc_platform_homepage:
+    path:     /
+    defaults: { _controller: PCPlatformBundle:Default:index }
+
+pc_platform_listRecipe:
+    path:     /recipes/
+    defaults: { _controller: PCPlatformBundle:Recipe:list }
+
+pc_platform_viewRecipe:
+    path:     /recipe/{id}
+    defaults: { _controller: PCPlatformBundle:Recipe:view }
