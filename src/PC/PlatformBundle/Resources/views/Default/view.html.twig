@@ -27,6 +27,12 @@
                         <li>300 g confiture au gingembre</li>
                         <li>10 cl d'huile d'olive pimentée</li>
                     </ul>
+                    <p>Les category</p>
+                    <ul>
+                        {% for category in recipe.categories %}
+                        <li>{{category.name}}</li>
+                        {% endfor %}
+                    </ul>
                 </div>
                 <div class="row">
                     {% for i in recipe.rating %}

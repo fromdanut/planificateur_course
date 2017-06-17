@@ -14,6 +14,8 @@ class LoadRecipe implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         for ($i=0; $i < 10; $i++) {
+            // La categorie;
+            $cat = $manager->getRepository('PCPlatformBundle:Category')->findOneBy(array('name' => 'italien'));
             // L'image (la meme pour l'ensemble des recettes)
             $image = new Image();
             $image->setUrl("https://images.marmitoncdn.org/recipephotos/multiphoto/57/572cf720-8433-4896-ad45-b0534eac1bb9_normal.jpg");
@@ -43,9 +45,12 @@ class LoadRecipe implements FixtureInterface
             $recipe->setShortDescription('Petite tarte aux fraises de saison qui ravira les petits comme les grands.');
             $recipe->setRating(4);
             $recipe->setImage($image);
+            $recipe->addCategory($cat);
+            # recipe->setDatePublication(new \DateTime());
             // persite l'image et la recipe.
             $manager->persist($image);
             $manager->persist($recipe);
+
         }
         $manager->flush();
     }

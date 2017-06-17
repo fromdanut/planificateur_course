@@ -57,9 +57,22 @@ class Recipe
     private $rating;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_publication", type="datetime")
+     */
+    private $datePublication;
+
+    /**
      * @ORM\OneToOne(targetEntity="PC\PlatformBundle\Entity\Image", cascade={"persist"})
      */
     private $image;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="PC\PlatformBundle\Entity\Category", cascade={"persist"})
+     * @ORM\JoinTable(name="pc_advert_category")
+     */
+    private $categories;
 
     /**
      * Get id
@@ -213,5 +226,71 @@ class Recipe
     public function getRating()
     {
         return $this->rating;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->datePublication = new \DateTime();
+    }
+
+    /**
+     * Add category
+     *
+     * @param \PC\PlatformBundle\Entity\Category $category
+     *
+     * @return Recipe
+     */
+    public function addCategory(\PC\PlatformBundle\Entity\Category $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \PC\PlatformBundle\Entity\Category $category
+     */
+    public function removeCategory(\PC\PlatformBundle\Entity\Category $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * Set datePublication
+     *
+     * @param \DateTime $datePublication
+     *
+     * @return Recipe
+     */
+    public function setDatePublication($datePublication)
+    {
+        $this->datePublication = $datePublication;
+
+        return $this;
+    }
+
+    /**
+     * Get datePublication
+     *
+     * @return \DateTime
+     */
+    public function getDatePublication()
+    {
+        return $this->datePublication;
     }
 }

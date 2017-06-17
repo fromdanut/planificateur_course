@@ -24,7 +24,7 @@ class Recipe
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=True)
      */
     private $name;
 
@@ -57,9 +57,22 @@ class Recipe
     private $rating;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_publication", type="datetime")
+     */
+    private $datePublication;
+
+    /**
      * @ORM\OneToOne(targetEntity="PC\PlatformBundle\Entity\Image", cascade={"persist"})
      */
     private $image;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="PC\PlatformBundle\Entity\Category", cascade={"persist"})
+     * @ORM\JoinTable(name="pc_advert_category")
+     */
+    private $categories;
 
     /**
      * Get id
@@ -189,5 +202,71 @@ class Recipe
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set rating
+     *
+     * @param integer $rating
+     *
+     * @return Recipe
+     */
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
+
+        return $this;
+    }
+
+    /**
+     * Get rating
+     *
+     * @return integer
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->datePublicaion = new \Datetime();
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add category
+     *
+     * @param \PC\PlatformBundle\Entity\Category $category
+     *
+     * @return Recipe
+     */
+    public function addCategory(\PC\PlatformBundle\Entity\Category $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \PC\PlatformBundle\Entity\Category $category
+     */
+    public function removeCategory(\PC\PlatformBundle\Entity\Category $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }
