@@ -1,0 +1,56 @@
+{# src/PC/PlatformBundle/Resources/views/Recipe/form.html.twig #}
+
+<h3>Formulaire de Recette</h3>
+
+<div class="well">
+  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+  {# Les erreurs générales du formulaire. #}
+  {{ form_errors(form) }}
+
+  {# Génération manuelle et éclatée : #}
+  <div class="form-group">
+    {# Génération du label. #}
+    {{ form_label(form.name, "Nom de la recette", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+    {# Affichage des erreurs pour ce champ précis. #}
+    {{ form_errors(form.name) }}
+
+    <div class="col-sm-10">
+      {# Génération de l'input. #}
+      {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+    </div>
+  </div>
+
+  {# shortDescription #}
+  <div class="form-group">
+    {{ form_label(form.shortDescription, "Présentation rapide", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    {{ form_errors(form.shortDescription) }}
+    <div class="col-sm-10">
+      {{ form_widget(form.shortDescription, {'attr': {'class': 'form-control'}}) }}
+    </div>
+  </div>
+
+  {# longDescription #}
+  <div class="form-group">
+    {{ form_label(form.longDescription, "Description complète", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    {{ form_errors(form.longDescription) }}
+    <div class="col-sm-10">
+      {{ form_widget(form.longDescription, {'attr': {'class': 'form-control'}}) }}
+    </div>
+  </div>
+
+  {{ form_row(form.cookingTime) }}
+  {{ form_row(form.rating) }}
+
+  {# Génération automatique des champs pas encore écrits.
+     Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+     et tous les champs cachés (type « hidden »). #}
+  {{ form_rest(form) }}
+
+  {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+  {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+
+  {# Fermeture de la balise <form> du formulaire HTML #}
+  {{ form_end(form) }}
+</div>

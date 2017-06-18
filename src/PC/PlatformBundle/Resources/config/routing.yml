@@ -6,6 +6,27 @@ pc_platform_listRecipe:
     path:     /recipes/
     defaults: { _controller: PCPlatformBundle:Recipe:list }
 
-pc_platform_viewRecipe:
+pc_platform_view:
     path:     /recipe/{id}
-    defaults: { _controller: PCPlatformBundle:Recipe:view }
+    defaults:
+        _controller: PCPlatformBundle:Recipe:view
+    requirements:
+        id: \d*
+
+pc_platform_add:
+    path:     /add
+    defaults: { _controller: PCPlatformBundle:Recipe:add }
+
+pc_platform_delete:
+    path:     /delete/{id}
+    defaults:
+        _controller: PCPlatformBundle:Recipe:delete
+    requirements:
+        id: \d*
+
+pc_platform_edit:
+    path:     /edit/{id}
+    defaults:
+        _controller: PCPlatformBundle:Recipe:edit
+    requirements:
+        id: \d*

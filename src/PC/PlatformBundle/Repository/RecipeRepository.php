@@ -10,4 +10,17 @@ namespace PC\PlatformBundle\Repository;
  */
 class RecipeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAllWithImage()
+    {
+      $qb = $this
+        ->createQueryBuilder('a')
+        ->leftJoin('a.image', 'image')
+        ->addSelect('image')
+      ;
+
+      return $qb
+        ->getQuery()
+        ->getResult()
+      ;
+    }
 }

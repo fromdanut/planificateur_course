@@ -43,9 +43,15 @@
         </div>
         <div class="row">
             <p class="text-justify">{{recipe.longDescription}}</p>
-            <div class="col-xs-6 col-sm2 text-center">
-                <a href="{{path('pc_platform_listRecipe')}}" class="btn btn-primary"><span class="glyphicon glyphicon-list"></span> Retour à la liste de recettes</a>
-            </div>
+        </div>
+        <div class="col-xs-3 col-sm2">
+            <a href="{{path('pc_platform_listRecipe')}}" class="btn btn-primary"><span class="glyphicon glyphicon-list"></span> Retour à la liste de recettes</a>
+        </div>
+        <div class="col-xs-3 col-sm2">
+            <a href="{{path('pc_platform_edit', {'id': recipe.id})}}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Modifier la recette</a>
+        </div>
+        <div class="col-xs-3 col-sm2">
+            <a href="{{path('pc_platform_delete', {'id': recipe.id})}}" class="btn btn-danger"><span class="glyphicon glyphicon-minus-sign"></span> Supprimer la recette</a>
         </div>
     </div>
 </div>
