@@ -130,28 +130,4 @@ class Ingredient
     {
         return $this->calorie;
     }
-
-    /**
-     * Set unit
-     *
-     * @param \PC\PlatformBundle\Entity\Unit $unit
-     *
-     * @return Ingredient
-     */
-    public function setUnit(\PC\PlatformBundle\Entity\Unit $unit = null)
-    {
-        $this->unit = $unit;
-
-        return $this;
-    }
-
-    /**
-     * Get unit
-     *
-     * @return \PC\PlatformBundle\Entity\Unit
-     */
-    public function getUnit()
-    {
-        return $this->unit;
-    }
 }

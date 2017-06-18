@@ -70,9 +70,15 @@ class Recipe
 
     /**
      * @ORM\ManyToMany(targetEntity="PC\PlatformBundle\Entity\Category", cascade={"persist"})
-     * @ORM\JoinTable(name="pc_advert_category")
+     * @ORM\JoinTable(name="pc_recipe_category")
      */
     private $categories;
+
+    /**
+     * @ORM\OneToMany(targetEntity="PC\PlatformBundle\Entity\RecipeIngredient", mappedBy="recipe")
+     */
+    private $recipeIngredients;
+
 
     /**
      * Get id
@@ -232,8 +238,8 @@ class Recipe
      */
     public function __construct()
     {
-        $this->datePublicaion = new \Datetime();
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->datePublication = new \DateTime();
     }
 
     /**
@@ -269,4 +275,29 @@ class Recipe
     {
         return $this->categories;
     }
+
+    /**
+     * Set datePublication
+     *
+     * @param \DateTime $datePublication
+     *
+     * @return Recipe
+     */
+    public function setDatePublication($datePublication)
+    {
+        $this->datePublication = $datePublication;
+
+        return $this;
+    }
+
+    /**
+     * Get datePublication
+     *
+     * @return \DateTime
+     */
+    public function getDatePublication()
+    {
+        return $this->datePublication;
+    }
+
 }

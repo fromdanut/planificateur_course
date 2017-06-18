@@ -1,0 +1,78 @@
+<?php
+/*
+    Cette entity fait le lien entre les recettes et les ingrédients (permet d'ajouter la quantité)
+*/
+namespace PC\PlatformBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * RecipeIngredient
+ *
+ * @ORM\Table(name="recipe_ingredient")
+ * @ORM\Entity(repositoryClass="PC\PlatformBundle\Repository\RecipeIngredientRepository")
+ */
+class RecipeIngredient
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="quantity", type="integer")
+     */
+    private $quantity;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Recipe")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $recipe;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Ingredient")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $ingredient;
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set quantity
+     *
+     * @param integer $quantity
+     *
+     * @return RecipeIngredient
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * Get quantity
+     *
+     * @return int
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+}

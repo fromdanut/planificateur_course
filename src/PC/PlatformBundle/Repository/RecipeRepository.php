@@ -23,4 +23,5 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         ->getResult()
       ;
     }
+
 }

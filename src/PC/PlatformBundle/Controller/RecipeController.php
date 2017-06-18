@@ -65,6 +65,11 @@ class RecipeController extends Controller
         if (null === $recipe) {
             throw new NotFoundHttpException("La recette n°".$id." n'existe pas.");
         }
+        // supprimer l'ensemble des recipeIngredients
+        foreach ($recipe->getRecipeIngredients() as $recipeIngredient) {
+            $em->remove($recipeIngredient);
+        }
+
         $em->remove($recipe);
         $em->flush();
 

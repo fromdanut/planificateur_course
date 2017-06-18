@@ -70,9 +70,15 @@ class Recipe
 
     /**
      * @ORM\ManyToMany(targetEntity="PC\PlatformBundle\Entity\Category", cascade={"persist"})
-     * @ORM\JoinTable(name="pc_advert_category")
+     * @ORM\JoinTable(name="pc_recipe_category")
      */
     private $categories;
+
+    /**
+     * @ORM\OneToMany(targetEntity="PC\PlatformBundle\Entity\RecipeIngredient", mappedBy="recipe")
+     */
+    private $recipeIngredients;
+
 
     /**
      * Get id
@@ -234,6 +240,7 @@ class Recipe
     {
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
         $this->datePublication = new \DateTime();
+        #$this->recipeIngredients = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -292,5 +299,42 @@ class Recipe
     public function getDatePublication()
     {
         return $this->datePublication;
+    }
+
+
+    /**
+     * Add recipeIngredient
+     *
+     * @param \PC\PlatformBundle\Entity\RecipeIngredient $recipeIngredient
+     *
+     * @return Recipe
+     */
+    public function addRecipeIngredient(\PC\PlatformBundle\Entity\RecipeIngredient $recipeIngredient)
+    {
+        $this->recipeIngredients[] = $recipeIngredient;
+
+        $recipeIngredient->setRecipe($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove recipeIngredient
+     *
+     * @param \PC\PlatformBundle\Entity\RecipeIngredient $recipeIngredient
+     */
+    public function removeRecipeIngredient(\PC\PlatformBundle\Entity\RecipeIngredient $recipeIngredient)
+    {
+        $this->recipeIngredients->removeElement($recipeIngredient);
+    }
+
+    /**
+     * Get recipeIngredients
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRecipeIngredients()
+    {
+        return $this->recipeIngredients;
     }
 }

@@ -8,18 +8,15 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use PC\PlatformBundle\Entity\Recipe;
 use PC\PlatformBundle\Entity\Image;
+use PC\PlatformBundle\Entity\Ingredient;
+use PC\PlatformBundle\Entity\RecipeIngredient;
 
 class LoadRecipe implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
         for ($i=0; $i < 10; $i++) {
-            // La categorie;
-            $cat = $manager->getRepository('PCPlatformBundle:Category')->findOneBy(array('name' => 'italien'));
-            // L'image (la meme pour l'ensemble des recettes)
-            $image = new Image();
-            $image->setUrl("https://images.marmitoncdn.org/recipephotos/multiphoto/57/572cf720-8433-4896-ad45-b0534eac1bb9_normal.jpg");
-            $image->setAlt("Une tarte à la fraise");
+
             // La recette
             $recipe = new Recipe();
             $recipe->setName("recette n°".$i);
@@ -44,11 +41,28 @@ class LoadRecipe implements FixtureInterface
                 Verser la crème sur le fond de tarte et disposer joliment les fraises coupées en 2.');
             $recipe->setShortDescription('Petite tarte aux fraises de saison qui ravira les petits comme les grands.');
             $recipe->setRating(4);
-            $recipe->setImage($image);
+
+            // Les ingrédients
+            $ingredients = $manager->getRepository('PCPlatformBundle:Ingredient')->findAll();
+            foreach ($ingredients as $ingredient) {
+                $RecipeIngredient = new RecipeIngredient();
+                $RecipeIngredient->setRecipe($recipe); // lie à la recette.
+                $RecipeIngredient->setIngredient($ingredient); // lie à l'ingrédient.
+                $RecipeIngredient->setQuantity(30); // quelle que soit l'unité.
+                $manager->persist($RecipeIngredient);
+            }
+
+            // La categorie
+            $cat = $manager->getRepository('PCPlatformBundle:Category')->findOneBy(array('name' => 'italien'));
             $recipe->addCategory($cat);
-            # recipe->setDatePublication(new \DateTime());
-            // persite l'image et la recipe.
+
+            // L'image (la meme pour l'ensemble des recettes)
+            $image = new Image();
+            $image->setUrl("https://images.marmitoncdn.org/recipephotos/multiphoto/57/572cf720-8433-4896-ad45-b0534eac1bb9_normal.jpg");
+            $image->setAlt("Une tarte à la fraise");
+            $recipe->setImage($image);
             $manager->persist($image);
+
             $manager->persist($recipe);
 
         }

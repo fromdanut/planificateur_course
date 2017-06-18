@@ -20,12 +20,9 @@
                 <div class="row">
                     <p>Les ingrédients</p>
                     <ul>
-                        <li>200 g de fraises</li>
-                        <li>150 g de sucre</li>
-                        <li>150 g de farin</li>
-                        <li>3 kg de beurre</li>
-                        <li>300 g confiture au gingembre</li>
-                        <li>10 cl d'huile d'olive pimentée</li>
+                        {% for recipeIngredient in recipe.recipeIngredients %}
+                            <li>{{recipeIngredient.quantity}} {{recipeIngredient.ingredient.unit.name}} de {{recipeIngredient.ingredient.name}}</li>
+                        {% endfor %}
                     </ul>
                     <p>Les category</p>
                     <ul>
