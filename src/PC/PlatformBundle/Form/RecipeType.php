@@ -10,6 +10,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 
 class RecipeType extends AbstractType
@@ -20,16 +23,26 @@ class RecipeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name' , TextType::class)
-            ->add('cookingTime', IntegerType::class )
-            ->add('longDescription', TextareaType::class)
-            ->add('shortDescription', TextareaType::class)
-            ->add('rating', RangeType::class,  array(
+            ->add('name' ,             TextType::class)
+            ->add('cookingTime',       IntegerType::class )
+            ->add('longDescription',   TextareaType::class)
+            ->add('shortDescription',  TextareaType::class)
+            ->add('recipeIngredients',  CollectionType::class, array(
+                'entry_type'   => RecipeIngredientType::class,
+                'allow_add'    => true,
+                'allow_delete' => true
+                ))
+            ->add('categories', EntityType::class, array(
+                      'class'        => 'PCPlatformBundle:Category',
+                      'choice_label' => 'name',
+                      'multiple'     => true,
+                    ))
+            ->add('rating',            RangeType::class,  array(
                     'attr' => array(
                         'min' => 0,
                         'max' => 5)))
-            ->add('image', ImageType::class)
-            ->add('save', SubmitType::class);
+            ->add('image',             ImageType::class)
+            ->add('save',              SubmitType::class);
     }
 
     /**

@@ -33,8 +33,9 @@ class RecipeController extends Controller
 
         }
 
-        return $this->render('PCPlatformBundle:Recipe:view.html.twig',
-                             array( 'recipe' => $recipe));
+        return $this->render('PCPlatformBundle:Recipe:view.html.twig', array(
+            'recipe' => $recipe,
+        ));
     }
 
     public function addAction(Request $request)
@@ -44,12 +45,18 @@ class RecipeController extends Controller
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            foreach ($recipe->getRecipeIngredients() as $recipeIngredient) {
+                $recipeIngredient->setRecipe($recipe);
+            }
             $em->persist($recipe);
             $em->flush();
 
             $request->getSession()->getFlashBag()->add('notice', 'Recette enregistrée.');
 
-            return $this->redirectToRoute('pc_platform_view', array('id' => $recipe->getId()));
+            return $this->redirectToRoute('pc_platform_view', array(
+                'id' => $recipe->getId(),
+            ));
         }
 
         return $this->render('PCPlatformBundle:Recipe:add.html.twig', array(
@@ -90,17 +97,22 @@ class RecipeController extends Controller
         $form = $this->get('form.factory')->create(RecipeType::class, $recipe);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
+            foreach ($recipe->getRecipeIngredients() as $recipeIngredient) {
+                $recipeIngredient->setRecipe($recipe);
+            }
+
             $em->persist($recipe);
             $em->flush();
 
             $request->getSession()->getFlashBag()->add('notice', 'Recette modifiée.');
-
+            
             return $this->redirectToRoute('pc_platform_view', array('id' => $recipe->getId()));
+
         }
 
         return $this->render('PCPlatformBundle:Recipe:add.html.twig', array(
             'form' => $form->createView(),
         ));
-
     }
 }

@@ -28,6 +28,7 @@
     {% endblock %}
   </head>
   <body>
+      <div class="container">
       <!-- navbar -->
       <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
           <div class="container-fluid">
@@ -37,7 +38,7 @@
               </div>
               <div class="collapse navbar-collapse navbar-menubuilder">
                   <ul class="nav navbar-nav navbar-left">
-                      <li><a href="#">Accueil</a>
+                      <li><a href="{{path('pc_platform_homepage')}}">Accueil</a>
                       </li>
                       <li><a href="{{path('pc_platform_listRecipe')}}">Mes recettes</a>
                       </li>
@@ -49,10 +50,9 @@
       </div>
 
     {% block pcplatform_body %}
-
-
     {% endblock %}
 
+    </div>
     {% block javascripts %}
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

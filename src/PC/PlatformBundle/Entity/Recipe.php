@@ -75,7 +75,7 @@ class Recipe
     private $categories;
 
     /**
-     * @ORM\OneToMany(targetEntity="PC\PlatformBundle\Entity\RecipeIngredient", mappedBy="recipe")
+     * @ORM\OneToMany(targetEntity="PC\PlatformBundle\Entity\RecipeIngredient", mappedBy="recipe", cascade={"persist"}, orphanRemoval=true)
      */
     private $recipeIngredients;
 
@@ -240,7 +240,7 @@ class Recipe
     {
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
         $this->datePublication = new \DateTime();
-        #$this->recipeIngredients = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->recipeIngredients = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

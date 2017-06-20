@@ -4,37 +4,36 @@
 
 {% block pcplatform_body %}
 
-<div class="container">
-    <div class="row">
-        {% for recipe in recipes %}
-        <!-- debug a améliorer : trouver une meilleur solution pour supprimer les effets sur le a-->
-        <a href="{{ path('pc_platform_view', {'id': recipe.id}) }}" style="color:#000000 !important; text-decoration:none;">
-            <div class="col-xs-6 col-sm-4 col-md-3">
-                <div class="row">
-                    {% if recipe.image %}
-                    <div class="col-xs-6">
-                        <img class="img-responsive img-rounded" src="{{recipe.image.url}}" alt="{{recipe.image.alt}}">
-                    </div>
-                    {% endif %}
-                    <div class="col-xs-6">
-                        <h3>{{recipe.name}}</h1>
-                        <small class="pull-right">Author</small><br>
-                    </div>
+<div class="row">
+    {% for recipe in recipes %}
+    <!-- debug a améliorer : trouver une meilleur solution pour supprimer les effets sur le a-->
+    <a href="{{ path('pc_platform_view', {'id': recipe.id}) }}" style="color:#000000 !important; text-decoration:none;">
+        <div class="col-xs-6 col-sm-4 col-md-3">
+            <div class="row">
+                {% if recipe.image %}
+                <div class="col-xs-6">
+                    <img class="img-responsive img-rounded" src="{{recipe.image.url}}" alt="{{recipe.image.alt}}">
                 </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <p>{{recipe.shortDescription}}</p>
-                    </div>
+                {% endif %}
+                <div class="col-xs-6">
+                    <h3>{{recipe.name}}</h1>
+                    <small class="pull-right">Author</small><br>
                 </div>
             </div>
-        </a>
-        {% endfor %}
-    </div>
-
-    <div class="row">
-        <div class="col-xs-6 col-sm2">
-            <a href="{{path('pc_platform_add')}}" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter une recette</a>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>{{recipe.shortDescription}}</p>
+                </div>
+            </div>
         </div>
+    </a>
+    {% endfor %}
+</div>
+
+<div class="row">
+    <div class="col-xs-6 col-sm2">
+        <a href="{{path('pc_platform_add')}}" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter une recette</a>
     </div>
 </div>
+
 {% endblock %}

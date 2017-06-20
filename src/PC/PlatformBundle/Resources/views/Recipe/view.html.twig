@@ -4,51 +4,47 @@
 
 {% block pcplatform_body %}
 
-<div class="container">
+<div class="row">
     <div class="row">
-        <div class="row">
-            <h1>{{recipe.name}}</h1>
+        <h1>{{recipe.name}}</h1>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            <img class="img-responsive" src="{{recipe.image.url}}" alt="{{recipe.image.alt}}">
         </div>
-        <div class="row">
-            <div class="col-xs-4">
-                <img class="img-responsive" src="{{recipe.image.url}}" alt="{{recipe.image.alt}}">
+        <div class="col-xs-8">
+            <div class="row">
+                <p class="lead">{{recipe.shortDescription}}</p>
             </div>
-            <div class="col-xs-8">
-                <div class="row">
-                    <p class="lead">{{recipe.shortDescription}}</p>
-                </div>
-                <div class="row">
-                    <p>Les ingrédients</p>
-                    <ul>
-                        {% for recipeIngredient in recipe.recipeIngredients %}
-                            <li>{{recipeIngredient.quantity}} {{recipeIngredient.ingredient.unit.name}} de {{recipeIngredient.ingredient.name}}</li>
-                        {% endfor %}
-                    </ul>
-                    <p>Les category</p>
-                    <ul>
-                        {% for category in recipe.categories %}
-                        <li>{{category.name}}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="row">
-                    {% for i in recipe.rating %}
-                    <span class="glyphicon glyphicon-star"></span>
+            <div class="row">
+                <p>Les ingrédients</p>
+                <ul class="list-inline">
+                    {% for recipeIngredient in recipe.recipeIngredients %}
+                        <li class>{{recipeIngredient.quantity}} {{recipeIngredient.ingredient.unit.name}} de {{recipeIngredient.ingredient.name}}</li>
                     {% endfor %}
-                </div>
+                </ul>
+                <p>Les category</p>
+                <ul>
+                    {% for category in recipe.categories %}
+                    <li>{{category.name}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="row">
+                {% for i in recipe.rating %}
+                <span class="glyphicon glyphicon-star"></span>
+                {% endfor %}
             </div>
         </div>
-        <div class="row">
-            <p class="text-justify">{{recipe.longDescription}}</p>
-        </div>
-        <div class="col-xs-3 col-sm2">
-            <a href="{{path('pc_platform_listRecipe')}}" class="btn btn-primary"><span class="glyphicon glyphicon-list"></span> Retour à la liste de recettes</a>
-        </div>
-        <div class="col-xs-3 col-sm2">
-            <a href="{{path('pc_platform_edit', {'id': recipe.id})}}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Modifier la recette</a>
-        </div>
-        <div class="col-xs-3 col-sm2">
-            <a href="{{path('pc_platform_delete', {'id': recipe.id})}}" class="btn btn-danger"><span class="glyphicon glyphicon-minus-sign"></span> Supprimer la recette</a>
+    </div>
+    <div class="row">
+        <p class="text-justify">{{recipe.longDescription}}</p>
+    </div>
+    <div class="col-xs-6 col-xs-push-3">
+        <div class="btn-group">
+            <a href="{{path('pc_platform_listRecipe')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Retour à la liste des recettes"><span class="glyphicon glyphicon-list"></span></a>
+            <a href="{{path('pc_platform_edit', {'id': recipe.id})}}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Modifier la recette"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a href="{{path('pc_platform_delete', {'id': recipe.id})}}" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Supprimer la recette"><span class="glyphicon glyphicon-minus-sign"></span></a>
         </div>
     </div>
 </div>
