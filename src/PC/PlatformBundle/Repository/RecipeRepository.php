@@ -13,8 +13,8 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
     public function findAllWithImage()
     {
       $qb = $this
-        ->createQueryBuilder('a')
-        ->leftJoin('a.image', 'image')
+        ->createQueryBuilder('r')
+        ->leftJoin('r.image', 'image')
         ->addSelect('image')
       ;
 
@@ -24,4 +24,18 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
       ;
     }
 
+    public function findByShoppingListOption($quick)
+    {
+        $qb = $this->createQueryBuilder('r');
+
+        // rajoute des conditions en fonction des paramètres (tous des bool)
+        if ($quick) {
+            $qb->where('r.cookingTime < 120');
+        }
+
+        return $qb
+          ->getQuery()
+          ->getResult()
+        ;
+    }
 }

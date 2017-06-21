@@ -17,10 +17,16 @@ class LoadRecipe implements FixtureInterface
     {
         for ($i=0; $i < 10; $i++) {
 
+            /*
+                Ce Datafixtures doit permettre d'avoir un panel de recette avec des attributs différents afin,
+                notamment de tester la génération de liste de recette en fonction de critères (temps de préparation,
+                prix, diététique)
+            */
+
             // La recette
             $recipe = new Recipe();
             $recipe->setName("recette n°".$i);
-            $recipe->setCookingTime(20+$i);
+            $recipe->setCookingTime(20*$i);
             $recipe->setLongDescription('
                 PÂTE:
                 Blanchir les jaunes et le sucre au fouet et détendre le mélange avec un peu d eau.
@@ -40,7 +46,7 @@ class LoadRecipe implements FixtureInterface
                 Retirer après ébullition.
                 Verser la crème sur le fond de tarte et disposer joliment les fraises coupées en 2.');
             $recipe->setShortDescription('Petite tarte aux fraises de saison qui ravira les petits comme les grands.');
-            $recipe->setRating(4);
+
 
             // Les ingrédients
             $ingredients = $manager->getRepository('PCPlatformBundle:Ingredient')->findAll();
@@ -48,13 +54,24 @@ class LoadRecipe implements FixtureInterface
                 $RecipeIngredient = new RecipeIngredient();
                 $RecipeIngredient->setRecipe($recipe); // lie à la recette.
                 $RecipeIngredient->setIngredient($ingredient); // lie à l'ingrédient.
-                $RecipeIngredient->setQuantity(30); // quelle que soit l'unité.
+                $RecipeIngredient->setQuantity(30*$i); // On aura des recette avec des quantité différentes
                 $manager->persist($RecipeIngredient);
             }
+             // Deux catégories
+            $catItalien = $manager->getRepository('PCPlatformBundle:Category')->findOneBy(array('name' => 'italien'));
+            $catAsiatique = $manager->getRepository('PCPlatformBundle:Category')->findOneBy(array('name' => 'asiatique'));
 
-            // La categorie
-            $cat = $manager->getRepository('PCPlatformBundle:Category')->findOneBy(array('name' => 'italien'));
-            $recipe->addCategory($cat);
+            // Petite bidouille pour obtenir des recettes avec des cat et des notes (rating) différentes
+
+            if ($i % 2 == 0) {
+                $recipe->addCategory($catItalien);
+                $recipe->setRating(4);
+            }
+            else {
+                $recipe->addCategory($catAsiatique);
+                $recipe->setRating(2);
+            }
+
 
             // L'image (la meme pour l'ensemble des recettes)
             $image = new Image();

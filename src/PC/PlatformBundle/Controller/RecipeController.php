@@ -30,7 +30,6 @@ class RecipeController extends Controller
 
         if (null === $recipe) {
             throw new NotFoundHttpException('Recette n°"'.$id.'" inexistante.');
-
         }
 
         return $this->render('PCPlatformBundle:Recipe:view.html.twig', array(
@@ -106,7 +105,7 @@ class RecipeController extends Controller
             $em->flush();
 
             $request->getSession()->getFlashBag()->add('notice', 'Recette modifiée.');
-            
+
             return $this->redirectToRoute('pc_platform_view', array('id' => $recipe->getId()));
 
         }

@@ -23,16 +23,16 @@ class RecipeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name' ,             TextType::class)
-            ->add('cookingTime',       IntegerType::class )
-            ->add('longDescription',   TextareaType::class)
-            ->add('shortDescription',  TextareaType::class)
+            ->add('name' ,              TextType::class)
+            ->add('cookingTime',        IntegerType::class )
+            ->add('longDescription',    TextareaType::class)
+            ->add('shortDescription',   TextareaType::class)
             ->add('recipeIngredients',  CollectionType::class, array(
-                'entry_type'   => RecipeIngredientType::class,
-                'allow_add'    => true,
-                'allow_delete' => true
-                ))
-            ->add('categories', EntityType::class, array(
+                    'entry_type'   => RecipeIngredientType::class,
+                    'allow_add'    => true,
+                    'allow_delete' => true
+                    ))
+            ->add('categories',         EntityType::class, array(
                       'class'        => 'PCPlatformBundle:Category',
                       'choice_label' => 'name',
                       'multiple'     => true,
@@ -62,6 +62,4 @@ class RecipeType extends AbstractType
     {
         return 'pc_platformbundle_recipe';
     }
-
-
 }

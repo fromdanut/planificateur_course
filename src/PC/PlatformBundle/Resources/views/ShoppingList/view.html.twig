@@ -1,0 +1,30 @@
+{# src/PC/PlatformBundle/Resources/views/ShoppingList/view.html.twig #}
+
+{% extends "PCPlatformBundle::layout.html.twig" %}
+
+{% block pcplatform_body %}
+
+<div class="row">
+    <h1>Vue d'une liste de courses (n°{{shoppingList.id}})</h1>
+</div>
+<div class="row">
+    <h2>Les recettes selectionnées pour vous</h2>
+
+    {% for recipe in shoppingList.recipes %}
+    {% include 'PCPlatformBundle:Recipe:viewSmall.html.twig' %}
+    {% endfor %}
+</div>
+<div class="row">
+    <h2>La liste des courses</h2>
+    <ul>
+        {% for ingredient in shoppingList.shoppingList %}
+            <li>{{ingredient.quantity}} {{ingredient.unit.name}} {{ingredient.name}} : {{ingredient.price * ingredient.quantity}} euros</li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="row">
+    <p class='text-warning'>{{debug}}</p>
+</div>
+
+
+{% endblock %}

@@ -14,19 +14,34 @@ pc_platform_view:
         id: \d*
 
 pc_platform_add:
-    path:     /add
+    path:     /recipe/add
     defaults: { _controller: PCPlatformBundle:Recipe:add }
 
 pc_platform_delete:
-    path:     /delete/{id}
+    path:     /recipe/delete/{id}
     defaults:
         _controller: PCPlatformBundle:Recipe:delete
     requirements:
         id: \d*
 
 pc_platform_edit:
-    path:     /edit/{id}
+    path:     /recipe/edit/{id}
     defaults:
         _controller: PCPlatformBundle:Recipe:edit
     requirements:
         id: \d*
+
+pc_platform_shoppinglist_view:
+    path:     /shoppingList/view/
+    defaults:
+        _controller: PCPlatformBundle:ShoppingList:view
+
+pc_platform_shoppinglist_add:
+    path:    /shoppingList/add/
+    defaults:
+        _controller: PCPlatformBundle:ShoppingList:add
+
+pc_platform_shoppinglist_option_view:
+    path: /shoppingList/option/
+    defaults:
+        _controller: PCPlatformBundle:ShoppingList:optionView

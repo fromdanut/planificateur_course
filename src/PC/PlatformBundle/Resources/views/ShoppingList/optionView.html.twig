@@ -1,0 +1,15 @@
+{# src/PC/PlatformBundle/Resources/views/ShoppingList/add.html.twig #}
+
+{% extends "PCPlatformBundle::layout.html.twig" %}
+
+{% block pcplatform_body %}
+
+    <h1>Mes options pour la génération de la liste de recettes pour la ShoppingList</h1>
+    {{form(form)}}
+
+    {# Informed the user if the options are modify #}
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        {{ flashMessage }}
+    {% endfor %}
+
+{% endblock %}
