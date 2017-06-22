@@ -19,21 +19,18 @@ class ShoppingListOptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('expensive', ChoiceType::class, array(
+        ->add('eco', ChoiceType::class, array(
             'choices'  => array(
-                'M\'en fout !' => null,
                 'Yep'   => true,
                 'Nop'    => false,
         )))
         ->add('quick', ChoiceType::class, array(
             'choices'  => array(
-                'M\'en fout !' => null,
                 'Yep'   => true,
                 'Nop'    => false,
         )))
-        ->add('fat', ChoiceType::class, array(
+        ->add('diet', ChoiceType::class, array(
             'choices'  => array(
-                'M\'en fout !' => null,
                 'Yep'   => true,
                 'Nop'    => false,
         )))

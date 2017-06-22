@@ -15,7 +15,7 @@ class LoadRecipe implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        for ($i=0; $i < 10; $i++) {
+        for ($i=0; $i < 30; $i++) {
 
             /*
                 Ce Datafixtures doit permettre d'avoir un panel de recette avec des attributs différents afin,
@@ -26,7 +26,7 @@ class LoadRecipe implements FixtureInterface
             // La recette
             $recipe = new Recipe();
             $recipe->setName("recette n°".$i);
-            $recipe->setCookingTime(20*$i);
+            $recipe->setCookingTime(2*$i);
             $recipe->setLongDescription('
                 PÂTE:
                 Blanchir les jaunes et le sucre au fouet et détendre le mélange avec un peu d eau.
@@ -54,7 +54,7 @@ class LoadRecipe implements FixtureInterface
                 $RecipeIngredient = new RecipeIngredient();
                 $RecipeIngredient->setRecipe($recipe); // lie à la recette.
                 $RecipeIngredient->setIngredient($ingredient); // lie à l'ingrédient.
-                $RecipeIngredient->setQuantity(30*$i); // On aura des recette avec des quantité différentes
+                $RecipeIngredient->setQuantity($i + (2 * $i * ($i % 2))); // On aura des recette avec des quantité différentes mais mini 1
                 $manager->persist($RecipeIngredient);
             }
              // Deux catégories
@@ -71,7 +71,6 @@ class LoadRecipe implements FixtureInterface
                 $recipe->addCategory($catAsiatique);
                 $recipe->setRating(2);
             }
-
 
             // L'image (la meme pour l'ensemble des recettes)
             $image = new Image();

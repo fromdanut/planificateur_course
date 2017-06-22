@@ -24,9 +24,9 @@ class ShoppingListOption
     /**
      * @var bool
      *
-     * @ORM\Column(name="expensive", type="boolean", nullable=true)
+     * @ORM\Column(name="eco", type="boolean", nullable=true)
      */
-    private $expensive;
+    private $eco;
 
     /**
      * @var bool
@@ -38,9 +38,9 @@ class ShoppingListOption
     /**
      * @var bool
      *
-     * @ORM\Column(name="fat", type="boolean", nullable=true)
+     * @ORM\Column(name="diet", type="boolean", nullable=true)
      */
-    private $fat;
+    private $diet;
 
     /**
      * @var \DateTime
@@ -74,27 +74,27 @@ class ShoppingListOption
     }
 
     /**
-     * Set expensive
+     * Set eco
      *
-     * @param boolean $expensive
+     * @param boolean $eco
      *
      * @return ShoppingListOption
      */
-    public function setExpensive($expensive)
+    public function setEco($eco)
     {
-        $this->expensive = $expensive;
+        $this->eco = $eco;
 
         return $this;
     }
 
     /**
-     * Get expensive
+     * Get eco
      *
      * @return boolean
      */
-    public function getExpensive()
+    public function getEco()
     {
-        return $this->expensive;
+        return $this->eco;
     }
 
     /**
@@ -122,27 +122,27 @@ class ShoppingListOption
     }
 
     /**
-     * Set fat
+     * Set diet
      *
-     * @param boolean $fat
+     * @param boolean $diet
      *
      * @return ShoppingListOption
      */
-    public function setFat($fat)
+    public function setDiet($diet)
     {
-        $this->fat = $fat;
+        $this->diet = $diet;
 
         return $this;
     }
 
     /**
-     * Get fat
+     * Get diet
      *
      * @return boolean
      */
-    public function getFat()
+    public function getDiet()
     {
-        return $this->fat;
+        return $this->diet;
     }
 
     /**

@@ -15,11 +15,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ShoppingListController extends Controller
 {
 
-    public function viewAction()
+    public function viewAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('PCPlatformBundle:ShoppingList');
-        $shoppingList = $repo->findOnlyOne();
+        $shoppingList = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('PCPlatformBundle:ShoppingList')
+            ->find($id);
 
         return $this->render('PCPlatformBundle:ShoppingList:view.html.twig', array(
             'shoppingList' => $shoppingList,
@@ -40,9 +42,7 @@ class ShoppingListController extends Controller
                     ->getDoctrine()
                     ->getManager()
                     ->getRepository('PCPlatformBundle:Recipe')
-                    ->findByShoppingListOption(
-                        $shoppingListOption->getQuick()
-                    );
+                    ->findByShoppingListOption($shoppingListOption);
 
         // Créé une shoppingList à laquelle sont ajoutées les recettes.
         $shoppingList = new ShoppingList();
@@ -60,9 +60,8 @@ class ShoppingListController extends Controller
             $em->flush();
             $request->getSession()->getFlashBag()->add('notice', 'Liste de courses enregistrée.');
 
-            return $this->render('PCPlatformBundle:ShoppingList:view.html.twig', array(
-                                    'shoppingList' => $shoppingList,
-                                    'debug' => count($shoppingList)
+            return $this->redirectToRoute('pc_platform_shoppinglist_view', array(
+                                    'id' => $shoppingList->getId()
                                 ));
         }
 

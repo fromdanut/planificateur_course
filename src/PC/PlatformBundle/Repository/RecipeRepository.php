@@ -24,13 +24,25 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
       ;
     }
 
-    public function findByShoppingListOption($quick)
+    public function findByShoppingListOption($shoppingListOption)
     {
         $qb = $this->createQueryBuilder('r');
 
-        // rajoute des conditions en fonction des paramètres (tous des bool)
-        if ($quick) {
-            $qb->where('r.cookingTime < 120');
+        /*
+            rajoute des conditions en fonction des paramètres (tous des bool)
+            Les valeurs des conditions where devront faire l'objet d'une autre
+            configuration de l'utilisateur.
+        */
+        if ($shoppingListOption->getQuick()) {
+            $qb->where('r.cookingTime < 20');
+        }
+
+        if ($shoppingListOption->getEco()) {
+            $qb->andWhere('r.price < 10');
+        }
+
+        if ($shoppingListOption->getDiet()) {
+            $qb->andWhere('r.calorie < 15000');
         }
 
         return $qb

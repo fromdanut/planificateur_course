@@ -32,9 +32,11 @@ pc_platform_edit:
         id: \d*
 
 pc_platform_shoppinglist_view:
-    path:     /shoppingList/view/
+    path:     /shoppingList/view/{id}
     defaults:
         _controller: PCPlatformBundle:ShoppingList:view
+    requirements:
+        id: \d*
 
 pc_platform_shoppinglist_add:
     path:    /shoppingList/add/

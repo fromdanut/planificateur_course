@@ -23,11 +23,11 @@ class LoadIngredient implements FixtureInterface
 
         // 5 ingrédient (nom, prix, calorie, unité)
         $rows = array(
-            array('fraise','6','600', $gUnit),
-            array('sucre','2','3000', $gUnit),
-            array('farine','1','3000', $gUnit),
-            array('lait','2','900', $clUnit),
-            array('oeuf','6','600', $unit),
+            array('fraise', 0.001,'150', $gUnit),
+            array('sucre', 0.0001,'600', $gUnit),
+            array('farine', 0.002,'300', $gUnit),
+            array('lait', 0.003,'90', $clUnit),
+            array('oeuf', 0.20,'80', $unit),
         );
 
         foreach ($rows as $row) {

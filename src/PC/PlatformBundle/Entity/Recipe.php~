@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="recipe")
  * @ORM\Entity(repositoryClass="PC\PlatformBundle\Repository\RecipeRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Recipe
 {
@@ -56,6 +57,21 @@ class Recipe
      */
     private $rating;
 
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="price", type="integer")
+     */
+    private $price;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="fat", type="bollean")
+     */
+    private $fat;
+
     /**
      * @var \DateTime
      *
@@ -75,10 +91,9 @@ class Recipe
     private $categories;
 
     /**
-     * @ORM\OneToMany(targetEntity="PC\PlatformBundle\Entity\RecipeIngredient", mappedBy="recipe")
+     * @ORM\OneToMany(targetEntity="PC\PlatformBundle\Entity\RecipeIngredient", mappedBy="recipe", cascade={"persist"}, orphanRemoval=true)
      */
     private $recipeIngredients;
-
 
     /**
      * Get id
@@ -240,6 +255,7 @@ class Recipe
     {
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
         $this->datePublication = new \DateTime();
+        $this->recipeIngredients = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -300,4 +316,80 @@ class Recipe
         return $this->datePublication;
     }
 
+
+    /**
+     * Add recipeIngredient
+     *
+     * @param \PC\PlatformBundle\Entity\RecipeIngredient $recipeIngredient
+     *
+     * @return Recipe
+     */
+    public function addRecipeIngredient(\PC\PlatformBundle\Entity\RecipeIngredient $recipeIngredient)
+    {
+        $this->recipeIngredients[] = $recipeIngredient;
+
+        $recipeIngredient->setRecipe($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove recipeIngredient
+     *
+     * @param \PC\PlatformBundle\Entity\RecipeIngredient $recipeIngredient
+     */
+    public function removeRecipeIngredient(\PC\PlatformBundle\Entity\RecipeIngredient $recipeIngredient)
+    {
+        $this->recipeIngredients->removeElement($recipeIngredient);
+    }
+
+    /**
+     * Get recipeIngredients
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRecipeIngredients()
+    {
+        return $this->recipeIngredients;
+    }
+
+    /*
+        Retourne le prix global d'une recette en fonction de ses recipeIngredients.
+    */
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set price
+     *
+     * @param integer $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+
+    /**
+     * @ORM\PreFlush
+     */
+    public function computePrice()
+    {
+        $price = 0;
+
+        foreach ($this->getRecipeIngredients() as $recipeIngredient) {
+            $price += ( $recipeIngredient->getIngredient()->getPrice() * $recipeIngredient->getQuantity() );
+        }
+        $this->setPrice($price);
+    }
+
+
+/*
+
+*/
 }

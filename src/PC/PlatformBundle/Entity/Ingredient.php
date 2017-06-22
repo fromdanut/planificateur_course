@@ -29,9 +29,9 @@ class Ingredient
     private $name;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="price", type="integer")
+     * @ORM\Column(name="price", type="decimal", precision=10, scale=5)
      */
     private $price;
 

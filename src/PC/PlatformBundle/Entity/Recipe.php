@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="recipe")
  * @ORM\Entity(repositoryClass="PC\PlatformBundle\Repository\RecipeRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Recipe
 {
@@ -56,6 +57,21 @@ class Recipe
      */
     private $rating;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="price", type="decimal", precision=10, scale=5)
+     */
+    private $price;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="calorie", type="integer")
+     */
+    private $calorie;
+
     /**
      * @var \DateTime
      *
@@ -78,7 +94,6 @@ class Recipe
      * @ORM\OneToMany(targetEntity="PC\PlatformBundle\Entity\RecipeIngredient", mappedBy="recipe", cascade={"persist"}, orphanRemoval=true)
      */
     private $recipeIngredients;
-
 
     /**
      * Get id
@@ -336,5 +351,77 @@ class Recipe
     public function getRecipeIngredients()
     {
         return $this->recipeIngredients;
+    }
+
+    /*
+        Retourne le prix global d'une recette en fonction de ses recipeIngredients.
+    */
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set price
+     *
+     * @param $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+
+    /**
+     * @ORM\PreFlush
+     */
+    public function computePrice()
+    {
+        $price = 0;
+
+        foreach ($this->getRecipeIngredients() as $recipeIngredient) {
+            $price += ( $recipeIngredient->getIngredient()->getPrice() * $recipeIngredient->getQuantity() );
+        }
+        $this->setPrice($price);
+    }
+
+    /**
+     * Set calorie
+     *
+     * @param \bollean $calorie
+     *
+     * @return Recipe
+     */
+    public function setCalorie($calorie)
+    {
+        $this->calorie = $calorie;
+
+        return $this;
+    }
+
+    /**
+     * Get calorie
+     *
+     * @return \bollean
+     */
+    public function getCalorie()
+    {
+        return $this->calorie;
+    }
+
+    /**
+     * @ORM\PreFlush
+     */
+    public function computeCalorie()
+    {
+        $calorie = 0;
+
+        foreach ($this->getRecipeIngredients() as $recipeIngredient) {
+            $calorie += ( $recipeIngredient->getIngredient()->getCalorie() * $recipeIngredient->getQuantity() );
+        }
+        $this->setCalorie($calorie);
     }
 }

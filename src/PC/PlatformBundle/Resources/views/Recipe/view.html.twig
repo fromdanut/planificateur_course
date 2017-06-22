@@ -11,7 +11,9 @@
                 {% for i in range(1, recipe.rating) %}
                 <span class="glyphicon glyphicon-star"></span>
                 {% endfor %}
-                <span>{{recipe.cookingTime}} mn</span>
+                {{recipe.cookingTime}} mn, {{recipe.price}}
+                <span class="glyphicon glyphicon-euro"></span>
+                {{recipe.calorie}} calories.
             </small>
         </h1>
     </div>
