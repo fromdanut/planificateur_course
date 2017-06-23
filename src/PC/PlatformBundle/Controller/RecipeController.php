@@ -3,7 +3,9 @@
 namespace PC\PlatformBundle\Controller;
 
 use PC\PlatformBundle\Form\RecipeType;
+use PC\PlatformBundle\Form\RecipeListOptionType;
 use PC\PlatformBundle\Entity\Recipe;
+use PC\PlatformBundle\Entity\RecipeListOption;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -11,15 +13,34 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RecipeController extends Controller
 {
-    public function listAction()
+    /*
+        Affiche les recettes en fonction des parametres passé dans l'url.
+    */
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $repo = $em->getRepository('PCPlatformBundle:Recipe');
-        $recipes = $repo->findAllWithImage();
+        $option = new RecipeListOption();
+        // Créé le formulaire.
+        $form = $this->get('form.factory')->create(RecipeListOptionType::class, $option);
+        // Créé l'entity manager.
+        $em = $this
+            ->getDoctrine()
+            ->getManager();
 
-        return $this->render('PCPlatformBundle:Recipe:list.html.twig',
-                             array( 'recipes' => $recipes ));
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
+            // Persiste la nouvelle recipeListOption
+            $em->persist($option);
+            $em->flush();
+        }
+
+        // génère la liste de recipes à partir des options.
+        $recipeRepository = $em->getRepository('PCPlatformBundle:Recipe');
+        $recipes = $recipeRepository->findByOption($option);
+        return $this->render('PCPlatformBundle:Recipe:index.html.twig', array(
+             'recipes' => $recipes,
+             'form' => $form->createView()
+          ));
     }
 
     public function viewAction($id)
@@ -82,7 +103,8 @@ class RecipeController extends Controller
         return $this->redirectToRoute('pc_platform_listRecipe');
     }
 
-    public function editAction(Request $request, $id) {
+    public function editAction(Request $request, $id)
+    {
 
         // récupère la recette
         $em = $this->getDoctrine()->getManager();
@@ -113,5 +135,7 @@ class RecipeController extends Controller
         return $this->render('PCPlatformBundle:Recipe:add.html.twig', array(
             'form' => $form->createView(),
         ));
+
     }
+
 }

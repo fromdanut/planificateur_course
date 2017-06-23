@@ -1,6 +1,9 @@
 <?php
 
 namespace PC\PlatformBundle\Repository;
+use PC\PlatformBundle\Entity\RecipeListOption;
+use PC\PlatformBundle\Entity\ShoppingListOption;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * RecipeRepository
@@ -10,40 +13,57 @@ namespace PC\PlatformBundle\Repository;
  */
 class RecipeRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findAllWithImage()
+    /*
+        Permet de charger l'image des recette.
+    */
+    public function withImage(QueryBuilder $qb)
     {
-      $qb = $this
-        ->createQueryBuilder('r')
+      $qb
         ->leftJoin('r.image', 'image')
         ->addSelect('image')
       ;
-
-      return $qb
-        ->getQuery()
-        ->getResult()
-      ;
     }
 
-    public function findByShoppingListOption($shoppingListOption)
+    public function findByOption($option)
     {
         $qb = $this->createQueryBuilder('r');
 
         /*
-            rajoute des conditions en fonction des paramètres (tous des bool)
-            Les valeurs des conditions where devront faire l'objet d'une autre
-            configuration de l'utilisateur.
+        ajoute les condition communes : correspondant aux attributs de l'entity RecipeOption.
+        Puis, en fonction du type d'instance du parametre $option rajoute
+        les conditions correspondant aux attributs de l'instance.
         */
-        if ($shoppingListOption->getQuick()) {
+        if ($option->getQuick()) {
             $qb->where('r.cookingTime < 20');
         }
 
-        if ($shoppingListOption->getEco()) {
+        if ($option->getEco()) {
             $qb->andWhere('r.price < 10');
         }
 
-        if ($shoppingListOption->getDiet()) {
+        if ($option->getDiet()) {
             $qb->andWhere('r.calorie < 15000');
         }
+
+        $qb->andWhere('r.rating >= :rating')
+        ->setParameter('rating', $option->getRating());
+
+        if ($option instanceof ShoppingListOption) {
+            // Limité au nombre de repas voulu par l'utilisateur.
+            $qb->setMaxResults($option->getNbMeal());
+        }
+
+        elseif ($option instanceof RecipeListOption) {
+            // Limité au nombre de repas voulu par l'utilisateur.
+            if ($option->getKeyword() ==! null) {
+                $qb->andWhere('r.name LIKE :exp')
+                ->setParameter('exp', '%'.$option->getKeyword().'%');
+            }
+            $qb->setMaxResults(12);
+        }
+
+        // jointure avec les images des recettes.
+        $this->withImage($qb);
 
         return $qb
           ->getQuery()

@@ -2,7 +2,7 @@
 
 {% extends "PCPlatformBundle::layout.html.twig" %}
 
-{% block pcplatform_body %}
+{% block pcplatform_article %}
 
 <div class="row">
     <div class="row">
@@ -47,7 +47,7 @@
     </div>
     <div class="col-xs-6 col-xs-push-3">
         <div class="btn-group">
-            <a href="{{path('pc_platform_listRecipe')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Retour à la liste des recettes"><span class="glyphicon glyphicon-th"></span></a>
+            <a href="{{path('pc_platform_recipe_index')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Retour à la liste des recettes"><span class="glyphicon glyphicon-th"></span></a>
             <a href="{{path('pc_platform_edit', {'id': recipe.id})}}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Modifier la recette"><span class="glyphicon glyphicon-pencil"></span></a>
             <a href="{{path('pc_platform_delete', {'id': recipe.id})}}" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Supprimer la recette"><span class="glyphicon glyphicon-minus-sign"></span></a>
         </div>

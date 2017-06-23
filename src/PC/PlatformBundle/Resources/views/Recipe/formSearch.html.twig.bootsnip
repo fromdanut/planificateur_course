@@ -1,0 +1,139 @@
+{# src/PC/PlatformBundle/Resources/views/Recipe/formSearch.html.twig #}
+
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Rechercher une recette</legend>
+
+<!-- Search input-->
+<div class="form-group">
+  <label class="col-xs-6 control-label" for="name-searchinput">Nom ?</label>
+  <div class="col-xs-6">
+    <input id="name-searchinput" name="name-searchinput" placeholder="Museau de porc en gelée" class="form-control input-md" type="search">
+
+  </div>
+</div>
+
+<!-- Multiple Checkboxes -->
+<div class="form-group">
+  <label class="col-xs-6 control-label" for="category-checkboxes">Style ?</label>
+  <div class="col-xs-6">
+  <div class="checkbox">
+    <label for="category-checkboxes-0">
+      <input name="category-checkboxes" id="category-checkboxes-0" value="1" type="checkbox">
+      italien
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="category-checkboxes-1">
+      <input name="category-checkboxes" id="category-checkboxes-1" value="2" type="checkbox">
+      asiatique
+    </label>
+	</div>
+  </div>
+</div>
+
+<!-- Multiple Radios -->
+<div class="form-group">
+  <label class="col-xs-6 control-label" for="quick-radios">Vite fait ?</label>
+  <div class="col-xs-6">
+  <div class="radio">
+    <label for="quick-radios-0">
+      <input name="quick-radios" id="quick-radios-0" value="true" checked="checked" type="radio">
+      Yep
+    </label>
+	</div>
+  <div class="radio">
+    <label for="quick-radios-1">
+      <input name="quick-radios" id="quick-radios-1" value="false" type="radio">
+      Nop
+    </label>
+	</div>
+  </div>
+</div>
+
+<!-- Multiple Radios -->
+<div class="form-group">
+  <label class="col-xs-6 control-label" for="expensive-radios">Budget ?</label>
+  <div class="col-xs-6">
+  <div class="radio">
+    <label for="expensive-radios-0">
+      <input name="expensive-radios" id="expensive-radios-0" value="false" checked="checked" type="radio">
+      Mini
+    </label>
+	</div>
+  <div class="radio">
+    <label for="expensive-radios-1">
+      <input name="expensive-radios" id="expensive-radios-1" value="true" type="radio">
+      Blindax
+    </label>
+	</div>
+  </div>
+</div>
+
+<!-- Multiple Radios -->
+<div class="form-group">
+  <label class="col-xs-6 control-label" for="rating-radios">Note minimum</label>
+  <div class="col-xs-6">
+  <div class="radio">
+    <label for="rating-radios-0">
+      <input name="rating-radios" id="rating-radios-0" value="1" checked="checked" type="radio">
+      1
+    </label>
+	</div>
+  <div class="radio">
+    <label for="rating-radios-1">
+      <input name="rating-radios" id="rating-radios-1" value="2" type="radio">
+      2
+    </label>
+	</div>
+  <div class="radio">
+    <label for="rating-radios-2">
+      <input name="rating-radios" id="rating-radios-2" value="3" type="radio">
+      3
+    </label>
+	</div>
+  <div class="radio">
+    <label for="rating-radios-3">
+      <input name="rating-radios" id="rating-radios-3" value="4" type="radio">
+      4
+    </label>
+	</div>
+  <div class="radio">
+    <label for="rating-radios-4">
+      <input name="rating-radios" id="rating-radios-4" value="5" type="radio">
+      5
+    </label>
+	</div>
+  </div>
+</div>
+
+<!-- Multiple Radios -->
+<div class="form-group">
+  <label class="col-xs-6 control-label" for="diet-radios">Diet ?</label>
+  <div class="col-xs-6">
+  <div class="radio">
+    <label for="diet-radios-0">
+      <input name="diet-radios" id="diet-radios-0" value="true" checked="checked" type="radio">
+      Yep
+	</div>
+  <div class="radio">
+    <label for="diet-radios-1">
+      <input name="diet-radios" id="diet-radios-1" value="false" type="radio">
+      Nop
+    </label>
+	</div>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-xs-6 control-label" for="singlebutton">Single Button</label>
+  <div class="col-xs-6">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
+  </div>
+</div>
+
+</fieldset>
+</form>

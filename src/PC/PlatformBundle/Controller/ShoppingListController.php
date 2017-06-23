@@ -70,27 +70,4 @@ class ShoppingListController extends Controller
         ));
 
     }
-
-    public function optionViewAction(Request $request)
-    {
-        $shoppingListOption = new ShoppingListOption();
-        $form = $this->get('form.factory')->create(ShoppingListOptionType::class, $shoppingListOption);
-
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-
-            // set date to now.
-            $shoppingListOption->setDate(new \DateTime());
-
-            $em->persist($shoppingListOption);
-            $em->flush();
-
-            $request->getSession()->getFlashBag()->add('notice', 'Options enregistrés.');
-
-        }
-
-        return $this->render('PCPlatformBundle:ShoppingList:optionView.html.twig', array(
-            'form' => $form->createView(),
-        ));
-    }
 }

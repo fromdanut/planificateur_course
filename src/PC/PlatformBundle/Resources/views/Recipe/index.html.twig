@@ -1,0 +1,24 @@
+{# src/PC/PlatformBundle/Resources/views/Recipe/index.html.twig #}
+
+{% extends "PCPlatformBundle::layout.html.twig" %}
+
+{% block pcplatform_article %}
+<div class="row">
+    <div class="col-xs-3">
+        {% include 'PCPlatformBundle:Recipe:formSearch.html.twig' %}
+    </div>
+    <div class="col-xs-9">
+        <div class="row">
+            {% for recipe in recipes %}
+            {% include 'PCPlatformBundle:Recipe:viewSmall.html.twig' %}
+            {% endfor %}
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6 col-sm2">
+                <a href="{{path('pc_platform_add')}}" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter une recette</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

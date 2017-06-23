@@ -5,41 +5,25 @@ namespace PC\PlatformBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ShoppingListOption
+ * RecipeListOption
  *
- * @ORM\Table(name="shopping_list_option")
- * @ORM\Entity(repositoryClass="PC\PlatformBundle\Repository\ShoppingListOptionRepository")
+ * @ORM\Table(name="recipe_list_option")
+ * @ORM\Entity(repositoryClass="PC\PlatformBundle\Repository\RecipeListOption")
  */
-class ShoppingListOption extends RecipeOption
+class RecipeListOption extends RecipeOption
 {
-
     /**
-     * @var bool
+     * @var string
      *
-     * @ORM\Column(name="lunch", type="boolean")
+     * @ORM\Column(name="keyword", type="string", length=255, nullable=true)
      */
-    private $lunch;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="dinner", type="boolean")
-     */
-    private $dinner;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="we", type="boolean")
-     */
-    private $we;
+    private $keyword;
 
     /**
      * @ORM\ManyToMany(targetEntity="PC\PlatformBundle\Entity\Category", cascade={"persist"})
-     * @ORM\JoinTable(name="pc_shoppinglistoption_category")
+     * @ORM\JoinTable(name="pc_recipelistoption_category")
      */
     protected $styles;
-
 
     /**
      * Constructor
@@ -50,75 +34,27 @@ class ShoppingListOption extends RecipeOption
     }
 
     /**
-     * Set lunch
+     * Set keyword
      *
-     * @param boolean $lunch
+     * @param string $keyword
      *
-     * @return ShoppingListOption
+     * @return RecipeListOption
      */
-    public function setLunch($lunch)
+    public function setKeyword($keyword)
     {
-        $this->lunch = $lunch;
+        $this->keyword = $keyword;
 
         return $this;
     }
 
     /**
-     * Get lunch
+     * Get keyword
      *
-     * @return boolean
+     * @return string
      */
-    public function getLunch()
+    public function getKeyword()
     {
-        return $this->lunch;
-    }
-
-    /**
-     * Set dinner
-     *
-     * @param boolean $dinner
-     *
-     * @return ShoppingListOption
-     */
-    public function setDinner($dinner)
-    {
-        $this->dinner = $dinner;
-
-        return $this;
-    }
-
-    /**
-     * Get dinner
-     *
-     * @return boolean
-     */
-    public function getDinner()
-    {
-        return $this->dinner;
-    }
-
-    /**
-     * Set we
-     *
-     * @param boolean $we
-     *
-     * @return ShoppingListOption
-     */
-    public function setWe($we)
-    {
-        $this->we = $we;
-
-        return $this;
-    }
-
-    /**
-     * Get we
-     *
-     * @return boolean
-     */
-    public function getWe()
-    {
-        return $this->we;
+        return $this->keyword;
     }
 
     /**
@@ -136,7 +72,7 @@ class ShoppingListOption extends RecipeOption
      *
      * @param boolean $eco
      *
-     * @return ShoppingListOption
+     * @return RecipeListOption
      */
     public function setEco($eco)
     {
@@ -160,7 +96,7 @@ class ShoppingListOption extends RecipeOption
      *
      * @param boolean $quick
      *
-     * @return ShoppingListOption
+     * @return RecipeListOption
      */
     public function setQuick($quick)
     {
@@ -184,7 +120,7 @@ class ShoppingListOption extends RecipeOption
      *
      * @param boolean $diet
      *
-     * @return ShoppingListOption
+     * @return RecipeListOption
      */
     public function setDiet($diet)
     {
@@ -208,7 +144,7 @@ class ShoppingListOption extends RecipeOption
      *
      * @param integer $rating
      *
-     * @return ShoppingListOption
+     * @return RecipeListOption
      */
     public function setRating($rating)
     {
@@ -228,11 +164,35 @@ class ShoppingListOption extends RecipeOption
     }
 
     /**
+     * Set bestRating
+     *
+     * @param boolean $bestRating
+     *
+     * @return RecipeListOption
+     */
+    public function setBestRating($bestRating)
+    {
+        $this->bestRating = $bestRating;
+
+        return $this;
+    }
+
+    /**
+     * Get bestRating
+     *
+     * @return boolean
+     */
+    public function getBestRating()
+    {
+        return $this->bestRating;
+    }
+
+    /**
      * Add style
      *
      * @param \PC\PlatformBundle\Entity\Category $style
      *
-     * @return ShoppingListOption
+     * @return RecipeListOption
      */
     public function addStyle(\PC\PlatformBundle\Entity\Category $style)
     {
@@ -259,23 +219,5 @@ class ShoppingListOption extends RecipeOption
     public function getStyles()
     {
         return $this->styles;
-    }
-
-    /*
-     * return int
-     * Cacule le nb de recette en fonction de lunch, dinner, we.
-     */
-    public function getNbMeal()
-    {
-        $nb = 0;
-        if ($this->getLunch()) {
-            if ($this->getWe()) { $nb += 7; }
-            else { $nb += 5; }
-        }
-        if ($this->getDinner()) {
-            if ($this->getWe()) { $nb += 7; }
-            else { $nb += 5;}
-        }
-        return $nb;
     }
 }

@@ -1,12 +1,12 @@
-{# src/PC/PlatformBundle/Resources/views/Recipe/list.html.twig #}
+{# src/PC/PlatformBundle/Resources/views/Recipe/add.html.twig #}
 
 {% extends "PCPlatformBundle::layout.html.twig" %}
 
-{% block pcplatform_body %}
+{% block pcplatform_article %}
 
     <div class="row">
     <h1>Ajout d'une recette</h1>
-        {{include("PCPlatformBundle:Recipe:form.html.twig")}}
+        {{include("PCPlatformBundle:Recipe:formAdd.html.twig")}}
     </div>
 
 {% endblock %}

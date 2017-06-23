@@ -2,9 +2,9 @@ pc_platform_homepage:
     path:     /
     defaults: { _controller: PCPlatformBundle:Default:index }
 
-pc_platform_listRecipe:
+pc_platform_recipe_index:
     path:     /recipes/
-    defaults: { _controller: PCPlatformBundle:Recipe:list }
+    defaults: { _controller: PCPlatformBundle:Recipe:index }
 
 pc_platform_view:
     path:     /recipe/{id}
@@ -43,7 +43,7 @@ pc_platform_shoppinglist_add:
     defaults:
         _controller: PCPlatformBundle:ShoppingList:add
 
-pc_platform_shoppinglist_option_view:
-    path: /shoppingList/option/
+pc_platform_shoppinglistoption_edit:
+    path: /shoppingListOption/edit/
     defaults:
-        _controller: PCPlatformBundle:ShoppingList:optionView
+        _controller: PCPlatformBundle:ShoppingListOption:edit

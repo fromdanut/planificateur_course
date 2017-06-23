@@ -1,4 +1,4 @@
-<!-- navbar -->
+{# app/Resources/views/nav-menu.html.twig #}
 <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
     <div class="container-fluid">
         <div class="navbar-header"><a class="navbar-brand" href="#">PlanCourses</a>
@@ -8,14 +8,14 @@
         <div class="collapse navbar-collapse navbar-menubuilder">
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="{{path('pc_platform_homepage')}}">Home</a></li>
-                <li><a href="{{path('pc_platform_listRecipe')}}">My recipes</a></li>
+                <li><a href="{{path('pc_platform_recipe_index')}}">My recipes</a></li>
                 <li class="dropdown">
                   <a class="btn dropdown-toggle" type="button" data-toggle="dropdown">Shopping list
                   <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="{{path('pc_platform_shoppinglist_add')}}">Create a shopping list</a></li>
                     <li><a href="#">My shopping list</a></li>
-                    <li><a href="{{path('pc_platform_shoppinglist_option_view')}}">Options</a></li>
+                    <li><a href="{{path('pc_platform_shoppinglistoption_edit')}}">Options</a></li>
                   </ul>
                 </li>
 

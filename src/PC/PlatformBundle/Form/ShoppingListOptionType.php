@@ -34,6 +34,26 @@ class ShoppingListOptionType extends AbstractType
                 'Yep'   => true,
                 'Nop'    => false,
         )))
+        ->add('lunch', ChoiceType::class, array(
+            'choices'  => array(
+                'Yep'   => true,
+                'Nop'    => false,
+        )))
+        ->add('dinner', ChoiceType::class, array(
+            'choices'  => array(
+                'Yep'   => true,
+                'Nop'    => false,
+        )))
+        ->add('we', ChoiceType::class, array(
+            'choices'  => array(
+                'Yep'   => true,
+                'Nop'    => false,
+        )))
+        ->add('bestRating', ChoiceType::class, array(
+            'choices'  => array(
+                'Yep'   => true,
+                'Nop'    => false,
+        )))
         ->add('styles', EntityType::class, array(
                   'class'        => 'PCPlatformBundle:Category',
                   'choice_label' => 'name',

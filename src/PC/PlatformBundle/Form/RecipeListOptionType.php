@@ -1,0 +1,87 @@
+<?php
+
+namespace PC\PlatformBundle\Form;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
+class RecipeListOptionType extends AbstractType
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('keyword', SearchType::class, array('required' => false))
+            ->add('eco', ChoiceType::class, array(
+                'choices' => array(
+                    'yep' => true,
+                    'nop' => false
+                ),
+                'expanded' => true,
+                'multiple' => false
+                 ))
+            ->add('quick', ChoiceType::class, array(
+                'choices' => array(
+                    'yep' => true,
+                    'nop' => false
+                ),
+                'expanded' => true,
+                'multiple' => false
+                 ))
+            ->add('diet', ChoiceType::class, array(
+                'choices' => array(
+                    'yep' => true,
+                    'nop' => false
+                ),
+                'expanded' => true,
+                'multiple' => false
+                 ))
+            ->add('rating', ChoiceType::class, array(
+                'choices' => array(
+                    1 => 1,
+                    2 => 2,
+                    3 => 3,
+                    4 => 4,
+                    5 => 5,
+                ),
+                'expanded' => true,
+                'multiple' => false
+                 ))
+             ->add('styles', EntityType::class, array(
+                       'class'        => 'PCPlatformBundle:Category',
+                       'choice_label' => 'name',
+                       'multiple'     => true,
+                       'required'     => false,
+                     ))
+             ->add('save', SubmitType::class, array(
+                 'label' => 'rechercher'
+             ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'PC\PlatformBundle\Entity\RecipeListOption'
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'pc_platformbundle_recipelistoption';
+    }
+
+
+}

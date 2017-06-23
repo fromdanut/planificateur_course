@@ -45,8 +45,8 @@ class LoadIngredient implements FixtureInterface
 
         // 5 ingrédient (nom, prix, calorie, unité, cat)
         $rows = array(
-            array('fraise', 0.001,'150', $gUnit, $fl),
-            array('sucre', 0.0001,'600', $gUnit, $esu),
+            array('fraise', 0.01,'150', $gUnit, $fl),
+            array('sucre', 0.001,'600', $gUnit, $esu),
             array('farine', 0.002,'300', $gUnit, $esa),
             array('lait', 0.003,'90', $clUnit, $pl),
             array('oeuf', 0.20,'80', $unit, $esa),
