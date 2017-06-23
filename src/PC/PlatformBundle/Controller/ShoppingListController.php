@@ -21,7 +21,7 @@ class ShoppingListController extends Controller
             ->getDoctrine()
             ->getManager()
             ->getRepository('PCPlatformBundle:ShoppingList')
-            ->find($id);
+            ->findWithAllFeatures($id);
 
         return $this->render('PCPlatformBundle:ShoppingList:view.html.twig', array(
             'shoppingList' => $shoppingList,

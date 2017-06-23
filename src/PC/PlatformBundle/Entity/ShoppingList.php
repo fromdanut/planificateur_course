@@ -84,37 +84,57 @@ class ShoppingList
     /*
         Fonction qui retourne la liste des courses en fonctions de la liste de recette.
         Génère une associative array :
-            $shoppingList = array( 'fraise' => array( "quantity" => 12,
-                                                      "price" => 3,
-                                                      "unit" => kg,
-                                                      "name" => "fraise"
-                                                  ),
-                                    'pomme' => array(...),
+            $ingList = array( 'fruis et légumes' => array(
+                                                'fraise' => array(
+                                                        "quantity" => 12,
+                                                        "price" => 3,
+                                                        "unit" => kg,
+                                                        "name" => "fraise"
+                                                        ),
+                                                'pomme' => array(...),
+                                            'produit laitiers' => array(...)
                                 )
     */
 
-    public function getShoppingList()
+    public function getGroupedIngredientList()
     {
-        $shoppingList = array();
+        $ingList = array(); // ingList for groupedIngredientList
+        // pour chaque recette.
         foreach ($this->getRecipes() as $recipe) {
+            // pour chaque ingrédient de recette.
             foreach($recipe->getRecipeIngredients() as $recipeIngredient) {
                 $ingredient = $recipeIngredient->getIngredient();
-                // Si l'ingrédient est déjà dans la liste on se contente d'incrémenter la quantité.
-                if (array_key_exists($ingredient->getName(), $shoppingList)) {
-                    $shoppingList[$ingredient->getName()]['quantity'] += $recipeIngredient->getQuantity();
+                $ingCat = $ingredient->getCategory()->getName();
+                $ingName = $ingredient->getName();
+                // Si la catégory de l'ingrédient est déjà renseignée dans la liste d'ingrédient.
+                if (array_key_exists($ingCat, $ingList)) {
+                    // Si l'ingrédient est déjà renseigné.
+                    if (array_key_exists($ingName, $ingList[$ingCat])) {
+                        // on rajoute la quantity du recipeIngredient.
+                        $ingList[$ingCat][$ingName]['quantity'] += $recipeIngredient->getQuantity();
+                    }
+                    // Si c'est la première occurence pour cet ingrédient, on l'ajoute à la ingList.
+                    else {
+                        $ingList[$ingCat][$ingName] = array(
+                            "name"     => $ingredient->getName(),
+                            "quantity" => $recipeIngredient->getQuantity(),
+                            "price"    => $ingredient->getPrice(),
+                            "unit"     => $ingredient->getUnit(),
+                        );
+                    }
                 }
-                // Si c'est la première occurence pour un ingrédient, on l'ajoute à la shoppingList.
+                // Si c'est la première occurence pour cette catégory, on l'ajoute, avec l'ingrédient.
                 else {
-                    $shoppingList[$ingredient->getName()] = array(
+                    $ingList[$ingCat][$ingName] = array(
                         "name"     => $ingredient->getName(),
                         "quantity" => $recipeIngredient->getQuantity(),
                         "price"    => $ingredient->getPrice(),
-                        "unit"     => $ingredient->getUnit()
+                        "unit"     => $ingredient->getUnit(),
                     );
                 }
             }
         }
 
-        return $shoppingList;
+        return $ingList;
     }
 }

@@ -160,28 +160,4 @@ class Ingredient
     {
         return $this->unit;
     }
-
-    /**
-     * Set category
-     *
-     * @param \PC\PlatformBundle\Entity\CategoryIngredient $category
-     *
-     * @return Ingredient
-     */
-    public function setCategory(\PC\PlatformBundle\Entity\CategoryIngredient $category = null)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category
-     *
-     * @return \PC\PlatformBundle\Entity\CategoryIngredient
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
 }

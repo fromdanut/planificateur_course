@@ -19,4 +19,28 @@ class ShoppingListRepository extends \Doctrine\ORM\EntityRepository
           ->getSingleResult();
     }
 
+    // Utilise dans la view du ShoppingListController
+    public function findWithAllFeatures($id)
+    {
+        $qb = $this
+                ->createQueryBuilder('s')
+                ->leftJoin('s.recipes', 'recipes')
+                    ->addSelect('recipes')
+                ->leftJoin('recipes.image', 'image')
+                    ->addSelect('image')
+                ->leftJoin('recipes.recipeIngredients', 'recipeIngredients')
+                    ->addSelect('recipeIngredients')
+                ->leftJoin('recipeIngredients.ingredient', 'ingredient')
+                    ->addSelect('ingredient')
+                ->leftJoin('ingredient.category', 'catIngredient')
+                    ->addSelect('catIngredient')
+                ->leftJoin('ingredient.unit', 'unitIngredient')
+                    ->addSelect('unitIngredient')
+                ->where('s.id = :id')
+                    ->setParameter('id', $id);
+        return $qb
+          ->getQuery()
+          ->getSingleResult();
+    }
+
 }

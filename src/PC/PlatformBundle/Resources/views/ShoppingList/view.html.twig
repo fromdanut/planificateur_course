@@ -16,11 +16,14 @@
     </div>
     <div class="row">
         <h2>La liste des courses</h2>
-        <ul>
-            {% for ingredient in shoppingList.shoppingList %}
-                <li>{{ingredient.quantity}} {{ingredient.unit.name}} {{ingredient.name}} : {{ingredient.price * ingredient.quantity}} euros</li>
-            {% endfor %}
-        </ul>
+        {% for catName, cat in shoppingList.groupedIngredientList %}
+        <h3>{{catName}}</h3>
+            <ul>
+                {% for ingredient in cat %}
+                    <li>{{ingredient.quantity}} {{ingredient.unit.name}} {{ingredient.name}} : {{ingredient.price * ingredient.quantity}} euros</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
     </div>
 
 {% endblock %}
