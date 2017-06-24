@@ -96,6 +96,12 @@ class Recipe
     private $recipeIngredients;
 
     /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $user;
+
+    /**
      * Get id
      *
      * @return int
@@ -423,5 +429,29 @@ class Recipe
             $calorie += ( $recipeIngredient->getIngredient()->getCalorie() * $recipeIngredient->getQuantity() );
         }
         $this->setCalorie($calorie);
+    }
+
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return Recipe
+     */
+    public function setUser(\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

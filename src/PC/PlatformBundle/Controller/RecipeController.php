@@ -78,6 +78,7 @@ class RecipeController extends Controller
             foreach ($recipe->getRecipeIngredients() as $recipeIngredient) {
                 $recipeIngredient->setRecipe($recipe);
             }
+            $recipe->setUser($this->getUser());
             $em->persist($recipe);
             $em->flush();
 
@@ -109,7 +110,7 @@ class RecipeController extends Controller
         $em->remove($recipe);
         $em->flush();
 
-        return $this->redirectToRoute('pc_platform_listRecipe');
+        return $this->redirectToRoute('pc_platform_recipe_index');
     }
 
     public function editAction(Request $request, $id)

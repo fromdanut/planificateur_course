@@ -5,13 +5,15 @@
 namespace PlatformBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use PC\PlatformBundle\Entity\Recipe;
 use PC\PlatformBundle\Entity\Image;
 use PC\PlatformBundle\Entity\Ingredient;
 use PC\PlatformBundle\Entity\RecipeIngredient;
+use UserBundle\Entity\User;
 
-class LoadRecipe implements FixtureInterface
+class LoadRecipe implements FixtureInterface, OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -21,10 +23,12 @@ class LoadRecipe implements FixtureInterface
                 Ce Datafixtures doit permettre d'avoir un panel de recette avec des attributs différents afin,
                 notamment de tester la génération de liste de recette en fonction de critères (temps de préparation,
                 prix, diététique)
+                !! Il est nécessaire de créer un user avec l'attribut username = jean !!
             */
 
             // La recette
             $recipe = new Recipe();
+
             $recipe->setName("recette n°".$i);
             $recipe->setCookingTime(2*$i);
             $recipe->setLongDescription('
@@ -47,6 +51,9 @@ class LoadRecipe implements FixtureInterface
                 Verser la crème sur le fond de tarte et disposer joliment les fraises coupées en 2.');
             $recipe->setShortDescription('Petite tarte aux fraises de saison qui ravira les petits comme les grands.');
 
+            // L'auteur
+            $user = $manager->getRepository('UserBundle:User')->findOneBy(array('username' => 'jean'));
+            $recipe->setUser($user);
 
             // Les ingrédients
             $ingredients = $manager->getRepository('PCPlatformBundle:Ingredient')->findAll();
@@ -83,5 +90,12 @@ class LoadRecipe implements FixtureInterface
 
         }
         $manager->flush();
+    }
+
+    public function getOrder()
+    {
+    // the order in which fixtures will be loaded
+    // the lower the number, the sooner that this fixture is loaded
+    return 2;
     }
 }

@@ -1,39 +1,38 @@
 <?php
-// src/OC/UserBundle/DataFixtures/ORM/LoadUser.php
 
-namespace UserBundle\DataFixtures\ORM;
+// src/UserBundle/DataFixtures/ORM/LoadUser.php
+
+namespace PlatformBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use UserBundle\Entity\User;
 
-class LoadUser implements FixtureInterface
+
+class LoadUser implements FixtureInterface, OrderedFixtureInterface
 {
-  public function load(ObjectManager $manager)
-  {
-    // Les noms d'utilisateurs à créer
-    $listNames = array('Alexandre', 'Marine', 'Anna');
+    public function load(ObjectManager $manager)
+    {
+        $names = array(
+            'jean',
+            'fred',
+        );
 
-    foreach ($listNames as $name) {
-      // On crée l'utilisateur
-      $user = new User;
-
-      // Le nom d'utilisateur et le mot de passe sont identiques pour l'instant
-      $user->setUsername($name);
-      $user->setPassword($name);
-      $email = $name.'@mail.com';
-      $user->setEmail($email);
-
-      // On ne se sert pas du sel pour l'instant
-      $user->setSalt('');
-      // On définit uniquement le role ROLE_USER qui est le role de base
-      $user->setRoles(array('ROLE_USER'));
-
-      // On le persiste
-      $manager->persist($user);
+        foreach ($names as $name) {
+            $user = new User();
+            $user->setUsername($name);
+            $user->setEmail($name.'@mail.net');
+            $user->setPassword($name);
+            $manager->persist($user);
+        }
+        $manager->flush();
     }
 
-    // On déclenche l'enregistrement
-    $manager->flush();
-  }
+    public function getOrder()
+    {
+    // the order in which fixtures will be loaded
+    // the lower the number, the sooner that this fixture is loaded
+    return 1;
+    }
 }

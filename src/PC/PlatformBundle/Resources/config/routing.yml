@@ -1,5 +1,9 @@
-pc_platform_homepage:
+pc_platform: # Redirect to /homepage
     path:     /
+    defaults: { _controller: PCPlatformBundle:Default:redirectToIndex }
+
+pc_platform_homepage:
+    path:     /homepage
     defaults: { _controller: PCPlatformBundle:Default:index }
 
 pc_platform_recipe_index:

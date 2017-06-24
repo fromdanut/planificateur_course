@@ -18,9 +18,12 @@ security:
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
+    anonymous_allowed:
+      pattern: ^/(homepage|login|register/*|)$
+      anonymous: true
     main:
       pattern:      ^/
-      anonymous:    true
+      anonymous:    false
       provider:     main
       form_login:
         login_path: fos_user_security_login

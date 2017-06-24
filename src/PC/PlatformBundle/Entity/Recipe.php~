@@ -59,18 +59,18 @@ class Recipe
 
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="price", type="integer")
+     * @ORM\Column(name="price", type="decimal", precision=10, scale=5)
      */
     private $price;
 
     /**
-     * @var bool
+     * @var int
      *
-     * @ORM\Column(name="fat", type="bollean")
+     * @ORM\Column(name="calorie", type="integer")
      */
-    private $fat;
+    private $calorie;
 
     /**
      * @var \DateTime
@@ -94,6 +94,12 @@ class Recipe
      * @ORM\OneToMany(targetEntity="PC\PlatformBundle\Entity\RecipeIngredient", mappedBy="recipe", cascade={"persist"}, orphanRemoval=true)
      */
     private $recipeIngredients;
+
+    /**
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    protected $user;
 
     /**
      * Get id
@@ -365,7 +371,7 @@ class Recipe
     /**
      * Set price
      *
-     * @param integer $price
+     * @param $price
      */
     public function setPrice($price)
     {
@@ -388,8 +394,40 @@ class Recipe
         $this->setPrice($price);
     }
 
+    /**
+     * Set calorie
+     *
+     * @param \bollean $calorie
+     *
+     * @return Recipe
+     */
+    public function setCalorie($calorie)
+    {
+        $this->calorie = $calorie;
 
-/*
+        return $this;
+    }
 
-*/
+    /**
+     * Get calorie
+     *
+     * @return \bollean
+     */
+    public function getCalorie()
+    {
+        return $this->calorie;
+    }
+
+    /**
+     * @ORM\PreFlush
+     */
+    public function computeCalorie()
+    {
+        $calorie = 0;
+
+        foreach ($this->getRecipeIngredients() as $recipeIngredient) {
+            $calorie += ( $recipeIngredient->getIngredient()->getCalorie() * $recipeIngredient->getQuantity() );
+        }
+        $this->setCalorie($calorie);
+    }
 }

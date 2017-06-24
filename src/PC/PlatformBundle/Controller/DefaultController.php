@@ -10,4 +10,9 @@ class DefaultController extends Controller
     {
         return $this->render('PCPlatformBundle:Default:index.html.twig');
     }
+
+    public function redirectToIndexAction()
+    {
+        return $this->redirectToRoute('pc_platform_homepage');
+    }
 }
