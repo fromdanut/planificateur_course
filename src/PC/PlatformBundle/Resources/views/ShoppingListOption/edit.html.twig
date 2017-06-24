@@ -2,14 +2,15 @@
 
 {% extends "PCPlatformBundle::layout.html.twig" %}
 
-{% block pcplatform_body %}
+{% block body %}
 
-    <h1>Mes options pour la génération de la liste de recettes pour la ShoppingList</h1>
-    {{form(form)}}
-
+    <h3 class="text-center">Mes options prédéfinies pour faire la liste de courses.</h3>
     {# Informed the user if the options are modify #}
     {% for flashMessage in app.session.flashbag.get('notice') %}
-        {{ flashMessage }}
+        <div class="alert alert-success" role="alert"><p>{{ flashMessage }}</p></div>
     {% endfor %}
+    {{form(form)}}
+
+
 
 {% endblock %}

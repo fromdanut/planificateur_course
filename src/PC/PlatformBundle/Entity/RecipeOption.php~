@@ -48,5 +48,10 @@ class RecipeOption
      */
     protected $rating = 1;
 
+    /**
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\User")
+     */
+    protected $user;
+
 
 }

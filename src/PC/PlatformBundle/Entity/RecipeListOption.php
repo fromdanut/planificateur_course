@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * RecipeListOption
  *
  * @ORM\Table(name="recipe_list_option")
- * @ORM\Entity(repositoryClass="PC\PlatformBundle\Repository\RecipeListOption")
+ * @ORM\Entity(repositoryClass="PC\PlatformBundle\Repository\RecipeListOptionRepository")
  */
 class RecipeListOption extends RecipeOption
 {
@@ -219,5 +219,29 @@ class RecipeListOption extends RecipeOption
     public function getStyles()
     {
         return $this->styles;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return RecipeListOption
+     */
+    public function setUser(\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

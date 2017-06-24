@@ -40,6 +40,11 @@ class ShoppingListOption extends RecipeOption
      */
     protected $styles;
 
+    /**
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\User")
+     */
+    protected $user;
+
 
     /**
      * Constructor
@@ -277,5 +282,29 @@ class ShoppingListOption extends RecipeOption
             else { $nb += 5;}
         }
         return $nb;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return ShoppingListOption
+     */
+    public function setUser(\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

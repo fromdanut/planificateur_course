@@ -9,23 +9,32 @@ use PC\PlatformBundle\Entity\RecipeListOption;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class RecipeController extends Controller
 {
-    /*
-        Affiche les recettes en fonction des parametres passé dans l'url.
-    */
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
     public function indexAction(Request $request)
     {
+        // Récupère l'utilisateur courant.
+        $user = $this->getUser();
 
-        $option = new RecipeListOption();
-        // Créé le formulaire.
+        // Créé l'entity manager et récupère l'option de recette de l'utilisateur.
+        $em = $this->getDoctrine()->getManager();
+        $option = $em
+            ->getRepository('PCPlatformBundle:RecipeListOption')
+            ->findOneByUser($user);
+
+        // Si l'utilisateur n'avait pas déjà d'option de recette, en créer une nouvelle.
+        if ($option === null) {
+            $option = new RecipeListOption();
+            $option->setUser($user);
+        }
+
+        // Créé le formulaire à partir d'$option.
         $form = $this->get('form.factory')->create(RecipeListOptionType::class, $option);
-        // Créé l'entity manager.
-        $em = $this
-            ->getDoctrine()
-            ->getManager();
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 

@@ -68,7 +68,6 @@ class ShoppingListController extends Controller
         return $this->render('PCPlatformBundle:ShoppingList:add.html.twig', array(
             'form' => $form->createView(),
             'shoppingListOption' => $shoppingListOption,
-            'diet' => true,
         ));
 
     }
