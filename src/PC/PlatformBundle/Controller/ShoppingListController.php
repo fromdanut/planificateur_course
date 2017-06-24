@@ -42,7 +42,7 @@ class ShoppingListController extends Controller
                     ->getDoctrine()
                     ->getManager()
                     ->getRepository('PCPlatformBundle:Recipe')
-                    ->findByShoppingListOption($shoppingListOption);
+                    ->findByOption($shoppingListOption);
 
         // Créé une shoppingList à laquelle sont ajoutées les recettes.
         $shoppingList = new ShoppingList();
@@ -67,6 +67,8 @@ class ShoppingListController extends Controller
 
         return $this->render('PCPlatformBundle:ShoppingList:add.html.twig', array(
             'form' => $form->createView(),
+            'shoppingListOption' => $shoppingListOption,
+            'diet' => true,
         ));
 
     }

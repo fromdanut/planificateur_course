@@ -54,11 +54,13 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         }
 
         elseif ($option instanceof RecipeListOption) {
-            // Limité au nombre de repas voulu par l'utilisateur.
+            // Filtre par catégorie. A faire...
+            // Filtre par mot clé.
             if ($option->getKeyword() ==! null) {
                 $qb->andWhere('r.name LIKE :exp')
                 ->setParameter('exp', '%'.$option->getKeyword().'%');
             }
+            // Limité au nombre de repas voulu par l'utilisateur.
             $qb->setMaxResults(12);
         }
 

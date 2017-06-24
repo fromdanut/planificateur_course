@@ -3,8 +3,36 @@
 {% extends "PCPlatformBundle::layout.html.twig" %}
 
 {% block pcplatform_article %}
+<div class="row">
+    <h3>Recettes seléctionnés à partir des options suivantes</h3>
+    <ul class="shoppingListOption">
+        {#
+            Permet à l'utilisateur de voir les filtres amenant à la liste de courses.
+
+            Vérifie si le filtre est activé (we, dinner, quick, etc. sont des booléens.),
+            avant d'afficher la valeur du filtre.
+        #}
+        {# filtre sur des attributs de type booléen. #}
+        {% if shoppingListOption.diet %}<li class="list-unstyled">diet</li>{% endif %}
+        {% if shoppingListOption.quick %}<li class="list-unstyled">quick</li>{% endif %}
+        {% if shoppingListOption.eco %}<li class="list-unstyled">eco</li>{% endif %}
+        {% if shoppingListOption.lunch %}<li class="list-unstyled">lunch</li>{% endif %}
+        {% if shoppingListOption.dinner %}<li class="list-unstyled">dinner</li>{% endif %}
+        {% if shoppingListOption.we %}<li class="list-unstyled">we</li>{% endif %}
+        {# filtre sur attributs type array #}
+        <li class="list-unstyled">
+            {% for style in shoppingListOption.styles %}
+                {{style.name}}
+            {% endfor %}
+        </li>
+        {# rappel le nombre de repas #}
+        <li class="list-unstyled">{{shoppingListOption.NbMeal}} repas</li>
+    </ul>
+
+</div>
 
 <div class="well">
+
 
   {{ form(form) }}
 

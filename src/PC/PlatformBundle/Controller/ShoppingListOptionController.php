@@ -19,10 +19,7 @@ class ShoppingListOptionController extends Controller
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
-
-            // set date to now.
-            $shoppingListOption->setDate(new \DateTime());
-
+            
             $em->persist($shoppingListOption);
             $em->flush();
 

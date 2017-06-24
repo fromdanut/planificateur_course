@@ -2,6 +2,36 @@
 
 <h3 class='text-center'>Filtrer les recettes</h3>
 
+
 <div class="well">
-{{form(form)}}
+  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+  {# Les erreurs générales du formulaire. #}
+  {{ form_errors(form) }}
+
+  {# Keyword #}
+  <div class="form-group">
+
+    {# Affichage des erreurs pour ce champ précis. #}
+    {{ form_errors(form.keyword) }}
+
+    <div class="col-xs-12">
+      {# Génération de l'input. #}
+      {{ form_widget(form.keyword, {'attr': {'class': 'form-control input-md', 'type': 'search', 'placeholder': 'Mot dans le titre'}}) }}
+    </div>'
+  </div>
+
+
+  {# Génération automatique des champs pas encore écrits.
+     Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+     et tous les champs cachés (type « hidden »). #}
+
+
+  {{ form_rest(form) }}
+
+  {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+  {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+
+  {# Fermeture de la balise <form> du formulaire HTML #}
+  {{ form_end(form) }}
 </div>
