@@ -1,10 +1,14 @@
-pc_platform: # Redirect to /homepage
+pc_platform: # Redirect to pc_platform_homepage if it's a authentificated user.
     path:     /
-    defaults: { _controller: PCPlatformBundle:Default:redirectToIndex }
+    defaults: { _controller: PCPlatformBundle:Default:index }
+
+pc_platform_login:
+    path:     /login
+    defaults: { _controller: PCPlatformBundle:Default:login }
 
 pc_platform_homepage:
-    path:     /homepage
-    defaults: { _controller: PCPlatformBundle:Default:index }
+    path:     /home
+    defaults: { _controller: PCPlatformBundle:Default:home }
 
 pc_platform_recipe_index:
     path:     /recipes/

@@ -19,7 +19,7 @@ security:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
     anonymous_allowed:
-      pattern: ^/(homepage|login|register/*|)$
+      pattern: ^/(login|register/*)$
       anonymous: true
     main:
       pattern:      ^/

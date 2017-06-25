@@ -6,13 +6,11 @@
 
 <div class="container">
   <div id="header" class="jumbotron">
-    <h1>Planificateur de courses<small> à partir de vos recettes !</small></h1>
+    <h1>Bonjour {{ app.user.username }}</h1>
     <p>
-        Ce site permet de gérer un livre de recettes, à partir desquelles on peut générer des listes de courses...
+        Heureux de vous revoir...
     </p>
     <br>
-    <a class="btn btn-primary btn-lg" href="{{path('fos_user_registration_register')}}">S'inscrire</a>
-    <a class="btn btn-primary btn-lg" href="{{path('fos_user_security_login')}}">Se connecter</a>
   </div>
 </div>
 

@@ -8,11 +8,23 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('PCPlatformBundle:Default:index.html.twig');
+        if ($this->getUser() === null) { # s'il l'utilisateur n'est pas authentifié.
+            return $this->redirectToRoute('pc_platform_login');
+        }
+        else {
+            return $this->redirectToRoute('pc_platform_homepage');
+        }
     }
 
-    public function redirectToIndexAction()
+    public function homeAction()
     {
-        return $this->redirectToRoute('pc_platform_homepage');
+        return $this->render('PCPlatformBundle:Default:home.html.twig');
     }
+
+    public function loginAction()
+    {
+        return $this->render('PCPlatformBundle::login.html.twig');
+    }
+
+
 }

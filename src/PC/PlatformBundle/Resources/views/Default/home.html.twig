@@ -1,0 +1,18 @@
+{# src/PC/PlatformBundle/Resources/views/Default/home.html.twig #}
+
+{% extends "PCPlatformBundle::layout.html.twig" %}
+
+{% block pcplatform_article %}
+<div class="row">
+    <div class="col-xs-12">
+        <div id="header" class="jumbotron">
+            <h1>Bonjour {{ app.user.username }}</h1>
+            <p>
+                Heureux de vous revoir...
+            </p>
+            <br>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -9,6 +9,7 @@ use PC\PlatformBundle\Entity\RecipeListOption;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class RecipeController extends Controller
@@ -99,10 +100,15 @@ class RecipeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('PCPlatformBundle:Recipe');
         $recipe = $repo->find($id);
+
+        // Vérifie si la recette existe.
         if (null === $recipe) {
             throw new NotFoundHttpException("La recette n°".$id." n'existe pas.");
         }
-        // supprimer l'ensemble des recipeIngredients
+        // Vérifie que l'auteur de la recette correspond au user authetifié.
+        $this->checkUser($recipe, $this->getUser(), "C'est pas cool d'essayer de supprimer les recettes des autres...");
+
+        // Supprime l'ensemble des recipeIngredients.
         foreach ($recipe->getRecipeIngredients() as $recipeIngredient) {
             $em->remove($recipeIngredient);
         }
@@ -120,9 +126,12 @@ class RecipeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('PCPlatformBundle:Recipe');
         $recipe = $repo->find($id);
+        // Vérifie que la recette existe.
         if (null === $recipe) {
             throw new NotFoundHttpException("La recette n°".$id." n'existe pas.");
         }
+        // Vérifie que l'auteur de la recette correspond au user authetifié.
+        $this->checkUser($recipe, $this->getUser(), "Pas touche aux recettes des autres !");
 
         // créé le formulaire
         $form = $this->get('form.factory')->create(RecipeType::class, $recipe);
@@ -145,7 +154,18 @@ class RecipeController extends Controller
         return $this->render('PCPlatformBundle:Recipe:add.html.twig', array(
             'form' => $form->createView(),
         ));
-
     }
+    /*
+        Vérifie si un utilisateur est bien l'auteur d'une recette.
+        Lève une erreur avec un message si ce n'est pas le cas.
+    */
+    public function checkUser($recipe, $user, $message) {
+        $user = $this->getUser();
+        if ($recipe->getUser() != $user) {
+            throw new AccessDeniedHttpException($message);
+        }
+    }
+    // Vérifie si l'utilisateur souhaitant effacer la recette en est l'auteur.
+
 
 }
