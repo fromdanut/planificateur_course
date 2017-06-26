@@ -12,6 +12,13 @@
             {% for recipe in recipes %}
             {% include 'PCPlatformBundle:Recipe:viewSmall.html.twig' %}
             {% endfor %}
+            {# Information s'il n'y a pas de recette #}
+            {% if recipes is empty %}
+            <div id="header" class="jumbotron">
+                <h1>Oups : aucune recette ne correspond <small> modifiez vos filtres !</small></h1>
+                </div>
+            </div>
+            {% endif %}
         </div>
 
         <div class="row">
