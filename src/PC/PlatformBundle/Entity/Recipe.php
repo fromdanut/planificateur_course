@@ -454,4 +454,5 @@ class Recipe
     {
         return $this->user;
     }
+
 }

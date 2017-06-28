@@ -27,17 +27,20 @@ class ShoppingListController extends Controller
             'shoppingList' => $shoppingList,
         ));
     }
-
+    /*
+        Formulaire pour ajouter une shopping list sur laquelle on l'utilisateur
+        ne voit uniquement que la liste des recettes (qu'il peut modifier).
+    */
     public function addAction(Request $request)
     {
-        // Récupère une ShoppingListOption arbitrairement, plus tard il faudra chercher celle de l'utilisateur...
+        // Récupère la ShoppingListOption de l'utilisateur.
         $shoppingListOption = $this
                                 ->getDoctrine()
                                 ->getManager()
                                 ->getRepository('PCPlatformBundle:ShoppingListOption')
-                                ->findOneBy(array());
+                                ->findOneBy(array('user' => $this->getUser()));
 
-        // Récupère une liste de recette en fonction de la shoppingListOption.
+        // Génère la liste de recette en fonction de la shoppingListOption.
         $recipes = $this
                     ->getDoctrine()
                     ->getManager()
@@ -58,7 +61,7 @@ class ShoppingListController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($shoppingList);
             $em->flush();
-            $request->getSession()->getFlashBag()->add('notice', 'Liste de courses enregistrée.');
+            $request->getSession()->getFlashBag()->add('notice', 'Nouvelle liste de courses enregistrées.');
 
             return $this->redirectToRoute('pc_platform_shoppinglist_view', array(
                                     'id' => $shoppingList->getId()
@@ -69,6 +72,5 @@ class ShoppingListController extends Controller
             'form' => $form->createView(),
             'shoppingListOption' => $shoppingListOption,
         ));
-
     }
 }

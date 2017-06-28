@@ -1,19 +1,68 @@
 <a href="{{ path('pc_platform_view', {'id': recipe.id}) }}" style="color:#000000 !important; text-decoration:none;">
-    <div class="col-xs-6 col-sm-4 col-md-3">
-        <div class="row">
-            {% if recipe.image is defined %}
-            <div class="col-xs-6">
-                <img class="img-responsive img-rounded" src="{{recipe.image.url}}" alt="{{recipe.image.alt}}">
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        {# Conteneur #}
+        <div class="row" style="padding-right:10px" >
+            {# TITRE #}
+            <div class="row">
+                <div class="col-xs-12">
+                    {# Limite le nombre de caractère à 50 dans le titre. #}
+                    <strong>{{ recipe.name|length > 50 ? recipe.name|slice(0, 50) ~ '...' : recipe.name  }}</strong>
+                </div>
             </div>
-            {% endif %}
-            <div class="col-xs-6">
-                <h3>{{recipe.name}}</h1>
-                <small class="pull-right">Author</small><br>
+
+            {# IMAGE + INFOS DIVERSES#}
+            <div class="row">
+
+                {# IMAGE #}
+                {% if recipe.image is defined %}
+                <div class="col-xs-6">
+                    <img class="img-responsive img-rounded" src="{{recipe.image.url}}" alt="{{recipe.image.alt}}">
+                </div>
+                {% endif %}
+
+                {# INFOS #}
+                <div class="col-xs-6">
+                    {# auteur #}
+                    <div class="row">
+                        <p><span class="glyphicon glyphicon-pencil"></span><strong> {{recipe.user.username}}</strong></p>
+                    </div>
+                    {# tps préparation #}
+                    <div class="row">
+                        <p><span class="glyphicon glyphicon-hourglass"></span>{{recipe.cookingTime}} mn</p>
+                    </div>
+                    {# note #}
+                    <div class="row">
+                        {% include 'PCPlatformBundle:Recipe:rating.html.twig' %}
+                    </div>
+                    {# info : diet/eco + la première des catégories (italien, asiat, etc.) #}
+                    <div class="row">
+
+                        {# !!! Rendre les valeurs de prix et diet parametrable -> cf RecipeRepository !!! #}
+                        {# prix #}
+                        {% if recipe.price < 10 %}
+                            <span class="label label-success">eco</span>
+                        {% else %}
+                            <span class="label label-warning">cher</span>
+                        {% endif %}
+
+                        {# diet #}
+                        {% if recipe.calorie < 15000 %}
+                            <span class="label label-success">diet</span>
+                        {% else %}
+                            <span class="label label-warning">fat</span>
+                        {% endif %}
+
+                        {# 1er élément des catégories #}
+                            <span class="label label-primary">{{recipe.categories|first}}</span>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <p>{{recipe.shortDescription}}</p>
+
+            {# COURTE DESCRIPTION #}
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>{{recipe.shortDescription|length > 50 ? recipe.shortDescription|slice(0, 50) ~ '...' : recipe.shortDescription}}</p>
+                </div>
             </div>
         </div>
     </div>

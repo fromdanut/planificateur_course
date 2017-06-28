@@ -1,0 +1,13 @@
+{# src/PC/PlatformBundle/Resources/views/Recipe/list.html.twig #}
+
+{# Affiche le rating (sur 5) avec le nbr d'étoile correspondant dans une couleur #}
+{% for i in range(1, recipe.rating) %}
+    <span class="glyphicon glyphicon-star" style="color:CornflowerBlue"></span>
+{% endfor %}
+
+{# Et le complément jusqu'à 5 en étoile grise #}
+{% if recipe.rating != 5 %}
+    {% for i in range(1, (5 - recipe.rating) ) %}
+        <span class="glyphicon glyphicon-star" style="color:grey"></span>
+    {% endfor %}
+{% endif %}
