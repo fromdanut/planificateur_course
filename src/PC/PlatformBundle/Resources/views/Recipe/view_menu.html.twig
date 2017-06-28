@@ -1,0 +1,45 @@
+{# src/PC/PlatformBundle/Resources/views/Recipe/view_ingredients.html.twig #}
+
+{# BOUTONS #}
+<div class="row" style="margin-top:10px">
+    <div class="col-xs-12">
+        <a href="{{path('pc_platform_recipe_index')}}" class="btn btn-block btn-primary btn-primary">
+            <span class="glyphicon glyphicon-th-large">
+            </span> retour à la liste
+        </a>
+    </div>
+</div>
+{# edit et delete accessible seulement pour l'auteur de la recette #}
+{% if app.user.username == recipe.user.username %}
+    <div class="row" style="margin-top:10px">
+        <div class="col-xs-12">
+            <a href="{{path('pc_platform_edit', {'id': recipe.id})}}" class="btn btn-block btn-primary btn-warning">
+                <span class="glyphicon glyphicon-pencil">
+                </span>  modifier
+            </a>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:10px">
+        <div class="col-xs-12">
+            <a href="{{path('pc_platform_delete', {'id': recipe.id})}}" class="btn btn-block btn-primary btn-danger">
+                <span class="glyphicon glyphicon-minus-sign">
+                </span>  supprimer
+            </a>
+        </div>
+    </div>
+{% endif %}
+
+{# SUGGESTION #}
+<div class="row" style="margin-top:10px">
+    <div class="col-xs-12">
+        <h4>Voir également...</h4>
+        {% for recipe in suggestions %}
+            <div class="row style="margin-top:10px"">
+                <div class="col-xs-12">
+                    {% include 'PCPlatformBundle:Recipe:viewSmall.html.twig' %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

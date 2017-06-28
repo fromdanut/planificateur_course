@@ -63,8 +63,13 @@ class RecipeController extends Controller
             throw new NotFoundHttpException('Recette n°"'.$id.'" inexistante.');
         }
 
+        // rechercher 3 recettes similaires pour les suggérer (affiche en small_view)
+        $nb = 3; # a parametrer !
+        $suggestions = $repo->findSuggestions($id, $nb);
+
         return $this->render('PCPlatformBundle:Recipe:view.html.twig', array(
             'recipe' => $recipe,
+            'suggestions' => $suggestions,
         ));
     }
 

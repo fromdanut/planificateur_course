@@ -72,4 +72,24 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
           ->getResult()
         ;
     }
+
+    /*
+        int id
+        int nb
+        return list of recipe Entity
+    */
+    public function findSuggestions($id, $nb)
+    {
+        /*
+            comportement attendu :
+            récupère l'auteur ou le titre de la recette
+            retourne n ($nb) like titre ou auteur.
+        */
+        $qb = $this->createQueryBuilder('r');
+        $qb->setMaxResults($nb);
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
 }

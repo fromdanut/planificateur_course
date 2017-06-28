@@ -4,55 +4,22 @@
 
 {% block pcplatform_article %}
 
-<div class="row">
-    <div class="row">
-        <h1>{{recipe.name}}
-            <small>
-                {% include 'PCPlatformBundle:Recipe:rating.html.twig' %}
-                {{recipe.cookingTime}} mn, {{recipe.price}}
-                <span class="glyphicon glyphicon-euro"></span>
-                {{recipe.calorie}} calories.
-            </small>
-        </h1>
+    <div class="col-sm-3 well hidden-xs hidden-sm">
+        {% include 'PCPlatformBundle:Recipe:view_menu.html.twig' %}
     </div>
-    <div class="row">
-        <div class="col-xs-4">
-            <img class="img-responsive" src="{{recipe.image.url}}" alt="{{recipe.image.alt}}">
-        </div>
-        <div class="col-xs-8">
-            <div class="row">
-                <p class="lead">{{recipe.shortDescription}}</p>
-            </div>
-            <div class="row">
-                <h3>Ingrédients</h3>
-                <ul>
-                    {% for recipeIngredient in recipe.recipeIngredients %}
-                        <li>{{recipeIngredient.quantity}} {{recipeIngredient.ingredient.unit.name}} de {{recipeIngredient.ingredient.name}}</li>
-                    {% endfor %}
-                </ul>
-                <h3>Catégories</h3>
-                <ul class="list-inline">
-                    {% for category in recipe.categories %}
-                    <li class="list-unstyled list-inline">{{category.name}}</li>
-                    {% endfor %}
-                </ul>
-                <h3>par {{recipe.user.username}}</h3>
-            </div>
 
-        </div>
+    <div class="col-xs-12 col-sm-9 col-md-7">
+        {% include 'PCPlatformBundle:Recipe:view_main.html.twig' %}
     </div>
-    <div class="row">
-        <p class="text-justify">{{recipe.longDescription}}</p>
+
+    <div class="col-xs-12 col-sm-3 col-md-2 well">
+        {% include 'PCPlatformBundle:Recipe:view_ingredients.html.twig' %}
     </div>
-    <div class="col-xs-6 col-xs-push-3">
-        <div class="btn-group">
-            <a href="{{path('pc_platform_recipe_index')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Retour à la liste des recettes"><span class="glyphicon glyphicon-th"></span></a>
-            {# vérifie si l'utilisateur l'auteur de la recette, pour lui permettre de l'editer/supprimer #}
-            {% if app.user.username == recipe.user.username %}
-            <a href="{{path('pc_platform_edit', {'id': recipe.id})}}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Modifier la recette"><span class="glyphicon glyphicon-pencil"></span></a>
-            <a href="{{path('pc_platform_delete', {'id': recipe.id})}}" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Supprimer la recette"><span class="glyphicon glyphicon-minus-sign"></span></a>
-            {% endif %}
-        </div>
+
+    {# Le menu se retrouve en bas pour xs et sm device #}
+    <div class="col-xs-12 well visible-xs visible-sm">
+        {% include 'PCPlatformBundle:Recipe:view_menu.html.twig' %}
     </div>
-</div>
+
+
 {% endblock %}

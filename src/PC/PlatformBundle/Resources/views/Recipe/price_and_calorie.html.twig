@@ -1,0 +1,14 @@
+{# !!! Rendre les valeurs de prix et diet parametrable -> cf RecipeRepository !!! #}
+{# prix #}
+{% if recipe.price < 10 %}
+    <span class="label label-success">eco</span>
+{% else %}
+    <span class="label label-warning">cher</span>
+{% endif %}
+
+{# diet #}
+{% if recipe.calorie < 15000 %}
+    <span class="label label-success">diet</span>
+{% else %}
+    <span class="label label-warning">fat</span>
+{% endif %}

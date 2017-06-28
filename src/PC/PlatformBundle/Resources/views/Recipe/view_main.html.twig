@@ -1,0 +1,24 @@
+{# src/PC/PlatformBundle/Resources/views/Recipe/view_main.html.twig #}
+
+{# TITTRE DE LA RECETTE, avec auteur, note et tps de préparation. #}
+<div class="row">
+    <div class="col-xs-12">
+        <h1 class="text-center">{{recipe.name}}<br>
+            <small class="tex-center"><span class="glyphicon glyphicon-pencil"></span> {{recipe.user.username}}</small>
+        </h1>
+    </div>
+</div>
+
+{# IMAGE #}
+<div class="row">
+    <div class="col-xs-12">
+        <img class="img-responsive center-block" src="{{recipe.image.url}}" alt="{{recipe.image.alt}}">
+    </div>
+</div>
+
+{# DESCRIPTION #}
+<div class="row">
+    <div class="col-xs-12">
+        <p class="text-justify">{{recipe.longDescription}}</p>
+    </div>
+</div>

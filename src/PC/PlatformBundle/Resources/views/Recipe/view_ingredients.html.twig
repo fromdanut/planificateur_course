@@ -1,0 +1,38 @@
+{# src/PC/PlatformBundle/Resources/views/Recipe/view_ingredients.html.twig #}
+
+{# Liste des ingrédients #}
+<div class="row">
+    <div class="col-xs-12">
+        <h4>Ingredients</h4>
+        <ul>
+            {% for recipeIngredient in recipe.recipeIngredients %}
+                <li class="list-unstyled">{{recipeIngredient.quantity}} {{recipeIngredient.ingredient.unit.name}} de {{recipeIngredient.ingredient.name}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{# Les catégories#}
+<div class="row">
+    <div class="col-xs-12">
+        <h4>Catégories</h4>
+        <ul class="list-inline">
+            {% for category in recipe.categories %}
+            <span class="label label-default">{{category.name}}</span>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{# Infos sur le prix, le tps de préparation et la note #}
+<div class="row">
+    <div class="col-xs-12">
+        <h4>Infos</h4>
+        <p>{% include 'PCPlatformBundle:Recipe:rating.html.twig' %}</p>
+        <p><span class="glyphicon glyphicon-hourglass"></span>{{recipe.cookingTime}} mn</p>
+        <p><span class="glyphicon glyphicon-euro"></span> {{recipe.price}}</p>
+        <p><span class="glyphicon glyphicon-scale"></span> {{recipe.calorie}} calories.</p>
+
+
+    </div>
+</div>

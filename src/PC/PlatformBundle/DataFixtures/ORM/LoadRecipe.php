@@ -81,7 +81,7 @@ class LoadRecipe implements FixtureInterface, OrderedFixtureInterface
 
             // L'image (la meme pour l'ensemble des recettes)
             $image = new Image();
-            $image->setUrl("https://images.marmitoncdn.org/recipephotos/multiphoto/57/572cf720-8433-4896-ad45-b0534eac1bb9_normal.jpg");
+            $image->setUrl("http://www.juliemyrtille.com/wp-content/uploads/2014/10/Tarteauxpommes_JulieMyrtille8.jpg");
             $image->setAlt("Une tarte à la fraise");
             $recipe->setImage($image);
             $manager->persist($image);
