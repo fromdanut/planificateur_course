@@ -14,6 +14,8 @@ A Symfony project created on June 15, 2017, 10:34 pm.
 - mettre à jour le schema uml...
 - améliorer la création d'un compte (pour l'instant c'est moche, ca marche mais ca renvoit plusieurs fois vers l'accueil alors qu'on s'attend à être renvoyé directement dans l'espace membre).
 - améliorer findSuggestions.
+- frontend améliorer le rendu des smallView recipe en small device sur la page view.
+- réussir à retenir les choix de l'utilisateur dans le formulaire RecipeListOption.
 
 ## Amélioration par page (essentiellement du frontend):
 
@@ -22,7 +24,6 @@ A Symfony project created on June 15, 2017, 10:34 pm.
 - /home : ajouter des éléments ("mes dernières recettes ajoutés", "mes dernières courses")
 
 - /recipes :
-    - améliorer le rendu des recette en viewSmall (on devra voir directement le rating, fat/diet, expensive/eco, tps de préparation, style).
     - améliorer le formulaire : rating en nb d'étoile, diet/quick/eco sous forme de bouton on/off
 
 - /shoppingListOption/editAction : Modifier l'affichage des options (liste dans des btn ?) + un bouton "créer une liste de recette".

@@ -6,7 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -19,41 +21,16 @@ class RecipeListOptionType extends AbstractType
     {
         $builder
             ->add('keyword', SearchType::class, array('required' => false))
-            ->add('eco', ChoiceType::class, array(
-                'choices' => array(
-                    'yep' => true,
-                    'nop' => false
-                ),
-                'expanded' => true,
-                'multiple' => false
-                 ))
-            ->add('quick', ChoiceType::class, array(
-                'choices' => array(
-                    'yep' => true,
-                    'nop' => false
-                ),
-                'expanded' => true,
-                'multiple' => false
-                 ))
-            ->add('diet', ChoiceType::class, array(
-                'choices' => array(
-                    'yep' => true,
-                    'nop' => false
-                ),
-                'expanded' => true,
-                'multiple' => false
-                 ))
-            ->add('rating', ChoiceType::class, array(
-                'choices' => array(
-                    1 => 1,
-                    2 => 2,
-                    3 => 3,
-                    4 => 4,
-                    5 => 5,
-                ),
-                'expanded' => true,
-                'multiple' => false
-                 ))
+            ->add('eco', CheckboxType::class, array(
+                'required' => false,
+            ))
+            ->add('quick', CheckboxType::class, array(
+                'required' => false,
+            ))
+            ->add('diet', CheckboxType::class, array(
+                'required' => false,
+            ))
+            ->add('rating', IntegerType::class)
              ->add('styles', EntityType::class, array(
                        'class'        => 'PCPlatformBundle:Category',
                        'choice_label' => 'name',

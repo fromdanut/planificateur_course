@@ -3,31 +3,32 @@
 {% extends "PCPlatformBundle::layout.html.twig" %}
 
 {% block pcplatform_article %}
-<div class="row">
-    <div class="col-xs-3">
-        {% include 'PCPlatformBundle:Recipe:formSearch.html.twig' %}
-    </div>
-    <div class="col-xs-9">
-        <div class="row">
-            {% for recipe in recipes %}
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                {% include 'PCPlatformBundle:Recipe:viewSmall.html.twig' %}
-                </div>
-            {% endfor %}
-            {# Information s'il n'y a pas de recette #}
-            {% if recipes is empty %}
-            <div id="header" class="jumbotron">
-                <h1>Oups : aucune recette ne correspond <small> modifiez vos filtres !</small></h1>
-                </div>
-            </div>
-            {% endif %}
-        </div>
 
-        <div class="row">
-            <div class="col-xs-6 col-sm2">
-                <a href="{{path('pc_platform_add')}}" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter une recette</a>
+    <div class="row">
+        <div class="col-xs-3">
+            {% include 'PCPlatformBundle:Recipe:formSearch.html.twig' %}
+        </div>
+        <div class="col-xs-9">
+            <div class="row">
+                {% for recipe in recipes %}
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                    {% include 'PCPlatformBundle:Recipe:viewSmall.html.twig' %}
+                    </div>
+                {% endfor %}
+                {# Information s'il n'y a pas de recette #}
+                {% if recipes is empty %}
+                <div id="header" class="jumbotron">
+                    <h1>Oups : aucune recette ne correspond <small> modifiez vos filtres !</small></h1>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6 col-sm2">
+                    <a href="{{path('pc_platform_add')}}" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter une recette</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
