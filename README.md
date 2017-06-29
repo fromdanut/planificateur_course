@@ -15,11 +15,10 @@ A Symfony project created on June 15, 2017, 10:34 pm.
 - améliorer la création d'un compte (pour l'instant c'est moche, ca marche mais ca renvoit plusieurs fois vers l'accueil alors qu'on s'attend à être renvoyé directement dans l'espace membre).
 - améliorer findSuggestions.
 - frontend améliorer le rendu des smallView recipe en small device sur la page view.
-- réussir à retenir les choix de l'utilisateur dans le formulaire RecipeListOption.
 
 ## Amélioration par page (essentiellement du frontend):
 
-- /login : améliorer l'incrustation du longin en haut + améliorer le contenu du Jumbotron
+- /login : améliorer l'incrustation du login en haut + améliorer le contenu du Jumbotron
 
 - /home : ajouter des éléments ("mes dernières recettes ajoutés", "mes dernières courses")
 

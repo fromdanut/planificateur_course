@@ -4,41 +4,42 @@
 
 {% block pcplatform_article %}
 <div class="row">
-    <h3>Recettes seléctionnés à partir des options suivantes</h3>
-    <ul class="shoppingListOption">
-        {#
-            Permet à l'utilisateur de voir les filtres amenant à la liste de courses.
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="well">
 
-            Vérifie si le filtre est activé (we, dinner, quick, etc. sont des booléens.),
-            avant d'afficher la valeur du filtre.
-        #}
-        {# filtre sur des attributs de type booléen. #}
-        {% if shoppingListOption.diet %}<li class="list-unstyled">diet</li>{% endif %}
-        {% if shoppingListOption.quick %}<li class="list-unstyled">quick</li>{% endif %}
-        {% if shoppingListOption.eco %}<li class="list-unstyled">eco</li>{% endif %}
-        {% if shoppingListOption.lunch %}<li class="list-unstyled">lunch</li>{% endif %}
-        {% if shoppingListOption.dinner %}<li class="list-unstyled">dinner</li>{% endif %}
-        {% if shoppingListOption.we %}<li class="list-unstyled">we</li>{% endif %}
-        {# filtre sur attributs type array #}
-        <li class="list-unstyled">
-            {% for style in shoppingListOption.styles %}
-                {{style.name}}
-            {% endfor %}
-        </li>
-        {# rappel le nombre de repas #}
-        <li class="list-unstyled">{{shoppingListOption.NbMeal}} repas</li>
-    </ul>
+                {#
+                Ici n'afficher que les recettes mais à la manière de recipe index.
+                #}
 
-</div>
+                {{ form(form) }}
+            </div>
+        </div>
+        <div class="row">
+            <ul class="shoppingListOption">
+                {#
+                    Permet à l'utilisateur de voir les filtres amenant à la liste de courses.
 
-<div class="well">
+                    Vérifie si le filtre est activé (we, dinner, quick, etc. sont des booléens.),
+                    avant d'afficher la valeur du filtre.
+                #}
+                {# filtre sur des attributs de type booléen. #}
+                {% if shoppingListOption.diet %}<span class="label label-success">diet</span>{% endif %}
+                {% if shoppingListOption.quick %}<span class="label label-success">quick</span>{% endif %}
+                {% if shoppingListOption.eco %}<span class="label label-success">eco</span>{% endif %}
+                {% if shoppingListOption.lunch %}<span class="label label-primary">lunch</span>{% endif %}
+                {% if shoppingListOption.dinner %}<span class="label label-primary">dinner</span>{% endif %}
+                {% if shoppingListOption.we %}<span class="label label-primary">week-end</span>{% endif %}
+                {# filtre sur attributs type array #}
+                {% for style in shoppingListOption.styles %}
+                    <span class="label label-default">{{style.name}}</span>
+                {% endfor %}
+                {# rappel le nombre de repas #}
+                <span class="label label-default"><span class="badge">{{shoppingListOption.NbMeal}}</span> Repas</span>
 
-  {#
-    Ici n'afficher que les recettes mais à la manière de recipe index.
-  #}
-
-  {{ form(form) }}
-
+            </ul>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

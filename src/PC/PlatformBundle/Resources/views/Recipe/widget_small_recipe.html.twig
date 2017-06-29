@@ -37,12 +37,12 @@
                 </div>
                 {# note #}
                 <div class="row">
-                    {% include 'PCPlatformBundle:Recipe:rating.html.twig' %}
+                    {% include 'PCPlatformBundle:Recipe:widget_rating.html.twig' %}
                 </div>
                 {# info : diet/eco + la première des catégories (italien, asiat, etc.) #}
                 <div class="row">
 
-                    {% include 'PCPlatformBundle:Recipe:price_and_calorie.html.twig' %}
+                    {% include 'PCPlatformBundle:Recipe:widget_price_and_calorie.html.twig' %}
 
                     {# 1er élément des catégories #}
                         <span class="label label-primary">{{recipe.categories|first}}</span>

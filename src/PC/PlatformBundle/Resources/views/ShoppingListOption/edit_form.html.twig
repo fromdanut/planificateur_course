@@ -1,22 +1,9 @@
-{# src/PC/PlatformBundle/Resources/views/Recipe/formSearch.html.twig #}
+{# src/PC/PlatformBundle/Resources/views/ShoppingListOption/edit_form.html.twig #}
 
 <div class="well">
-      <div class="row">
-          <h3 class='text-center'>Recherche de recettes</h3>
-      </div>
       {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
       {# Les erreurs générales du formulaire. #}
       {{ form_errors(form) }}
-
-    {# Keyword #}
-      <div class="form-group">
-        {# Affichage des erreurs pour ce champ précis. #}
-        {{ form_errors(form.keyword) }}
-        <div class="col-xs-12">
-          {# Génération de l'input. #}
-          {{ form_widget(form.keyword, {'attr': {'class': 'form-control input-md', 'type': 'search', 'placeholder': 'Mot dans le titre'}}) }}
-        </div>'
-      </div>
 
     {# Diet : Génération manuelle et éclatée #}
         <div class="form-group">
@@ -50,6 +37,42 @@
               <div class="checkbox">
                   {# Génération de l'input. #}
                   {{ form_widget(form.quick, {'attr': {'data-toggle': 'toggle', 'type': 'checkbox'}}) }}
+              </div>
+          </div>
+        </div>
+
+    {# lunch : Génération manuelle et éclatée #}
+        <div class="form-group">
+          {# Affichage des erreurs pour ce champ précis. #}
+          {{ form_errors(form.lunch) }}
+          <div class="col-xs-12 center-block">
+              <div class="checkbox">
+                  {# Génération de l'input. #}
+                  {{ form_widget(form.lunch, {'attr': {'data-toggle': 'toggle', 'type': 'checkbox'}}) }}
+              </div>
+          </div>
+        </div>
+
+    {# dinner : Génération manuelle et éclatée #}
+        <div class="form-group">
+          {# Affichage des erreurs pour ce champ précis. #}
+          {{ form_errors(form.dinner) }}
+          <div class="col-xs-12 center-block">
+              <div class="checkbox">
+                  {# Génération de l'input. #}
+                  {{ form_widget(form.dinner, {'attr': {'data-toggle': 'toggle', 'type': 'checkbox'}}) }}
+              </div>
+          </div>
+        </div>
+
+    {# we : Génération manuelle et éclatée #}
+        <div class="form-group">
+          {# Affichage des erreurs pour ce champ précis. #}
+          {{ form_errors(form.we) }}
+          <div class="col-xs-12 center-block">
+              <div class="checkbox">
+                  {# Génération de l'input. #}
+                  {{ form_widget(form.we, {'attr': {'data-toggle': 'toggle', 'type': 'checkbox'}}) }}
               </div>
           </div>
         </div>

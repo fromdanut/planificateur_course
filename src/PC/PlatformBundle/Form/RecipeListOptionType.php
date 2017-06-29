@@ -6,11 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use PC\PlatformBundle\Form\RecipeOptionType;
 
 class RecipeListOptionType extends AbstractType
 {
@@ -21,20 +19,7 @@ class RecipeListOptionType extends AbstractType
     {
         $builder
             ->add('keyword', SearchType::class, array('required' => false))
-            ->add('eco', CheckboxType::class, array(
-                'required' => false,
-                'label'    => 'Economique ?',
-            ))
-            ->add('quick', CheckboxType::class, array(
-                'required' => false,
-                'label'    => 'Rapide ?',
-            ))
-            ->add('diet', CheckboxType::class, array(
-                'required' => false,
-                'label'    => 'Diet ?',
-            ))
-            ->add('rating', IntegerType::class)
-             ->add('styles', EntityType::class, array(
+            ->add('styles', EntityType::class, array(
                        'class'        => 'PCPlatformBundle:Category',
                        'choice_label' => 'name',
                        'multiple'     => true,
@@ -46,14 +31,9 @@ class RecipeListOptionType extends AbstractType
              ));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
+    public function getParent()
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'PC\PlatformBundle\Entity\RecipeListOption'
-        ));
+      return RecipeOptionType::class;
     }
 
     /**
