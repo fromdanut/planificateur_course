@@ -1,0 +1,38 @@
+{# src/PC/PlatformBundle/Resources/views/ShoppingList/view_shoppinglist.html.twig #}
+<div class="well">
+    <div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading">Liste de courses</div>
+          <div class="panel-body">
+            <p>Liste des ingrédients triés par groupe.</p>
+          </div>
+          <table class="table table-bordered table-striped table-condensed">
+              <tbody>
+                  {% for catName, cat in shoppingList.groupedIngredientList %}
+                    <tr>
+                        <th class="bg-default" scope="rowgroup" colspan="3" class="text-center">{{catName}}</th>
+                    </tr>
+                    {% for ingredient in cat %}
+                        <tr>
+                            <td>{{ingredient.name}}</td>
+                            <td>{{ingredient.quantity}} {{ingredient.unit.name}}
+                                <span class="label label-default label-as-badge pull-right">
+                                    {{(ingredient.quantity * ingredient.price)|number_format(2, '.', ',')}}
+                                    <span class="glyphicon glyphicon-eur"></span>
+                                </span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+                <tr>
+                    <th class="bg-default" scope="rowgroup" colspan="3">Total
+                        <span class="label label-primary label-as-badge pull-right">
+                        {{shoppingList.totalPrice|number_format(2, '.', ',')}}
+                        <span class="glyphicon glyphicon-eur"></span>
+                        </span>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

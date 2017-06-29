@@ -5,8 +5,17 @@
 {% block pcplatform_article %}
 
     <div class="row">
+        <div class="row">
+            <div class="col-xs-12">
+                {% block article_title %}
+                    <h1 class="text-center">Liste des recettes</h1>
+                {% endblock %}
+            </div>
+        </div>
         <div class="col-xs-3">
-            {% include 'PCPlatformBundle:Recipe:formSearch.html.twig' %}
+            {% block left_menu %}
+                {% include 'PCPlatformBundle:Recipe:formSearch.html.twig' %}
+            {% endblock %}
         </div>
         <div class="col-xs-9">
             <div class="row">
@@ -25,8 +34,10 @@
             </div>
 
             <div class="row">
-                <div class="col-xs-6 col-sm2">
-                    <a href="{{path('pc_platform_add')}}" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter une recette</a>
+                <div class="col-xs-6 col-sm-2 col-xs-push-3 col-sm-push-5">
+                    {% block add_button %}
+                        <a href="{{path('pc_platform_add')}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Ecrire une nouvelle recette</a>
+                    {% endblock %}
                 </div>
             </div>
         </div>

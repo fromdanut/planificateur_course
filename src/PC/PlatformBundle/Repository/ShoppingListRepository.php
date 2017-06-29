@@ -20,7 +20,7 @@ class ShoppingListRepository extends \Doctrine\ORM\EntityRepository
     }
 
     // Utilise dans la view du ShoppingListController
-    public function findWithAllFeatures($id)
+    public function findWithAllFeatures($user)
     {
         $qb = $this
                 ->createQueryBuilder('s')
@@ -36,8 +36,8 @@ class ShoppingListRepository extends \Doctrine\ORM\EntityRepository
                     ->addSelect('catIngredient')
                 ->leftJoin('ingredient.unit', 'unitIngredient')
                     ->addSelect('unitIngredient')
-                ->where('s.id = :id')
-                    ->setParameter('id', $id);
+                ->where('s.user = :user')
+                    ->setParameter('user', $user);
         return $qb
           ->getQuery()
           ->getSingleResult();

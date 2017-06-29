@@ -15,6 +15,7 @@ A Symfony project created on June 15, 2017, 10:34 pm.
 - améliorer la création d'un compte (pour l'instant c'est moche, ca marche mais ca renvoit plusieurs fois vers l'accueil alors qu'on s'attend à être renvoyé directement dans l'espace membre).
 - améliorer findSuggestions.
 - frontend améliorer le rendu des smallView recipe en small device sur la page view.
+- refaire un datafixtures (avec des users pour shoppingList, recipe notamment !)
 
 ## Amélioration par page (essentiellement du frontend):
 
@@ -22,15 +23,10 @@ A Symfony project created on June 15, 2017, 10:34 pm.
 
 - /home : ajouter des éléments ("mes dernières recettes ajoutés", "mes dernières courses")
 
-- /recipes :
-    - améliorer le formulaire : rating en nb d'étoile, diet/quick/eco sous forme de bouton on/off
-
-- /shoppingListOption/editAction : Modifier l'affichage des options (liste dans des btn ?) + un bouton "créer une liste de recette".
+- /shoppingListOption/editAction : nommer le bouton "créer une liste de recette" et non plus save
 
     **---> réussir la transition entre ces deux étape, le redirectToRoute ne fonctionne pas mais manuellement on peut aller à l'url 'shoppingList/add'**
 
 - /shoppingList/addShoppingListAction :
     - **Modifier l'affichage des recettes** -> en utilisant le viewList + des boutons (supprimer/modifier).
     - ajouter un bouton "voir ma liste de couses" qui update / ajoute si n'existe pas encore la shopping liste de l'utilisateur et redirige vers shoppingList/view.
-
-- /shoppingList/view/{id}, affiche les recettes via viewList mais sans les boutons (supprimer/modifier car la liste est déjà créée). En dessous la liste des courses: sous forme de tableau groupé par cat d'ingrédient avec les sous-totaux.

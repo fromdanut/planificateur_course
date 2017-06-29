@@ -15,16 +15,17 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ShoppingListController extends Controller
 {
 
-    public function viewAction($id)
+    public function viewAction()
     {
         $shoppingList = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('PCPlatformBundle:ShoppingList')
-            ->findWithAllFeatures($id);
+            ->findWithAllFeatures($this->getUser());
 
         return $this->render('PCPlatformBundle:ShoppingList:view.html.twig', array(
             'shoppingList' => $shoppingList,
+            'recipes'      => $shoppingList->getRecipes()
         ));
     }
     /*
@@ -35,20 +36,31 @@ class ShoppingListController extends Controller
     {
         // Récupère la ShoppingListOption de l'utilisateur.
         $shoppingListOption = $this
-                                ->getDoctrine()
-                                ->getManager()
-                                ->getRepository('PCPlatformBundle:ShoppingListOption')
-                                ->findOneBy(array('user' => $this->getUser()));
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('PCPlatformBundle:ShoppingListOption')
+            ->findOneBy(array('user' => $this->getUser()));
+
+        // Récupère la ShoppingList de l'utilisateur.
+        $shoppingList = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('PCPlatformBundle:ShoppingList')
+            ->findOneBy(array('user' => $this->getUser()));
+
+        // Si l'utilisateur créer sa première shoppingList.
+        if ($shoppingList === null) {
+            $shoppingList = new ShoppingList();
+        }
 
         // Génère la liste de recette en fonction de la shoppingListOption.
         $recipes = $this
-                    ->getDoctrine()
-                    ->getManager()
-                    ->getRepository('PCPlatformBundle:Recipe')
-                    ->findByOption($shoppingListOption);
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('PCPlatformBundle:Recipe')
+            ->findByOption($shoppingListOption);
 
-        // Créé une shoppingList à laquelle sont ajoutées les recettes.
-        $shoppingList = new ShoppingList();
+        // Ajoute les recettes à la shoppingList.
         foreach ($recipes as $recipe) {
             $shoppingList->addRecipe($recipe);
         }
@@ -63,9 +75,7 @@ class ShoppingListController extends Controller
             $em->flush();
             $request->getSession()->getFlashBag()->add('notice', 'Nouvelle liste de courses enregistrées.');
 
-            return $this->redirectToRoute('pc_platform_shoppinglist_view', array(
-                                    'id' => $shoppingList->getId()
-                                ));
+            return $this->redirectToRoute('pc_platform_shoppinglist_view');
         }
 
         return $this->render('PCPlatformBundle:ShoppingList:add.html.twig', array(
@@ -73,4 +83,35 @@ class ShoppingListController extends Controller
             'shoppingListOption' => $shoppingListOption,
         ));
     }
+
+    /*
+        ajoute une recette la shoppinglist de l'utilisateur
+        (int) id
+    */
+    public function addRecipeAction($id)
+    {
+        // Récupère l'entity manager.
+        $em = $this->getDoctrine()->getManager();
+
+        // Récupère la ShoppingListOption de l'utilisateur.
+        $shoppingList = $em
+            ->getRepository('PCPlatformBundle:ShoppingList')
+            ->findOneBy(array('user' => $this->getUser()->getId()));
+
+        // Récupère la recette
+        $recipe = $em
+            ->getRepository('PCPlatformBundle:Recipe')
+            ->findOneBy(array('id' => $id));
+
+        if ($recipe == null) {
+            throw new NotFoundHttpException('Cette recette n\'existe pas impossible de l\'ajouter !');
+        }
+
+        $shoppingList->addRecipe($recipe);
+        $em->flush();
+
+        return $this->redirectToRoute('pc_platform_shoppinglist_view');
+    }
+
+
 }

@@ -40,16 +40,21 @@ pc_platform_edit:
         id: \d*
 
 pc_platform_shoppinglist_view:
-    path:     /shoppingList/view/{id}
+    path:     /shoppingList/view/
     defaults:
         _controller: PCPlatformBundle:ShoppingList:view
-    requirements:
-        id: \d*
 
 pc_platform_shoppinglist_add:
     path:    /shoppingList/add/
     defaults:
         _controller: PCPlatformBundle:ShoppingList:add
+
+pc_platform_shoppinglist_add_recipe:
+    path:    /shoppingList/addRecipe/{id}
+    defaults:
+        _controller: PCPlatformBundle:ShoppingList:addRecipe
+    requirements:
+      id: \d*
 
 pc_platform_shoppinglistoption_edit:
     path: /shoppingListOption/edit/
