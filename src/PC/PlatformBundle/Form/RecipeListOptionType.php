@@ -23,12 +23,15 @@ class RecipeListOptionType extends AbstractType
             ->add('keyword', SearchType::class, array('required' => false))
             ->add('eco', CheckboxType::class, array(
                 'required' => false,
+                'label'    => 'Economique ?',
             ))
             ->add('quick', CheckboxType::class, array(
                 'required' => false,
+                'label'    => 'Rapide ?',
             ))
             ->add('diet', CheckboxType::class, array(
                 'required' => false,
+                'label'    => 'Diet ?',
             ))
             ->add('rating', IntegerType::class)
              ->add('styles', EntityType::class, array(
@@ -36,6 +39,7 @@ class RecipeListOptionType extends AbstractType
                        'choice_label' => 'name',
                        'multiple'     => true,
                        'required'     => false,
+                       'label'        => 'note minimum',
                      ))
              ->add('save', SubmitType::class, array(
                  'label' => 'rechercher'

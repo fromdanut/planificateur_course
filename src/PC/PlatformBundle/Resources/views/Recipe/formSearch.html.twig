@@ -4,14 +4,11 @@
       <div class="row">
           <h3 class='text-center'>Recherche de recettes</h3>
       </div>
-      <div class="row">
-          {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-          {# Les erreurs générales du formulaire. #}
-          {{ form_errors(form) }}
-      </div>
+      {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+      {# Les erreurs générales du formulaire. #}
+      {{ form_errors(form) }}
 
     {# Keyword #}
-    <div class="row">
       <div class="form-group">
         {# Affichage des erreurs pour ce champ précis. #}
         {{ form_errors(form.keyword) }}
@@ -20,10 +17,8 @@
           {{ form_widget(form.keyword, {'attr': {'class': 'form-control input-md', 'type': 'search', 'placeholder': 'Mot dans le titre'}}) }}
         </div>'
       </div>
-    </div>
 
     {# Diet : Génération manuelle et éclatée #}
-    <div class="row">
         <div class="form-group">
           {# Affichage des erreurs pour ce champ précis. #}
           {{ form_errors(form.diet) }}
@@ -34,24 +29,19 @@
               </div>
             </div>
         </div>
-    </div>
-
     {# eco : Génération manuelle et éclatée #}
-    <div class="row">
-          <div class="form-group">
-            {# Affichage des erreurs pour ce champ précis. #}
-            {{ form_errors(form.eco) }}
-            <div class="col-xs-12 center-block">
-                <div class="checkbox">
-                  {# Génération de l'input. #}
-                  {{ form_widget(form.eco, {'attr': {'data-toggle': 'toggle', 'type': 'checkbox'}}) }}
-                </div>
+      <div class="form-group">
+        {# Affichage des erreurs pour ce champ précis. #}
+        {{ form_errors(form.eco) }}
+        <div class="col-xs-12 center-block">
+            <div class="checkbox">
+              {# Génération de l'input. #}
+              {{ form_widget(form.eco, {'attr': {'data-toggle': 'toggle', 'type': 'checkbox'}}) }}
             </div>
-          </div>
-    </div>
+        </div>
+      </div>
 
     {# quick : Génération manuelle et éclatée #}
-    <div class="row">
         <div class="form-group">
           {# Affichage des erreurs pour ce champ précis. #}
           {{ form_errors(form.quick) }}
@@ -62,20 +52,22 @@
               </div>
           </div>
         </div>
-    </div>
 
     {# rating : Génération manuelle et éclatée #}
-    <div class="row">
         <div class="form-group">
           {# Affichage des erreurs pour ce champ précis. #}
           {{ form_errors(form.rating) }}
           <div class="col-xs-12 center-block">
-          {# Génération de l'input. #}
+          {# Génération de l'input.
+              On utilise une classe spé 'rating', avec 'hidden' qui permet d'afficher
+              des étoiles pour choisir la note, par contre on est obligé d'écrire le
+              label en dur dans un <span> .
+          #}
             {{ form_widget(form.rating, {'attr': {'class':'rating hidden'}}) }}
+            <span>Note minimum</span>
           </div>
         </div>
-    </div>
-    <div class="row" style="margin:10px">
+
     {# rating : Génération manuelle et éclatée #}
         <div class="form-group">
           {# Affichage des erreurs pour ce champ précis. #}
@@ -85,10 +77,6 @@
             {{ form_widget(form.styles) }}
           </div>
         </div>
-    </div>
-
-    <div class="row">
-
         {# Génération automatique des champs pas encore écrits.
         Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
         et tous les champs cachés (type « hidden »). #}
@@ -99,5 +87,4 @@
 
         {# Fermeture de la balise <form> du formulaire HTML #}
         {{ form_end(form) }}
-    </div>
 </div>
