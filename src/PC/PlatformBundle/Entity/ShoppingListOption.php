@@ -14,31 +14,17 @@ class ShoppingListOption extends RecipeOption
 {
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="lunch", type="boolean")
-     */
-    private $lunch;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="dinner", type="boolean")
-     */
-    private $dinner;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="we", type="boolean")
-     */
-    private $we;
-
-    /**
      * @ORM\ManyToMany(targetEntity="PC\PlatformBundle\Entity\Category", cascade={"persist"})
      * @ORM\JoinTable(name="pc_shoppinglistoption_category")
      */
     protected $styles;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nb_meal", type="integer")
+     */
+    private $nbMeal;
 
     /**
      * Constructor
@@ -46,78 +32,6 @@ class ShoppingListOption extends RecipeOption
     public function __construct()
     {
         $this->styles = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Set lunch
-     *
-     * @param boolean $lunch
-     *
-     * @return ShoppingListOption
-     */
-    public function setLunch($lunch)
-    {
-        $this->lunch = $lunch;
-
-        return $this;
-    }
-
-    /**
-     * Get lunch
-     *
-     * @return boolean
-     */
-    public function getLunch()
-    {
-        return $this->lunch;
-    }
-
-    /**
-     * Set dinner
-     *
-     * @param boolean $dinner
-     *
-     * @return ShoppingListOption
-     */
-    public function setDinner($dinner)
-    {
-        $this->dinner = $dinner;
-
-        return $this;
-    }
-
-    /**
-     * Get dinner
-     *
-     * @return boolean
-     */
-    public function getDinner()
-    {
-        return $this->dinner;
-    }
-
-    /**
-     * Set we
-     *
-     * @param boolean $we
-     *
-     * @return ShoppingListOption
-     */
-    public function setWe($we)
-    {
-        $this->we = $we;
-
-        return $this;
-    }
-
-    /**
-     * Get we
-     *
-     * @return boolean
-     */
-    public function getWe()
-    {
-        return $this->we;
     }
 
     /**
@@ -260,24 +174,6 @@ class ShoppingListOption extends RecipeOption
         return $this->styles;
     }
 
-    /*
-     * return int
-     * Cacule le nb de recette en fonction de lunch, dinner, we.
-     */
-    public function getNbMeal()
-    {
-        $nb = 0;
-        if ($this->getLunch()) {
-            if ($this->getWe()) { $nb += 7; }
-            else { $nb += 5; }
-        }
-        if ($this->getDinner()) {
-            if ($this->getWe()) { $nb += 7; }
-            else { $nb += 5;}
-        }
-        return $nb;
-    }
-
     /**
      * Set user
      *
@@ -300,5 +196,29 @@ class ShoppingListOption extends RecipeOption
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set nbMeal
+     *
+     * @param integer $nbMeal
+     *
+     * @return ShoppingListOption
+     */
+    public function setNbMeal($nbMeal)
+    {
+        $this->nbMeal = $nbMeal;
+
+        return $this;
+    }
+
+    /**
+     * Get nbMeal
+     *
+     * @return integer
+     */
+    public function getNbMeal()
+    {
+        return $this->nbMeal;
     }
 }

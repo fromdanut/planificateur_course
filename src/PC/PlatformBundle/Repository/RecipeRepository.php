@@ -33,6 +33,10 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         Puis, en fonction du type d'instance du parametre $option rajoute
         les conditions correspondant aux attributs de l'instance.
         */
+
+        // jointure avec les images des recettes.
+        $this->withImage($qb);
+
         if ($option->getQuick()) {
             $qb->where('r.cookingTime < 20');
         }
@@ -46,7 +50,7 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         }
 
         $qb->andWhere('r.rating >= :rating')
-        ->setParameter('rating', $option->getRating());
+            ->setParameter('rating', $option->getRating());
 
         if ($option instanceof ShoppingListOption) {
             // Limité au nombre de repas voulu par l'utilisateur.
@@ -54,18 +58,13 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         }
 
         elseif ($option instanceof RecipeListOption) {
-            // Filtre par catégorie. A faire...
             // Filtre par mot clé.
             if ($option->getKeyword() ==! null) {
                 $qb->andWhere('r.name LIKE :exp')
                 ->setParameter('exp', '%'.$option->getKeyword().'%');
             }
-            // Limité au nombre de repas voulu par l'utilisateur.
-            $qb->setMaxResults(12);
         }
 
-        // jointure avec les images des recettes.
-        $this->withImage($qb);
 
         return $qb
           ->getQuery()

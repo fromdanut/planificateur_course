@@ -1,38 +1,39 @@
 {# src/PC/PlatformBundle/Resources/views/Recipe/view_ingredient.html.twig #}
 
 {# Liste des ingrédients #}
-<div class="row">
-    <div class="col-xs-12">
-        <h4>Ingredients</h4>
-        <ul>
-            {% for recipeIngredient in recipe.recipeIngredients %}
-                <li class="list-unstyled">{{recipeIngredient.quantity}} {{recipeIngredient.ingredient.unit.name}} de {{recipeIngredient.ingredient.name}}</li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
+<div class="well">
+    <div class="row">
+        <div class="col-xs-12">
+            {# Les ingrédients #}
+            <div class="panel panel-default">
+                  <!-- Default panel contents -->
+                  <div class="panel-heading">Ingrédient</div>
+                  <table class="table table-bordered table-striped table-condensed">
+                      <tbody>
+                          {% for recipeIngredient in recipe.recipeIngredients %}
+                          <tr>
+                              <td>{{recipeIngredient.ingredient.name}}</td>
+                              <td>{{recipeIngredient.quantity}} {{recipeIngredient.ingredient.unit.name}}</td>
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                 </table>
+            </div>
 
-{# Les catégories#}
-<div class="row">
-    <div class="col-xs-12">
-        <h4>Catégories</h4>
-        <ul class="list-inline">
-            {% for category in recipe.categories %}
-            <span class="label label-default">{{category.name}}</span>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
-
-{# Infos sur le prix, le tps de préparation et la note #}
-<div class="row">
-    <div class="col-xs-12">
-        <h4>Infos</h4>
-        <p>{% include 'PCPlatformBundle:Recipe:widget_rating.html.twig' %}</p>
-        <p><span class="glyphicon glyphicon-hourglass"></span>{{recipe.cookingTime}} mn</p>
-        <p><span class="glyphicon glyphicon-euro"></span> {{recipe.price}}</p>
-        <p><span class="glyphicon glyphicon-scale"></span> {{recipe.calorie}} calories.</p>
-
-
+            {# Infos sur les catégories, le prix, le tps de préparation et la note #}
+            <div class="panel panel-default">
+                  <!-- Default panel contents -->
+                  <div class="panel-heading text-center">Infos</div>
+                  <div class="panel-body">
+                      {% for category in recipe.categories %}
+                      <span class="label label-default">{{category.name}}</span>
+                      {% endfor %}
+                      <p>{% include 'PCPlatformBundle:Recipe:widget_rating.html.twig' %}</p>
+                      <p><span class="glyphicon glyphicon-hourglass"></span>{{recipe.cookingTime}} mn</p>
+                      <p><span class="glyphicon glyphicon-euro"></span> {{recipe.price|number_format(2, '.', ',')}}</p>
+                      <p><span class="glyphicon glyphicon-scale"></span> {{recipe.calorie}} calories.</p>
+                  </div>
+              </div>
+        </div>
     </div>
 </div>

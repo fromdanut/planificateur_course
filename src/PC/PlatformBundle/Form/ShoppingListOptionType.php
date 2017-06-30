@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use PC\PlatformBundle\Form\RecipeOptionType;
 
@@ -20,25 +20,13 @@ class ShoppingListOptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('lunch', CheckboxType::class, array(
-            'required' => false,
-            'label'    => 'Lunch ?',
-        ))
-        ->add('dinner', CheckboxType::class, array(
-            'required' => false,
-            'label'    => 'Dinner ?',
-        ))
-        ->add('we', CheckboxType::class, array(
-            'required' => false,
-            'label'    => 'Week-end ?',
-        ))
         ->add('styles', EntityType::class, array(
                    'class'        => 'PCPlatformBundle:Category',
                    'choice_label' => 'name',
                    'multiple'     => true,
                    'required'     => false,
                  ))
-
+        ->add('nbMeal', IntegerType::class)
         ->add('save', SubmitType::class);
     }
 

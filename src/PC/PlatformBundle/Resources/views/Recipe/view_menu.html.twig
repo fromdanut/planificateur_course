@@ -2,16 +2,19 @@
 
 
 {# SUGGESTION #}
-<div class="row" style="margin-top:10px">
-    <div class="col-xs-10 col-xs-push-1">
-        <h4>Voir également...</h4>
-        {% for recipe in suggestions %}
-            <div class="row style="margin-top:10px"">
-                <div class="col-xs-12">
+<div class="well">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading text-center">Suggestions</div>
+              <div class="panel-body">
+                {% for recipe in suggestions %}
                     {% include 'PCPlatformBundle:Recipe:widget_small_recipe.html.twig' %}
-                </div>
+                {% endfor %}
+             </div>
             </div>
-        {% endfor %}
+        </div>
     </div>
 </div>
 
@@ -47,7 +50,7 @@
     </div>
 </div>
 
-{# edit et delete accessible seulement pour l'auteur de la recette #}
+{# edit  accessible seulement pour l'auteur de la recette #}
 {% if app.user.username == recipe.user.username %}
 <div class="row" style="margin-top:10px">
     <div class="col-xs-12">
@@ -58,10 +61,11 @@
     </div>
 </div>
 
+{# delete  accessible seulement pour l'auteur de la recette #}
 <div class="row" style="margin-top:10px">
     <div class="col-xs-12">
         <a href="{{path('pc_platform_delete', {'id': recipe.id})}}" class="btn btn-block btn-primary btn-danger">
-            <span class="glyphicon glyphicon-minus-sign">
+            <span class="glyphicon glyphicon-trash">
             </span>  supprimer
         </a>
     </div>

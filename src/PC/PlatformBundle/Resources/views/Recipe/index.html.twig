@@ -13,7 +13,7 @@
         </div>
         <div class="col-xs-3">
             {% block left_menu %}
-                {% include 'PCPlatformBundle:Recipe:formSearch.html.twig' %}
+                {% include 'PCPlatformBundle:Recipe:index_menu.html.twig' %}
             {% endblock %}
         </div>
         <div class="col-xs-9">
@@ -35,9 +35,6 @@
             {% if recipes is not empty %}
             <div class="row">
                 <div class="col-xs-6 col-sm-2 col-xs-push-3 col-sm-push-5">
-                    {# nécessaire pour ShoppingList/view.html.twig #}
-                    {% block add_button %}
-                    {% endblock %}
                 </div>
             </div>
             {% endif %}

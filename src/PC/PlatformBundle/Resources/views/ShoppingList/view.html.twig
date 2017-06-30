@@ -15,13 +15,7 @@
     {% endblock %}
 
     {% block left_menu %}
-        {% include "PCPlatformBundle:ShoppingList:widget_shoppinglist.html.twig" %}
+        {% include "PCPlatformBundle:ShoppingList:view_menu.html.twig" %}
     {% endblock %}
-
-    {% block add_button %}
-        <a href="{{path('pc_platform_recipe_index')}}" class="btn btn-primary">
-            <span class="glyphicon glyphicon-plus-sign">
-            </span> Ajouter une recette à ma liste
-        </a>
-    {% endblock %}
+    
 {% endembed %}

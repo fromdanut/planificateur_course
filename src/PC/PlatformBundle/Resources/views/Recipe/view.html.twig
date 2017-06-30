@@ -4,7 +4,7 @@
 
 {% block pcplatform_article %}
 
-    <div class="col-sm-3 well hidden-xs hidden-sm">
+    <div class="col-sm-3 hidden-xs hidden-sm">
         {% include 'PCPlatformBundle:Recipe:view_menu.html.twig' %}
     </div>
 
@@ -12,12 +12,12 @@
         {% include 'PCPlatformBundle:Recipe:view_main.html.twig' %}
     </div>
 
-    <div class="col-xs-12 col-sm-3 col-md-2 well">
+    <div class="col-xs-12 col-sm-3 col-md-2">
         {% include 'PCPlatformBundle:Recipe:view_ingredients.html.twig' %}
     </div>
 
     {# Le menu se retrouve en bas pour xs et sm device #}
-    <div class="col-xs-12 well visible-xs visible-sm">
+    <div class="col-xs-12 visible-xs visible-sm">
         {% include 'PCPlatformBundle:Recipe:view_menu.html.twig' %}
     </div>
 
