@@ -23,9 +23,16 @@ class ShoppingListController extends Controller
             ->getRepository('PCPlatformBundle:ShoppingList')
             ->findWithAllFeatures($this->getUser());
 
+        $shoppingListOption = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('PCPlatformBundle:ShoppingListOption')
+            ->findOneBy(array('user' => $this->getUser()));
+
         return $this->render('PCPlatformBundle:ShoppingList:view.html.twig', array(
-            'shoppingList' => $shoppingList,
-            'recipes'      => $shoppingList->getRecipes()
+            'shoppingList'       => $shoppingList,
+            'shoppingListOption' => $shoppingListOption,
+            'recipes'            => $shoppingList->getRecipes()
         ));
     }
     /*
@@ -34,17 +41,16 @@ class ShoppingListController extends Controller
     */
     public function addAction(Request $request)
     {
+        // Créé l'entity manager.
+        $em = $this->getDoctrine()->getManager();
+
         // Récupère la ShoppingListOption de l'utilisateur.
-        $shoppingListOption = $this
-            ->getDoctrine()
-            ->getManager()
+        $shoppingListOption = $em
             ->getRepository('PCPlatformBundle:ShoppingListOption')
             ->findOneBy(array('user' => $this->getUser()));
 
         // Récupère la ShoppingList de l'utilisateur.
-        $shoppingList = $this
-            ->getDoctrine()
-            ->getManager()
+        $shoppingList = $em
             ->getRepository('PCPlatformBundle:ShoppingList')
             ->findOneBy(array('user' => $this->getUser()));
 
@@ -53,10 +59,13 @@ class ShoppingListController extends Controller
             $shoppingList = new ShoppingList();
         }
 
+        // On enlève toutes les recettes rattaché à cette shoppingList.
+        foreach ($shoppingList->getRecipes() as $recipe) {
+            $shoppingList->removeRecipe($recipe);
+        }
+
         // Génère la liste de recette en fonction de la shoppingListOption.
-        $recipes = $this
-            ->getDoctrine()
-            ->getManager()
+        $recipes = $em
             ->getRepository('PCPlatformBundle:Recipe')
             ->findByOption($shoppingListOption);
 
@@ -65,23 +74,10 @@ class ShoppingListController extends Controller
             $shoppingList->addRecipe($recipe);
         }
 
-        // Créé le formulaire à partir de la shoppingList.
-        $form = $this->get('form.factory')->create(ShoppingListType::class, $shoppingList);
+        $em->persist($shoppingList);
+        $em->flush();
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($shoppingList);
-            $em->flush();
-            $request->getSession()->getFlashBag()->add('notice', 'Nouvelle liste de courses enregistrées.');
-
-            return $this->redirectToRoute('pc_platform_shoppinglist_view');
-        }
-
-        return $this->render('PCPlatformBundle:ShoppingList:add.html.twig', array(
-            'form' => $form->createView(),
-            'shoppingListOption' => $shoppingListOption,
-        ));
+        return $this->redirectToRoute('pc_platform_shoppinglist_view');
     }
 
     /*
@@ -113,5 +109,33 @@ class ShoppingListController extends Controller
         return $this->redirectToRoute('pc_platform_shoppinglist_view');
     }
 
+    /*
+        retire une recette la shoppinglist de l'utilisateur
+        (int) id
+    */
+    public function removeRecipeAction($id)
+    {
+        // Récupère l'entity manager.
+        $em = $this->getDoctrine()->getManager();
+
+        // Récupère la ShoppingListOption de l'utilisateur.
+        $shoppingList = $em
+            ->getRepository('PCPlatformBundle:ShoppingList')
+            ->findOneBy(array('user' => $this->getUser()->getId()));
+
+        // Récupère la recette
+        $recipe = $em
+            ->getRepository('PCPlatformBundle:Recipe')
+            ->findOneBy(array('id' => $id));
+
+        if ($recipe == null) {
+            throw new NotFoundHttpException('Cette recette n\'existe pas impossible de l\'enlever de la shoppinglist !');
+        }
+
+        $shoppingList->removeRecipe($recipe);
+        $em->flush();
+
+        return $this->redirectToRoute('pc_platform_shoppinglist_view');
+    }
 
 }

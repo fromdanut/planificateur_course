@@ -36,7 +36,7 @@ class ShoppingListOptionController extends Controller
             $em->flush();
 
             // Renvoie vers la création de liste de recette.
-            $this->redirectToRoute('pc_platform_shoppinglist_add');
+            return $this->redirectToRoute('pc_platform_shoppinglist_add');
 
         }
         // Envoie le formulaire d'édition prérempli.

@@ -41,12 +41,6 @@ class ShoppingListOption extends RecipeOption
     protected $styles;
 
     /**
-     * @ORM\OneToOne(targetEntity="UserBundle\Entity\User")
-     */
-    protected $user;
-
-
-    /**
      * Constructor
      */
     public function __construct()

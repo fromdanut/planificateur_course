@@ -2,90 +2,105 @@
 
 <div class="well">
       <div class="row">
-          <h3 class='text-center'>Recherche de recettes</h3>
-      </div>
-      {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-      {# Les erreurs générales du formulaire. #}
-      {{ form_errors(form) }}
+          <div class="col-xs-12">
+              <h4 class='text-center'>Filtrer les recettes</h4>
 
-    {# Keyword #}
-      <div class="form-group">
-        {# Affichage des erreurs pour ce champ précis. #}
-        {{ form_errors(form.keyword) }}
-        <div class="col-xs-12">
-          {# Génération de l'input. #}
-          {{ form_widget(form.keyword, {'attr': {'class': 'form-control input-md', 'type': 'search', 'placeholder': 'Mot dans le titre'}}) }}
-        </div>'
-      </div>
+          {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+          {# Les erreurs générales du formulaire. #}
+          {{ form_errors(form) }}
 
-    {# Diet : Génération manuelle et éclatée #}
-        <div class="form-group">
-          {# Affichage des erreurs pour ce champ précis. #}
-          {{ form_errors(form.diet) }}
+
+        {# Diet : Génération manuelle et éclatée #}
+            <div class="form-group">
+              {# Affichage des erreurs pour ce champ précis. #}
+              {{ form_errors(form.diet) }}
+                <div class="col-xs-12 center-block">
+                  <div class="checkbox">
+                    {# Génération de l'input. #}
+                    {{ form_widget(form.diet, {'attr': {'data-toggle': 'toggle', 'type': 'checkbox'}}) }}
+                  </div>
+                </div>
+            </div>
+
+        {# eco : Génération manuelle et éclatée #}
+          <div class="form-group">
+            {# Affichage des erreurs pour ce champ précis. #}
+            {{ form_errors(form.eco) }}
             <div class="col-xs-12 center-block">
-              <div class="checkbox">
-                {# Génération de l'input. #}
-                {{ form_widget(form.diet, {'attr': {'data-toggle': 'toggle', 'type': 'checkbox'}}) }}
-              </div>
-            </div>
-        </div>
-
-    {# eco : Génération manuelle et éclatée #}
-      <div class="form-group">
-        {# Affichage des erreurs pour ce champ précis. #}
-        {{ form_errors(form.eco) }}
-        <div class="col-xs-12 center-block">
-            <div class="checkbox">
-              {# Génération de l'input. #}
-              {{ form_widget(form.eco, {'attr': {'data-toggle': 'toggle', 'type': 'checkbox'}}) }}
-            </div>
-        </div>
-      </div>
-
-    {# quick : Génération manuelle et éclatée #}
-        <div class="form-group">
-          {# Affichage des erreurs pour ce champ précis. #}
-          {{ form_errors(form.quick) }}
-          <div class="col-xs-12 center-block">
-              <div class="checkbox">
+                <div class="checkbox">
                   {# Génération de l'input. #}
-                  {{ form_widget(form.quick, {'attr': {'data-toggle': 'toggle', 'type': 'checkbox'}}) }}
+                  {{ form_widget(form.eco, {'attr': {'data-toggle': 'toggle', 'type': 'checkbox'}}) }}
+                </div>
+            </div>
+          </div>
+
+        {# quick : Génération manuelle et éclatée #}
+            <div class="form-group">
+              {# Affichage des erreurs pour ce champ précis. #}
+              {{ form_errors(form.quick) }}
+              <div class="col-xs-12 center-block">
+                  <div class="checkbox">
+                      {# Génération de l'input. #}
+                      {{ form_widget(form.quick, {'attr': {'data-toggle': 'toggle', 'type': 'checkbox'}}) }}
+                  </div>
               </div>
-          </div>
+            </div>
+
+        {# rating : Génération manuelle et éclatée #}
+            <div class="form-group">
+              {# Affichage des erreurs pour ce champ précis. #}
+              {{ form_errors(form.rating) }}
+              <div class="col-xs-12 center-block">
+              {# Génération de l'input.
+                  On utilise une classe spé 'rating', avec 'hidden' qui permet d'afficher
+                  des étoiles pour choisir la note, par contre on est obligé d'écrire le
+                  label en dur dans un <span> .
+              #}
+                {{ form_widget(form.rating, {'attr': {'class':'rating hidden'}}) }}
+                <span>Note minimum</span>
+              </div>
+            </div>
+
+        {# styles #}
+            <div class="form-group">
+              {# Affichage des erreurs pour ce champ précis. #}
+              {{ form_errors(form.styles) }}
+              <div class="col-xs-12 center-block">
+              {# Génération de l'input. #}
+                {{ form_widget(form.styles) }}
+              </div>
+            </div>
+
+            {# Keyword #}
+            <div class="form-group">
+                {# Affichage des erreurs pour ce champ précis. #}
+                {{ form_errors(form.keyword) }}
+                <div class="col-xs-12">
+                    {# Génération de l'input. #}
+                    {{ form_widget(form.keyword, {'attr': {'class': 'form-control input-md', 'type': 'search', 'placeholder': 'Mot dans le titre'}}) }}
+                </div>'
+            </div>
+            
+            {# Génération automatique des champs pas encore écrits.
+            Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+            et tous les champs cachés (type « hidden »). #}
+            {{ form_rest(form) }}
+
+            {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+            {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+
+            {# Fermeture de la balise <form> du formulaire HTML #}
+            {{ form_end(form) }}
+
+
         </div>
+    </div>
+</div>
 
-    {# rating : Génération manuelle et éclatée #}
-        <div class="form-group">
-          {# Affichage des erreurs pour ce champ précis. #}
-          {{ form_errors(form.rating) }}
-          <div class="col-xs-12 center-block">
-          {# Génération de l'input.
-              On utilise une classe spé 'rating', avec 'hidden' qui permet d'afficher
-              des étoiles pour choisir la note, par contre on est obligé d'écrire le
-              label en dur dans un <span> .
-          #}
-            {{ form_widget(form.rating, {'attr': {'class':'rating hidden'}}) }}
-            <span>Note minimum</span>
-          </div>
+<div class="well">
+    <div class="row">
+        <div class="col-xs-12">
+            <a href="{{path('pc_platform_add')}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Ecrire une nouvelle recette</a>
         </div>
-
-    {# styles #}
-        <div class="form-group">
-          {# Affichage des erreurs pour ce champ précis. #}
-          {{ form_errors(form.styles) }}
-          <div class="col-xs-12 center-block">
-          {# Génération de l'input. #}
-            {{ form_widget(form.styles) }}
-          </div>
-        </div>
-        {# Génération automatique des champs pas encore écrits.
-        Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
-        et tous les champs cachés (type « hidden »). #}
-        {{ form_rest(form) }}
-
-        {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
-        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
-
-        {# Fermeture de la balise <form> du formulaire HTML #}
-        {{ form_end(form) }}
+    </div>
 </div>

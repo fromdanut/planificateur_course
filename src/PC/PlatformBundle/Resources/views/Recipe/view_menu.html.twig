@@ -40,7 +40,7 @@
 {# Enlever à la shoppingList #}
 <div class="row" style="margin-top:10px">
     <div class="col-xs-12">
-        <a href="#" class="btn btn-block btn-warning">
+        <a href="{{path('pc_platform_shoppinglist_remove_recipe', {'id': recipe.id})}}" class="btn btn-block btn-warning">
             <span class="glyphicon glyphicon-minus-sign">
             </span> Enlever de votre ShoppingList
         </a>

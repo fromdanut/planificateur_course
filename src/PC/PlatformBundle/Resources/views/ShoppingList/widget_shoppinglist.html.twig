@@ -2,9 +2,25 @@
 <div class="well">
     <div class="panel panel-default">
           <!-- Default panel contents -->
-          <div class="panel-heading">Liste de courses</div>
+          <div class="panel-heading">Options</div>
           <div class="panel-body">
-            <p>Liste des ingrédients triés par groupe.</p>
+            {#
+                Permet à l'utilisateur de voir les filtres amenant à la liste de courses.
+
+                Vérifie si le filtre est activé (we, dinner, quick, etc. sont des booléens.),
+                avant d'afficher la valeur du filtre.
+            #}
+            {# filtre sur des attributs de type booléen. #}
+            {% if shoppingListOption.diet %}<span class="label label-success">diet</span>{% endif %}
+            {% if shoppingListOption.quick %}<span class="label label-success">quick</span>{% endif %}
+            {% if shoppingListOption.eco %}<span class="label label-success">eco</span>{% endif %}
+            {% if shoppingListOption.lunch %}<span class="label label-primary">lunch</span>{% endif %}
+            {% if shoppingListOption.dinner %}<span class="label label-primary">dinner</span>{% endif %}
+            {% if shoppingListOption.we %}<span class="label label-primary">week-end</span>{% endif %}
+            {# filtre sur attributs type array #}
+            {% for style in shoppingListOption.styles %}
+                <span class="label label-default">{{style.name}}</span>
+            {% endfor %}
           </div>
           <table class="table table-bordered table-striped table-condensed">
               <tbody>

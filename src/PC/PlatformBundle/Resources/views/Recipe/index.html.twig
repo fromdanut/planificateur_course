@@ -8,7 +8,6 @@
         <div class="row">
             <div class="col-xs-12">
                 {% block article_title %}
-                    <h1 class="text-center">Liste des recettes</h1>
                 {% endblock %}
             </div>
         </div>
@@ -27,19 +26,21 @@
                 {# Information s'il n'y a pas de recette #}
                 {% if recipes is empty %}
                 <div id="header" class="jumbotron">
-                    <h1>Oups : aucune recette ne correspond <small> modifiez vos filtres !</small></h1>
-                    </div>
+                    <h1>Oups ! aucune recette ne correspond <small> Soyez moins sélectif ou bien...</small></h1>
+                    <a href="{{path('pc_platform_add')}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Ecrivez une nouvelle recette !</a>
                 </div>
                 {% endif %}
             </div>
 
+            {% if recipes is not empty %}
             <div class="row">
                 <div class="col-xs-6 col-sm-2 col-xs-push-3 col-sm-push-5">
+                    {# nécessaire pour ShoppingList/view.html.twig #}
                     {% block add_button %}
-                        <a href="{{path('pc_platform_add')}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Ecrire une nouvelle recette</a>
                     {% endblock %}
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

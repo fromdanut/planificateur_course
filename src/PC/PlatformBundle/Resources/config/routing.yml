@@ -56,6 +56,13 @@ pc_platform_shoppinglist_add_recipe:
     requirements:
       id: \d*
 
+pc_platform_shoppinglist_remove_recipe:
+    path:    /shoppingList/removeRecipe/{id}
+    defaults:
+        _controller: PCPlatformBundle:ShoppingList:removeRecipe
+    requirements:
+      id: \d*
+
 pc_platform_shoppinglistoption_edit:
     path: /shoppingListOption/edit/
     defaults:

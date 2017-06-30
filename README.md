@@ -16,17 +16,5 @@ A Symfony project created on June 15, 2017, 10:34 pm.
 - améliorer findSuggestions.
 - frontend améliorer le rendu des smallView recipe en small device sur la page view.
 - refaire un datafixtures (avec des users pour shoppingList, recipe notamment !)
-
-## Amélioration par page (essentiellement du frontend):
-
 - /login : améliorer l'incrustation du login en haut + améliorer le contenu du Jumbotron
-
-- /home : ajouter des éléments ("mes dernières recettes ajoutés", "mes dernières courses")
-
-- /shoppingListOption/editAction : nommer le bouton "créer une liste de recette" et non plus save
-
-    **---> réussir la transition entre ces deux étape, le redirectToRoute ne fonctionne pas mais manuellement on peut aller à l'url 'shoppingList/add'**
-
-- /shoppingList/addShoppingListAction :
-    - **Modifier l'affichage des recettes** -> en utilisant le viewList + des boutons (supprimer/modifier).
-    - ajouter un bouton "voir ma liste de couses" qui update / ajoute si n'existe pas encore la shopping liste de l'utilisateur et redirige vers shoppingList/view.
+- /home : ajouter des éléments (ex: "mes dernières recettes ajoutés", "mes dernières courses")

@@ -27,27 +27,52 @@
                 <div class="row">
                     <p><span class="glyphicon glyphicon-pencil"></span><strong> author</strong></p>
                 </div>
-                {# tps préparation #}
+                {# tps / prix / calorie #}
                 <div class="row">
-                    {# valeur de cookingTime à parametrer #}
-                    {% if recipe.cookingTime > 20 %}
-                        <p style="color:IndianRed">
-                    {% else %}
-                        <p>
-                    {% endif %}
-                    <span class="glyphicon glyphicon-hourglass"></span>{{recipe.cookingTime}} mn</p>
+                    {# tps #}
+                    <div class="col-xs-4">
+                        <div class="row">
+                            {# affiche 1, 2 ou 3 au max sablier en fonction du temps de préparation #}
+                            {% for i in range(0, (recipe.cookingTime // 20) ) if i <= 2 %}
+                            <span class="glyphicon glyphicon-hourglass" style="color:grey"></span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {# prix #}
+                    <div class="col-xs-4">
+                        <div class="row">
+                            {# affiche 1, 2 ou 3 au max euros en fonction du prix #}
+                            {% for i in range(0, (recipe.price // 10) ) if i <= 2 %}
+                            <span class="glyphicon glyphicon-eur" style="color:grey"></span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {# calorie #}
+                    <div class="col-xs-4">
+                        <div class="row">
+                            {# affiche une balance en vert/rouge en fonction des calorie #}
+                            {% if recipe.calorie > 15000 %}
+                            <p style="color:IndianRed">
+                            {% elseif recipe.calorie > 10000 %}
+                            <p style="color:grey">
+                            {% else %}
+                            <p style="color:green">
+                            {% endif %}
+                            <span class="glyphicon glyphicon-scale"></span>
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
                 {# note #}
                 <div class="row">
                     {% include 'PCPlatformBundle:Recipe:widget_rating.html.twig' %}
                 </div>
-                {# info : diet/eco + la première des catégories (italien, asiat, etc.) #}
+                {# 3 premières catégories #}
                 <div class="row">
-
-                    {% include 'PCPlatformBundle:Recipe:widget_price_and_calorie.html.twig' %}
-
-                    {# 1er élément des catégories #}
-                        <span class="label label-primary">{{recipe.categories|first}}</span>
+                    {% for cat in recipe.categories|slice(0,2) %}
+                    <span class="label label-default">{{cat.name}}</span>
+                    {% endfor %}
                 </div>
             </div>
         </div>
