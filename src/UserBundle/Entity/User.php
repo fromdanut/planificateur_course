@@ -7,6 +7,7 @@ namespace UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
+use PC\PlatformBundle\Entity\ShoppingList;
 
 /**
  * @ORM\Table(name="user")

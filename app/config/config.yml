@@ -9,6 +9,7 @@ imports:
 parameters:
     locale: en
     nb_recipe_per_page_index: 9
+    nb_small_recipe_view_menu: 3
 
 framework:
     #esi: ~

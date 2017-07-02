@@ -75,15 +75,14 @@ class RecipeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('PCPlatformBundle:Recipe');
-        $recipe = $repo->find($id);
+        $recipe = $repo->findOneWithImageCatAndIngredients($id);
 
         if (null === $recipe) {
             throw new NotFoundHttpException('Recette n°"'.$id.'" inexistante.');
         }
 
-        // rechercher 3 recettes similaires pour les suggérer (affiche en small_view)
-        $nb = 3; # a parametrer !
-        $suggestions = $repo->findSuggestions($id, $nb);
+        $nb = $this->getParameter('nb_small_recipe_view_menu');
+        $suggestions = $repo->findSuggestionsWithImageAndCat($id, $nb);
 
         return $this->render('PCPlatformBundle:Recipe:view.html.twig', array(
             'recipe' => $recipe,

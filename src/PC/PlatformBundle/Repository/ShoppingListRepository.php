@@ -10,16 +10,8 @@ namespace PC\PlatformBundle\Repository;
  */
 class ShoppingListRepository extends \Doctrine\ORM\EntityRepository
 {
-    // Méthode pour débug à supprimer...
-    public function findOnlyOne()
-    {
-        $qb = $this->createQueryBuilder('s');
-        return $qb
-          ->getQuery()
-          ->getSingleResult();
-    }
 
-    // Utilise dans la view du ShoppingListController
+    // Utilisé dans la view du ShoppingListController
     public function findWithAllFeatures($user)
     {
         $qb = $this
@@ -28,6 +20,8 @@ class ShoppingListRepository extends \Doctrine\ORM\EntityRepository
                     ->addSelect('recipes')
                 ->leftJoin('recipes.image', 'image')
                     ->addSelect('image')
+                ->leftJoin('recipes.categories', 'recipeCategories')
+                    ->addSelect('recipeCategories')
                 ->leftJoin('recipes.recipeIngredients', 'recipeIngredients')
                     ->addSelect('recipeIngredients')
                 ->leftJoin('recipeIngredients.ingredient', 'ingredient')
@@ -40,7 +34,8 @@ class ShoppingListRepository extends \Doctrine\ORM\EntityRepository
                     ->setParameter('user', $user);
         return $qb
           ->getQuery()
-          ->getSingleResult();
+          // La 1ere fois, l'utilisateur n'a pas encore de shoppingLinst
+          ->getOneOrNullResult();
     }
 
 }

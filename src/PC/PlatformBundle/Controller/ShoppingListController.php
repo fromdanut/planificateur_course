@@ -23,6 +23,7 @@ class ShoppingListController extends Controller
             ->getRepository('PCPlatformBundle:ShoppingList')
             ->findWithAllFeatures($this->getUser());
 
+
         $shoppingListOption = $this
             ->getDoctrine()
             ->getManager()

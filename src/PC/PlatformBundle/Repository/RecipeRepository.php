@@ -15,13 +15,39 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class RecipeRepository extends \Doctrine\ORM\EntityRepository
 {
     /*
-        Permet de charger l'image des recette.
+        Permet de charger l'image des recettes.
     */
     public function withImage(QueryBuilder $qb)
     {
       $qb
         ->leftJoin('r.image', 'image')
         ->addSelect('image')
+      ;
+    }
+
+    /*
+        Permet de charger les catégories des recettes.
+    */
+    public function withCategories(QueryBuilder $qb)
+    {
+      $qb
+        ->leftJoin('r.categories', 'categories')
+        ->addSelect('categories')
+      ;
+    }
+
+    /*
+        Permet de charger les ingrédients (avec nom et unité)
+    */
+    public function withIngredients(QueryBuilder $qb)
+    {
+      $qb
+        ->leftJoin('r.recipeIngredients', 'recipeIng')
+            ->addSelect('recipeIng')
+        ->leftJoin('recipeIng.ingredient', 'ing')
+            ->addSelect('ing')
+        ->leftJoin('ing.unit', 'unit')
+            ->addSelect('unit')
       ;
     }
 
@@ -68,8 +94,9 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
     public function findByOptionPaginated($option, $page, $nbPerPage)
     {
         $qb = $this->createQueryBuilder('r');
-        $this->withImage($qb);
         $this->byOption($qb, $option);
+        $this->withImage($qb);
+        $this->withCategories($qb);
         $query = $qb->getQuery();
 
         $query
@@ -99,18 +126,41 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         int nb
         return list of recipe Entity
     */
-    public function findSuggestions($id, $nb)
+    public function findSuggestionsWithImageAndCat($id, $nb)
     {
         /*
-            comportement attendu :
-            récupère l'auteur ou le titre de la recette
+            A faire comportement attendu :
+            !! récupère l'auteur ou le titre de la recette !!
+
+            Fait :
             retourne n ($nb) like titre ou auteur.
+            retourne les Images et les categories
         */
         $qb = $this->createQueryBuilder('r');
+        $this->withImage($qb);
+        $this->withCategories($qb);
         $qb->setMaxResults($nb);
 
         return $qb
             ->getQuery()
             ->getResult();
+    }
+
+    /*
+        Retourne une recette avec image, catégories et ingrédients
+        Utilisé dans la methode RecipeController:viewAction
+    */
+    public function findOneWithImageCatAndIngredients($id)
+    {
+        $qb = $this->createQueryBuilder('r');
+        $qb->where('r.id = :id')
+                ->setParameter('id', $id);
+        $this->withImage($qb);
+        $this->withCategories($qb);
+        $this->withIngredients($qb);
+
+        return $qb
+            ->getQuery()
+            ->getSingleResult();
     }
 }

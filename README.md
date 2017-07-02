@@ -7,6 +7,7 @@ A Symfony project created on June 15, 2017, 10:34 pm.
 - ajouter filtre User et Categories à findByOption pour les recettes.
 - version bilingue
 - ajouter slug à recipe (et l'utiliser dans l'url pour view_recipe)
+- ajouter un bouton "supprimer filtre"
 
 ## En vrac:
 
@@ -14,7 +15,6 @@ A Symfony project created on June 15, 2017, 10:34 pm.
 - mettre à jour le schema uml...
 - améliorer la création d'un compte (pou l'instant c'est moche, ca marche mais ca renvoit plusieurs fois vers l'accueil alors qu'on s'attend à être renvoyé directement dans l'espace membre).
 - frontend améliorer le rendu des smallView recipe en small device sur la page view.
-- refaire un datafixtures (avec des users pour shoppingList, recipe notamment !)
-- /login : améliorer l'incrustation du login en haut https://symfony.com/doc/current/bundles/FOSUserBundle/overriding_templates.html
+- refaire un datafixtures (avec des users pour shoppingList, recipe notamment !) https://symfony.com/doc/current/bundles/FOSUserBundle/overriding_templates.html
 - /home : ajouter des éléments (ex: "mes dernières recettes ajoutés", "mes dernières courses")
-- améliorer les requettes...
+-faire en sorte de pouvoir ajouter plusieurs fois la meme recette à la shopping list.
