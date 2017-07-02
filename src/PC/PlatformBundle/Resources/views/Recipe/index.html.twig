@@ -32,13 +32,13 @@
                 {% endif %}
             </div>
 
-            {% if recipes is not empty %}
+            {% block pagination %}
             <div class="row">
                 <div class="col-xs-6 col-sm-4 col-xs-push-3 col-sm-push-4">
                     {% include 'PCPlatformBundle:Recipe:widget_pagination.html.twig' %}
                 </div>
             </div>
-            {% endif %}
+            {% endblock %}
         </div>
     </div>
 {% endblock %}

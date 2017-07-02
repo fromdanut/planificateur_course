@@ -12,7 +12,9 @@ pc_platform_homepage:
 
 pc_platform_recipe_index:
     path:     /recipes/{page}/
-    defaults: { _controller: PCPlatformBundle:Recipe:index }
+    defaults:
+        _controller: PCPlatformBundle:Recipe:index
+        page: 1
     requirements:
         page: \d*
 
