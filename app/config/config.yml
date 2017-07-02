@@ -8,6 +8,7 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    nb_recipe_per_page_index: 9
 
 framework:
     #esi: ~

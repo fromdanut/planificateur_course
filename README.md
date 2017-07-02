@@ -15,4 +15,3 @@ A Symfony project created on June 15, 2017, 10:34 pm.
 - refaire un datafixtures (avec des users pour shoppingList, recipe notamment !)
 - /login : améliorer l'incrustation du login en haut + améliorer le contenu du Jumbotron
 - /home : ajouter des éléments (ex: "mes dernières recettes ajoutés", "mes dernières courses")
-- pagination recipe/index.html.twig

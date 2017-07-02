@@ -4,6 +4,7 @@ namespace PC\PlatformBundle\Repository;
 use PC\PlatformBundle\Entity\RecipeListOption;
 use PC\PlatformBundle\Entity\ShoppingListOption;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * RecipeRepository
@@ -24,19 +25,14 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
       ;
     }
 
-    public function findByOption($option)
-    {
-        $qb = $this->createQueryBuilder('r');
-
-        /*
+    /*
+        Applique un ensemble de clause Where en fonction des $option :
         ajoute les condition communes : correspondant aux attributs de l'entity RecipeOption.
         Puis, en fonction du type d'instance du parametre $option rajoute
         les conditions correspondant aux attributs de l'instance.
-        */
-
-        // jointure avec les images des recettes.
-        $this->withImage($qb);
-
+    */
+    public function byOption(QueryBuilder $qb, $option)
+    {
         if ($option->getQuick()) {
             $qb->where('r.cookingTime < 20');
         }
@@ -50,7 +46,7 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         }
 
         $qb->andWhere('r.rating >= :rating')
-            ->setParameter('rating', $option->getRating());
+        ->setParameter('rating', $option->getRating());
 
         if ($option instanceof ShoppingListOption) {
             // Limité au nombre de repas voulu par l'utilisateur.
@@ -64,7 +60,33 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
                 ->setParameter('exp', '%'.$option->getKeyword().'%');
             }
         }
+    }
 
+    /*
+        Permet de faire une pagination.
+    */
+    public function findByOptionPaginated($option, $page, $nbPerPage)
+    {
+        $qb = $this->createQueryBuilder('r');
+        $this->withImage($qb);
+        $this->byOption($qb, $option);
+        $query = $qb->getQuery();
+
+        $query
+          // On définit l'annonce à partir de laquelle commencer la liste
+          ->setFirstResult(($page-1) * $nbPerPage)
+          // Ainsi que le nombre d'annonce à afficher sur une page
+          ->setMaxResults($nbPerPage)
+          ;
+
+        return new Paginator($query, true);
+    }
+
+    public function findByOption($option)
+    {
+        $qb = $this->createQueryBuilder('r');
+        $this->withImage($qb);
+        $this->byOption($qb);
 
         return $qb
           ->getQuery()

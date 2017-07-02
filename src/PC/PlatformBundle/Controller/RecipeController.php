@@ -17,8 +17,12 @@ class RecipeController extends Controller
     /**
      * @Security("has_role('ROLE_USER')")
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, $page)
     {
+        if ($page < 1) {
+            throw $this->createNotFoundException("La page ".$page." n'existe pas.");
+        }
+
         // Récupère l'utilisateur courant.
         $user = $this->getUser();
 
@@ -44,12 +48,26 @@ class RecipeController extends Controller
             $em->flush();
         }
 
+        // récupère le paramètre pour le nombre de recette à afficher par page.
+        $nbPerPage = $this->container->getParameter('nb_recipe_per_page_index');
+
         // génère la liste de recipes à partir des options.
         $recipeRepository = $em->getRepository('PCPlatformBundle:Recipe');
-        $recipes = $recipeRepository->findByOption($option);
+        $recipes = $recipeRepository->findByOptionPaginated($option, $page, $nbPerPage);
+
+        // On calcule le nombre total de pages grâce au count($listAdverts) qui retourne le nombre total d'annonces
+        $nbPages = ceil(count($recipes) / $nbPerPage);
+
+        // Si la page n'existe pas, on retourne une 404
+        if ($page > $nbPages) {
+            throw $this->createNotFoundException("La page ".$page." n'existe pas.");
+        }
+
         return $this->render('PCPlatformBundle:Recipe:index.html.twig', array(
              'recipes' => $recipes,
-             'form' => $form->createView()
+             'form' => $form->createView(),
+             'nbPages'     => $nbPages,
+             'page'        => $page,
           ));
     }
 
