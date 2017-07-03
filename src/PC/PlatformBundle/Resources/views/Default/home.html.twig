@@ -6,11 +6,15 @@
 <div class="row">
     <div class="col-xs-12">
         <div id="header" class="jumbotron">
-            <h1>Bonjour {{ app.user.username }}</h1>
-            <p>
-                Heureux de vous revoir...
-            </p>
-            <br>
+            <h1>Content de vous revoir {{ app.user.username }} !</h1>
+            <p>Découvrez les dernières recettes ajoutées...</p>
+            <div class="row">
+                {% for recipe in suggestions %}
+                <div class="col-xs-4">
+                    {% include 'PCPlatformBundle:Recipe:widget_small_recipe.html.twig' %}
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>

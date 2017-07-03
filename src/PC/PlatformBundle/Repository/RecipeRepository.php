@@ -126,15 +126,11 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         int nb
         return list of recipe Entity
     */
-    public function findSuggestionsWithImageAndCat($id, $nb)
+    public function findSuggestionsWithImageAndCat($nb)
     {
         /*
-            A faire comportement attendu :
-            !! récupère l'auteur ou le titre de la recette !!
-
-            Fait :
-            retourne n ($nb) like titre ou auteur.
-            retourne les Images et les categories
+            Functionnalité à écrire :
+            retourner une liste de recette en fonction des gouts de l'utilisateur
         */
         $qb = $this->createQueryBuilder('r');
         $this->withImage($qb);

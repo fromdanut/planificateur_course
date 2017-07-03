@@ -18,7 +18,15 @@ class DefaultController extends Controller
 
     public function homeAction()
     {
-        return $this->render('PCPlatformBundle:Default:home.html.twig');
+        $nb = $this->getParameter('nb_small_recipe_view_menu');
+        $suggestions = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('PCPlatformBundle:Recipe')
+            ->findSuggestionsWithImageAndCat($nb);
+        return $this->render('PCPlatformBundle:Default:home.html.twig', array(
+            'suggestions' => $suggestions
+        ));
     }
 
     public function loginAction()

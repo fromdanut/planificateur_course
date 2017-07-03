@@ -79,7 +79,7 @@ class RecipeController extends Controller
         }
 
         $nb = $this->getParameter('nb_small_recipe_view_menu');
-        $suggestions = $repo->findSuggestionsWithImageAndCat($id, $nb);
+        $suggestions = $repo->findSuggestionsWithImageAndCat($nb);
 
         return $this->render('PCPlatformBundle:Recipe:view.html.twig', array(
             'recipe' => $recipe,
