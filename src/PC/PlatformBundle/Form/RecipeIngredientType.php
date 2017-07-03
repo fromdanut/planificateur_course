@@ -17,7 +17,8 @@ class RecipeIngredientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('quantity',   IntegerType::class)
+            ->add('quantity',   IntegerType::class, array(
+                'attr'         => array('min' => 0)))
             ->add('ingredient', EntityType::class, array(
                 'class'        => 'PCPlatformBundle:Ingredient',
                 'choice_label' => 'name',

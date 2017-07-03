@@ -26,7 +26,7 @@ class RecipeIngredient
     /**
      * @var int
      *
-     * @ORM\Column(name="quantity", type="integer")
+     * @ORM\Column(name="quantity", type="integer", options={"unsigned"=true})
      */
     private $quantity;
 
