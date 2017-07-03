@@ -20,10 +20,6 @@ class RecipeController extends Controller
      */
     public function indexAction(Request $request, $page)
     {
-        if ($page < 1) {
-            throw $this->createNotFoundException("La page ".$page." n'existe pas.");
-        }
-
         // Récupère l'utilisateur courant.
         $user = $this->getUser();
 
@@ -56,8 +52,8 @@ class RecipeController extends Controller
         $recipeRepository = $em->getRepository('PCPlatformBundle:Recipe');
         $recipes = $recipeRepository->findByOptionPaginated($option, $page, $nbPerPage);
 
-        // On calcule le nombre total de pages grâce au count($listAdverts) qui retourne le nombre total d'annonces
-        $nbPages = ceil(count($recipes) / $nbPerPage);
+        // calcule le nb de pages nécessaire (1 dans le cas ou la liste de recette est vide)
+        $nbPages = (count($recipes) == 0) ? 1 : ceil(count($recipes) / $nbPerPage);
 
         // Si la page n'existe pas, on retourne une 404
         if ($page > $nbPages) {

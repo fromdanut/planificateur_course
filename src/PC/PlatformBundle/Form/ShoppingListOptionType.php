@@ -20,14 +20,8 @@ class ShoppingListOptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('styles', EntityType::class, array(
-                   'class'        => 'PCPlatformBundle:Category',
-                   'choice_label' => 'name',
-                   'multiple'     => true,
-                   'required'     => false,
-                 ))
-        ->add('nbMeal', IntegerType::class)
-        ->add('save', SubmitType::class);
+            ->add('nbMeal', IntegerType::class)
+            ->add('save', SubmitType::class);
     }
 
     public function getParent()

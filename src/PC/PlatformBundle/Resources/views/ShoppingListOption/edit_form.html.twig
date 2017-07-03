@@ -58,15 +58,6 @@
           </div>
         </div>
 
-    {# styles #}
-        <div class="form-group">
-          {# Affichage des erreurs pour ce champ précis. #}
-          {{ form_errors(form.styles) }}
-          <div class="col-xs-12 center-block">
-          {# Génération de l'input. #}
-            {{ form_widget(form.styles) }}
-          </div>
-        </div>
         {# Génération automatique des champs pas encore écrits.
         Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
         et tous les champs cachés (type « hidden »). #}

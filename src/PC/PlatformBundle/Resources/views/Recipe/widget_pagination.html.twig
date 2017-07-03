@@ -1,8 +1,29 @@
+
 <ul class="pagination">
-  {# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
-  {% for p in range(1, nbPages) %}
-    <li{% if p == page %} class="active"{% endif %}>
-      <a href="{{ path('pc_platform_recipe_index', {'page': p}) }}">{{ p }}</a>
+
+    <li{% if page == 1 %} class="active"{% endif %}>
+      <a href="{{ path('pc_platform_recipe_index', {'page': 1}) }}">1</a>
     </li>
-  {% endfor %}
+
+    {% if page != 1 %}
+        <li>
+          <a href="{{ path('pc_platform_recipe_index', {'page': (page - 1) }) }}"><</a>
+        </li>
+    {% endif %}
+
+    {% if page not in [1, nbPages] %}
+        <li class="active" >
+          <a href="{{ path('pc_platform_recipe_index', {'page': page }) }}">{{page}}</a>
+        </li>
+    {% endif %}
+
+    {% if page != nbPages %}
+        <li>
+          <a href="{{ path('pc_platform_recipe_index', {'page': (page + 1) }) }}">></a>
+        </li>
+    {% endif %}
+
+    <li {% if page == nbPages %} class="active"{% endif %}>
+      <a href="{{ path('pc_platform_recipe_index', {'page': nbPages }) }}">{{nbPages}}</a>
+    </li>
 </ul>
