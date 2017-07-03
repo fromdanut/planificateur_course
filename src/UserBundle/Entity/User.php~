@@ -1,0 +1,70 @@
+<?php
+
+// src/UserBundle/Entity/User.php
+
+namespace UserBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use FOS\UserBundle\Model\User as BaseUser;
+use PC\PlatformBundle\Entity\ShoppingList;
+
+/**
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
+ * @ORM\HasLifecycleCallbacks()
+ */
+class User extends BaseUser
+{
+  /**
+   * @ORM\Column(name="id", type="integer")
+   * @ORM\Id
+   * @ORM\GeneratedValue(strategy="AUTO")
+   */
+  protected $id;
+
+  /**
+   * @ORM\OneToOne(targetEntity="PC\PlatformBundle\Entity\ShoppingList", mappedBy="user",  cascade={"persist"})
+   */
+  protected $shoppingList;
+
+  /*
+  public function __construct()
+  {
+      $shoppingList = new ShoppingList();
+      $this->shoppingList = $shoppingList;
+  }
+  */
+
+  /**
+   * @ORM\PrePersist
+   */
+  public function addShoppingList(){
+      $shoppingList = new ShoppingList();
+      $this->shoppingList = $shoppingList;
+  }
+
+    /**
+     * Set shoppingList
+     *
+     * @param \PC\PlatformBundle\Entity\ShoppingList $shoppingList
+     *
+     * @return User
+     */
+    public function setShoppingList(\PC\PlatformBundle\Entity\ShoppingList $shoppingList = null)
+    {
+        $this->shoppingList = $shoppingList;
+
+        return $this;
+    }
+
+    /**
+     * Get shoppingList
+     *
+     * @return \PC\PlatformBundle\Entity\ShoppingList
+     */
+    public function getShoppingList()
+    {
+        return $this->shoppingList;
+    }
+}

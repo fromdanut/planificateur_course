@@ -1,0 +1,51 @@
+{# Retour à la liste #}
+<div class="row" style="margin-top:10px">
+    <div class="col-xs-12">
+        <a href="{{path('pc_platform_recipe_index')}}" class="btn btn-block btn-primary">
+            <span class="glyphicon glyphicon-th-large">
+            </span> retour à la liste des recettes
+        </a>
+    </div>
+</div>
+
+{# Ajouter à la shoppingList #}
+<div class="row" style="margin-top:10px">
+    <div class="col-xs-12">
+        <a href="{{path('pc_platform_shoppinglist_add_recipe', {'id': recipe.id})}}" class="btn btn-block btn-success">
+            <span class="glyphicon glyphicon-plus-sign">
+            </span> Ajouter à votre ShoppingList
+        </a>
+    </div>
+</div>
+
+{# Enlever à la shoppingList #}
+<div class="row" style="margin-top:10px">
+    <div class="col-xs-12">
+        <a href="{{path('pc_platform_shoppinglist_remove_recipe', {'id': recipe.id})}}" class="btn btn-block btn-warning">
+            <span class="glyphicon glyphicon-minus-sign">
+            </span> Enlever de votre ShoppingList
+        </a>
+    </div>
+</div>
+
+{# edit  accessible seulement pour l'auteur de la recette #}
+{% if app.user.username == recipe.user.username %}
+<div class="row" style="margin-top:10px">
+    <div class="col-xs-12">
+        <a href="{{path('pc_platform_edit', {'id': recipe.id})}}" class="btn btn-block btn-primary btn-warning">
+            <span class="glyphicon glyphicon-pencil">
+            </span>  modifier
+        </a>
+    </div>
+</div>
+
+{# delete  accessible seulement pour l'auteur de la recette #}
+<div class="row" style="margin-top:10px">
+    <div class="col-xs-12">
+        <a href="{{path('pc_platform_delete', {'id': recipe.id})}}" class="btn btn-block btn-primary btn-danger">
+            <span class="glyphicon glyphicon-trash">
+            </span>  supprimer
+        </a>
+    </div>
+</div>
+{% endif %}

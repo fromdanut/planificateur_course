@@ -4,20 +4,20 @@
 
 {% block pcplatform_article %}
 
-    <div class="col-sm-3 hidden-xs hidden-sm">
+    <div class="col-md-4 col-lg-3 hidden-xs hidden-sm">
         {% include 'PCPlatformBundle:Recipe:view_menu.html.twig' %}
     </div>
 
-    <div class="col-xs-12 col-sm-9 col-md-7">
+    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-7">
         {% include 'PCPlatformBundle:Recipe:view_main.html.twig' %}
     </div>
 
-    <div class="col-xs-12 col-sm-3 col-md-2">
+    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
         {% include 'PCPlatformBundle:Recipe:view_ingredients.html.twig' %}
     </div>
 
     {# Le menu se retrouve en bas pour xs et sm device #}
-    <div class="col-xs-12 visible-xs visible-sm">
+    <div class="col-xs-12 col-sm-6 visible-xs visible-sm">
         {% include 'PCPlatformBundle:Recipe:view_menu.html.twig' %}
     </div>
 

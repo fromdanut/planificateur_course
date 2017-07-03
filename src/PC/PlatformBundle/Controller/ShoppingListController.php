@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 class ShoppingListController extends Controller
 {
 
-    public function viewAction()
+    public function viewAction(Request $request)
     {
         $shoppingList = $this
             ->getDoctrine()
@@ -24,6 +24,11 @@ class ShoppingListController extends Controller
             ->getRepository('PCPlatformBundle:ShoppingList')
             ->findWithAllFeatures($this->getUser());
 
+        // Lors de la première utilisation l'utilisateur n'a pas de shoppingList.
+        if ($shoppingList === null) {
+            $request->getSession()->getFlashBag()->add('notice', 'Vous n\'avez pas encore de shopping list, créez en une !');
+            return $this->redirectToRoute('pc_platform_shoppinglistoption_edit');
+        }
 
         $shoppingListOption = $this
             ->getDoctrine()
@@ -59,6 +64,7 @@ class ShoppingListController extends Controller
         // Si l'utilisateur créer sa première shoppingList.
         if ($shoppingList === null) {
             $shoppingList = new ShoppingList();
+            $shoppingList->setUser($this->getUser());
         }
 
         // On enlève toutes les recettes rattaché à cette shoppingList.
