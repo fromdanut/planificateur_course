@@ -32,7 +32,7 @@ class Recipe
     /**
      * @var int
      *
-     * @ORM\Column(name="cooking_time", type="integer")
+     * @ORM\Column(name="cooking_time", type="integer", options={"unsigned"=true})
      */
     private $cookingTime;
 

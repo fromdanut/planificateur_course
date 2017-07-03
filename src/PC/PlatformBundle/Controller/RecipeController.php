@@ -102,7 +102,7 @@ class RecipeController extends Controller
             $em->persist($recipe);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('notice', 'Recette enregistrée.');
+            $request->getSession()->getFlashBag()->add('notice', 'Nouvelle recette enregistrée.');
 
             return $this->redirectToRoute('pc_platform_view', array(
                 'id' => $recipe->getId(),

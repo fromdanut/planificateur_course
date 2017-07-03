@@ -5,11 +5,8 @@
 {% block body %}
 <div class="row">
     <div class="col-xs-6 col-xs-push-3">
+        {% include 'PCPlatformBundle:Default:widget_flashbag_success.html.twig' %}
         <h3 class="text-center">Mes options pour faire la liste de courses.</h3>
-        {# Informed the user if the options are modify #}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="alert alert-success" role="alert"><p>{{ flashMessage }}</p></div>
-        {% endfor %}
         {% include 'PCPlatformBundle:ShoppingListOption:edit_form.html.twig' %}
     </div>
 </div>

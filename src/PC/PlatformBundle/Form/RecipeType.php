@@ -24,7 +24,8 @@ class RecipeType extends AbstractType
     {
         $builder
             ->add('name' ,              TextType::class)
-            ->add('cookingTime',        IntegerType::class )
+            ->add('cookingTime',        IntegerType::class, array(
+                'attr'         => array('min' => 0)))
             ->add('longDescription',    TextareaType::class)
             ->add('shortDescription',   TextareaType::class)
             ->add('recipeIngredients',  CollectionType::class, array(

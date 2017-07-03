@@ -3,6 +3,7 @@
 {# TITTRE DE LA RECETTE, avec auteur, note et tps de préparation. #}
 <div class="row">
     <div class="col-xs-12">
+        {% include 'PCPlatformBundle:Default:widget_flashbag_success.html.twig' %}
         <h1 class="text-center">{{recipe.name}}<br>
             <small class="tex-center"><span class="glyphicon glyphicon-pencil"></span> {{recipe.user.username}}</small>
         </h1>
