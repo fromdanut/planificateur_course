@@ -10,6 +10,7 @@ use PC\PlatformBundle\Entity\ShoppingListOption;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 
 
 class ShoppingListController extends Controller
@@ -102,6 +103,18 @@ class ShoppingListController extends Controller
 
         if ($recipe == null) {
             throw new NotFoundHttpException('Cette recette n\'existe pas impossible de l\'ajouter !');
+        }
+
+        /*
+            Pour empécher un utilisateur d'ajouter une recette déjà selectionnée.
+            Normalement il devriat pouvoir le faire mais il faudra créer une entity
+            ShoppingList_Recipe (ave une relation OneToManyToOne)...
+        */
+
+        foreach ($shoppingList->getRecipes() as $recipeSelected) {
+            if($recipe === $recipeSelected) {
+                throw new NotAcceptableHttpException('Vous avez déjà ajouté cette recette à votre liste de course ! Vous n\'allez pas manger que des ' . $recipe->getName());
+            }
         }
 
         $shoppingList->addRecipe($recipe);
