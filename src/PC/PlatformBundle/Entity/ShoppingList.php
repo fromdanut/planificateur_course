@@ -3,6 +3,7 @@
 namespace PC\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use PC\PlatformBundle\Utility\IngredientList;
 
 /**
  * ShoppingList
@@ -85,66 +86,15 @@ class ShoppingList
         return $this->recipes;
     }
 
-    /*
-        Fonction qui retourne la liste des courses en fonctions de la liste de recette.
-        Génère une associative array :
-            $ingList = array( 'fruis et légumes' => array(
-                                                'fraise' => array(
-                                                        "quantity" => 12,
-                                                        "price" => 3,
-                                                        "unit" => kg,
-                                                        "name" => "fraise"
-                                                        ),
-                                                'pomme' => array(...),
-                                            'produit laitiers' => array(...)
-                                )
-    */
-
-    public function getGroupedIngredientList()
+    public function getIngredientList()
     {
-        $ingList = array(); // ingList for groupedIngredientList
-        // pour chaque recette.
-        foreach ($this->getRecipes() as $recipe) {
-            // pour chaque ingrédient de recette.
-            foreach($recipe->getRecipeIngredients() as $recipeIngredient) {
-                $ingredient = $recipeIngredient->getIngredient();
-                $ingCat = $ingredient->getCategory()->getName();
-                $ingName = $ingredient->getName();
-                // Si la catégory de l'ingrédient est déjà renseignée dans la liste d'ingrédient.
-                if (array_key_exists($ingCat, $ingList)) {
-                    // Si l'ingrédient est déjà renseigné.
-                    if (array_key_exists($ingName, $ingList[$ingCat])) {
-                        // on rajoute la quantity du recipeIngredient.
-                        $ingList[$ingCat][$ingName]['quantity'] += $recipeIngredient->getQuantity();
-                    }
-                    // Si c'est la première occurence pour cet ingrédient, on l'ajoute à la ingList.
-                    else {
-                        $ingList[$ingCat][$ingName] = array(
-                            "name"     => $ingredient->getName(),
-                            "quantity" => $recipeIngredient->getQuantity(),
-                            "price"    => $ingredient->getPrice(),
-                            "unit"     => $ingredient->getUnit(),
-                        );
-                    }
-                }
-                // Si c'est la première occurence pour cette catégory, on l'ajoute, avec l'ingrédient.
-                else {
-                    $ingList[$ingCat][$ingName] = array(
-                        "name"     => $ingredient->getName(),
-                        "quantity" => $recipeIngredient->getQuantity(),
-                        "price"    => $ingredient->getPrice(),
-                        "unit"     => $ingredient->getUnit(),
-                    );
-                }
-            }
-        }
-
-        return $ingList;
+        $ingList = new IngredientList($this->getRecipes());
+        return $ingList->getIngList();
     }
 
     public function getTotalPrice()
     {
-        $ingList = $this->getGroupedIngredientList();
+        $ingList = $this->getIngredientList();
         $total = 0;
         foreach ($ingList as $cats) {
             foreach ($cats as $ing) {

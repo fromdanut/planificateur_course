@@ -8,14 +8,13 @@
         <div class="collapse navbar-collapse navbar-menubuilder">
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="{{path('pc_platform_homepage')}}">Home</a></li>
-                <li><a href="{{path('pc_platform_recipe_index')}}">Recipes</a></li>
-                <li><a href="{{path('pc_platform_shoppinglist_view')}}">My shopping list</a></li>
+                <li><a href="{{path('pc_platform_recipe_index')}}">Recettes</a></li>
+                <li><a href="{{path('pc_platform_shoppinglist_view')}}">Liste de course</a></li>
                 <li class="dropdown">
                     <a class="btn dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
                     <ul class="dropdown-menu">
                         <p class="text-center">{{ app.user.username }}</p>
                         <li class="divider"></li>
-                        <li><a href="{{ path('fos_user_change_password') }}">Modifier le mot de passe</a></li>
                         <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                     </ul>
                 </li>

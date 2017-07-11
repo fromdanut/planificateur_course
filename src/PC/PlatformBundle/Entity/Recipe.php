@@ -3,6 +3,9 @@
 namespace PC\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use PC\PlatformBundle\Validator\Antiflood;
 
 /**
  * Recipe
@@ -10,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="recipe")
  * @ORM\Entity(repositoryClass="PC\PlatformBundle\Repository\RecipeRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(fields="name", message="Une recette existe déjà avec ce nom.")
  */
 class Recipe
 {
@@ -33,6 +37,7 @@ class Recipe
      * @var int
      *
      * @ORM\Column(name="cooking_time", type="integer", options={"unsigned"=true})
+     * @Assert\Range(min=0)
      */
     private $cookingTime;
 
@@ -40,6 +45,7 @@ class Recipe
      * @var string
      *
      * @ORM\Column(name="long_description", type="text")
+     * @Assert\Length(min=100)
      */
     private $longDescription;
 
@@ -47,6 +53,7 @@ class Recipe
      * @var string
      *
      * @ORM\Column(name="short_description", type="string", length=255)
+     * @Assert\Length(min=50)
      */
     private $shortDescription;
 
@@ -54,6 +61,7 @@ class Recipe
      * @var int
      *
      * @ORM\Column(name="rating", type="integer")
+     * @Assert\Range(min=1, max=5)
      */
     private $rating;
 

@@ -10,7 +10,7 @@
             <p>Découvrez les dernières recettes ajoutées...</p>
             <div class="row">
                 {% for recipe in suggestions %}
-                <div class="col-xs-4">
+                <div class="col-xs-12 col-sm-6 col-md-4">
                     {% include 'PCPlatformBundle:Recipe:widget_small_recipe.html.twig' %}
                 </div>
                 {% endfor %}

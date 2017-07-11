@@ -1,0 +1,22 @@
+{% extends "PCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Oups !
+{% endblock %}
+
+{% block nav %}
+{% endblock %}
+
+{% block body %}
+    <div class="row jumbotron">
+        <div class="col-xs-6">
+            <a href="http://www.marmiton.org/recettes/recette_tarte-au-concombre_61434.aspx">
+                <img class="img-sresponsive" src="https://image.afcdn.com/recipe/20140711/24688_w397.jpg" alt="Une tarte au concombre">
+            </a>
+        </div>
+        <div class="col-xs-6">
+            <h1>Oups! Une erreur s'est produite.</h1>
+            <p>Le serveur indique un "{{ status_code }} {{ status_text }}".<p>
+        </div>
+    </div>
+{% endblock %}
