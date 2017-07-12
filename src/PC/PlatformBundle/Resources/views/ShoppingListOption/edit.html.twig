@@ -11,3 +11,11 @@
     </div>
 </div>
 {% endblock %}
+
+{# JS nécessaire à l'affichage du rating des recipes #}
+{% block javascripts %}
+    {{parent()}}
+    {% javascripts 'bundles/pcplatform/js/rating.js' filter='jsqueeze' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

@@ -84,3 +84,14 @@ fos_user:
     from_email:
       address: "%mailer_user%"
       sender_name: "%mailer_user%"
+
+assetic:
+    debug:                '%kernel.debug%'
+    use_controller:
+        enabled:              '%kernel.debug%'
+        profiler:             false
+    filters:
+        cssrewrite: ~
+        jsqueeze:   ~
+        scssphp:
+            formatter: 'Leafo\ScssPhp\Formatter\Compressed'
