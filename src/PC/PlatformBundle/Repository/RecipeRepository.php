@@ -157,6 +157,6 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
 
         return $qb
             ->getQuery()
-            ->getSingleResult();
+            ->getOneOrNullResult();
     }
 }

@@ -4,6 +4,7 @@
         <div class="col-xs-12">
             <div class="panel panel-default">
                   <!-- Default panel contents -->
+                  <div class="panel-heading text-center"><strong>Liste des courses</strong></div>
                   <div class="panel-heading">Options</div>
                   <div class="panel-body">
                     {#
@@ -14,9 +15,13 @@
                     {% if shoppingListOption.quick %}<span class="label label-success">quick</span>{% endif %}
                     {% if shoppingListOption.eco %}<span class="label label-success">eco</span>{% endif %}
                     {# filtre sur attributs type array #}
+                    <ul class="list-inline list-unstyled">
                     {% for style in shoppingListOption.styles %}
-                        <span class="label label-default">{{style.name}}</span>
+                        <li style="margin-top: 5px;">
+                            <span class="label label-default">{{style.name}} <span class="glyphicon glyphicon-tag"></span></span>
+                        </li>
                     {% endfor %}
+                    </ul>
                   </div>
             </div>
             <div class="panel panel-default">

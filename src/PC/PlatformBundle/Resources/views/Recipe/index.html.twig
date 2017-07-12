@@ -5,18 +5,18 @@
 {% block pcplatform_article %}
 
     <div class="row">
-        <div class="row">
-            <div class="col-xs-12">
-                {% block article_title %}
-                {% endblock %}
-            </div>
-        </div>
         <div class="col-xs-3">
             {% block left_menu %}
                 {% include 'PCPlatformBundle:Recipe:index_menu.html.twig' %}
             {% endblock %}
         </div>
         <div class="col-xs-9">
+            <div class="row">
+                <div class="col-xs-12">
+                    {% block article_title %}
+                    {% endblock %}
+                </div>
+            </div>
             <div class="row">
                 {% for recipe in recipes %}
                     <div class="col-xs-12 col-sm-6 col-md-4">
@@ -32,13 +32,15 @@
                 {% endif %}
             </div>
 
-            {% block pagination %}
-            <div class="row">
-                <div class="col-xs-6 col-sm-4 col-xs-push-3 col-sm-push-4">
-                    {% include 'PCPlatformBundle:Recipe:widget_pagination.html.twig' %}
-                </div>
-            </div>
-            {% endblock %}
+            {% if recipes is not empty %}
+                {% block pagination %}
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-4 col-xs-push-3 col-sm-push-4">
+                            {% include 'PCPlatformBundle:Recipe:widget_pagination.html.twig' %}
+                        </div>
+                    </div>
+                {% endblock %}
+            {% endif %}
         </div>
     </div>
 {% endblock %}
