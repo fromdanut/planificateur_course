@@ -1,0 +1,6 @@
+/*
+    pour le rendu de src/PC/PlatformBundle/Resources/views/ShoppingList/view_shoppinglist.html.twig
+*/
+.label-as-badge {
+    border-radius: 1em;
+}
