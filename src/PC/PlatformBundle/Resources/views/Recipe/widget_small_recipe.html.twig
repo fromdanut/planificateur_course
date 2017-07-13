@@ -1,87 +1,94 @@
 {# src/PC/PlatformBundle/Resources/views/Recipe/widget_small_recipe.html.twig #}
+<div style="padding:10px">
+    <a href="{{ path('pc_platform_view', {'id': recipe.id}) }}" style="color:#000000 !important; text-decoration:none;">
+        {# Conteneur #}
+        <div class="row" style="background-color:#485563; padding:10px" >
+            {# TITRE #}
+            <div class="row">
+                <div class="col-xs-12">
+                    {# Limite le nombre de caractère à 50 dans le titre. #}
+                    <strong>{{ recipe.name|length > 50 ? recipe.name|slice(0, 50) ~ '...' : recipe.name  }}</strong>
+                </div>
+            </div>
 
-<a href="{{ path('pc_platform_view', {'id': recipe.id}) }}" style="color:#000000 !important; text-decoration:none;">
-    {# Conteneur #}
-    <div class="row" style="padding-right:10px;" >
-        {# TITRE #}
-        <div class="row">
-            <div class="col-xs-12">
-                {# Limite le nombre de caractère à 50 dans le titre. #}
-                <strong>{{ recipe.name|length > 50 ? recipe.name|slice(0, 50) ~ '...' : recipe.name  }}</strong>
+            {# IMAGE + INFOS DIVERSES#}
+            <div class="row">
+
+                {# IMAGE #}
+                {% if recipe.image is defined %}
+                <div class="col-xs-6">
+                    <img class="img-responsive" style='border-radius:3px;' src="{{recipe.image.url}}" alt="{{recipe.image.alt}}">
+                </div>
+                {% endif %}
+
+                {# INFOS #}
+                <div class="col-xs-6">
+                    {# auteur #}
+                    <div class="row">
+                        <p><span class="glyphicon glyphicon-pencil"></span><strong> author</strong></p>
+                    </div>
+                    {# tps / prix / calorie #}
+                    <div class="row">
+                        {# tps #}
+                        <div class="col-xs-6">
+                            <div class="row">
+                                {# affiche 1, 2 ou 3 au max sablier en fonction du temps de préparation #}
+                                {% for i in range(0, (recipe.cookingTime // 20) ) if i <= 2 %}
+                                <span class="glyphicon glyphicon-hourglass" style="color:#ebebeb"></span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {# prix #}
+                        <div class="col-xs-3">
+                            <div class="row">
+                                {# affiche un euro en vert/rouge en fonction du prix #}
+                                {% if recipe.price > 15 %}
+                                <p style="color:IndianRed">
+                                {% elseif recipe.price < 5 %}
+                                <p style="color:#4cae4c">
+                                {% else %}
+                                <p style="color:#ebebeb">
+                                {% endif %}
+                                <span class="glyphicon glyphicon-eur"></span>
+                                </p>
+                            </div>
+                        </div>
+                        {# calorie #}
+                        <div class="col-xs-3">
+                            <div class="row">
+                                {# affiche une balance en vert/rouge en fonction des calorie #}
+                                {% if recipe.calorie > 15000 %}
+                                <p style="color:IndianRed">
+                                {% elseif recipe.calorie > 10000 %}
+                                <p style="color:#ebebeb">
+                                {% else %}
+                                <p style="color:#4cae4c">
+                                {% endif %}
+                                <span class="glyphicon glyphicon-scale"></span>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    {# note #}
+                    <div class="row">
+                        {% include 'PCPlatformBundle:Recipe:widget_rating.html.twig' %}
+                    </div>
+                    {# 3 premières catégories #}
+                    <div class="row">
+                        {% for cat in recipe.categories|slice(0,2) %}
+                        <span class="label label-default">{{cat.name}}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            {# COURTE DESCRIPTION #}
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>{{recipe.shortDescription|length > 50 ? recipe.shortDescription|slice(0, 50) ~ '...' : recipe.shortDescription}}</p>
+                </div>
             </div>
         </div>
-
-        {# IMAGE + INFOS DIVERSES#}
-        <div class="row">
-
-            {# IMAGE #}
-            {% if recipe.image is defined %}
-            <div class="col-xs-6">
-                <img class="img-responsive img-rounded" src="{{recipe.image.url}}" alt="{{recipe.image.alt}}">
-            </div>
-            {% endif %}
-
-            {# INFOS #}
-            <div class="col-xs-6">
-                {# auteur #}
-                <div class="row">
-                    <p><span class="glyphicon glyphicon-pencil"></span><strong> author</strong></p>
-                </div>
-                {# tps / prix / calorie #}
-                <div class="row">
-                    {# tps #}
-                    <div class="col-xs-4">
-                        <div class="row">
-                            {# affiche 1, 2 ou 3 au max sablier en fonction du temps de préparation #}
-                            {% for i in range(0, (recipe.cookingTime // 20) ) if i <= 2 %}
-                            <span class="glyphicon glyphicon-hourglass" style="color:grey"></span>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {# prix #}
-                    <div class="col-xs-4">
-                        <div class="row">
-                            {# affiche 1, 2 ou 3 au max euros en fonction du prix #}
-                            {% for i in range(0, (recipe.price // 10) ) if i <= 2 %}
-                            <span class="glyphicon glyphicon-eur" style="color:grey"></span>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {# calorie #}
-                    <div class="col-xs-4">
-                        <div class="row">
-                            {# affiche une balance en vert/rouge en fonction des calorie #}
-                            {% if recipe.calorie > 15000 %}
-                            <p style="color:IndianRed">
-                            {% elseif recipe.calorie > 10000 %}
-                            <p style="color:grey">
-                            {% else %}
-                            <p style="color:green">
-                            {% endif %}
-                            <span class="glyphicon glyphicon-scale"></span>
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-                {# note #}
-                <div class="row">
-                    {% include 'PCPlatformBundle:Recipe:widget_rating.html.twig' %}
-                </div>
-                {# 3 premières catégories #}
-                <div class="row">
-                    {% for cat in recipe.categories|slice(0,2) %}
-                    <span class="label label-default">{{cat.name}}</span>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-
-        {# COURTE DESCRIPTION #}
-        <div class="row">
-            <div class="col-xs-12">
-                <p>{{recipe.shortDescription|length > 50 ? recipe.shortDescription|slice(0, 50) ~ '...' : recipe.shortDescription}}</p>
-            </div>
-        </div>
-    </div>
-</a>
+    </a>
+</div>
