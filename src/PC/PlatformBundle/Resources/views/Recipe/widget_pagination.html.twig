@@ -1,29 +1,15 @@
 
 <ul class="pagination">
 
-    <li{% if page == 1 %} class="active"{% endif %}>
-      <a href="{{ path('pc_platform_recipe_index', {'page': 1}) }}">1</a>
+    <li{% if page == 1 %} class="disabled"{% endif %}>
+      <a href="{{ path('pc_platform_recipe_index', {'page': page - 1 }) }}"><</a>
     </li>
 
-    {% if page != 1 %}
-        <li>
-          <a href="{{ path('pc_platform_recipe_index', {'page': (page - 1) }) }}"><</a>
-        </li>
-    {% endif %}
+    <li class="active" >
+        <a href="{{ path('pc_platform_recipe_index', {'page': page }) }}">{{page}}</a>
+    </li>
 
-    {% if page not in [1, nbPages] %}
-        <li class="active" >
-          <a href="{{ path('pc_platform_recipe_index', {'page': page }) }}">{{page}}</a>
-        </li>
-    {% endif %}
-
-    {% if page != nbPages %}
-        <li>
-          <a href="{{ path('pc_platform_recipe_index', {'page': (page + 1) }) }}">></a>
-        </li>
-    {% endif %}
-
-    <li {% if page == nbPages %} class="active"{% endif %}>
-      <a href="{{ path('pc_platform_recipe_index', {'page': nbPages }) }}">{{nbPages}}</a>
+    <li {% if page == nbPages %} class="disabled" {% endif %}>
+      <a href="{{ path('pc_platform_recipe_index', {'page': (page + 1) }) }}">></a>
     </li>
 </ul>
