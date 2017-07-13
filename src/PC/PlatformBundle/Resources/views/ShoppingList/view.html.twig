@@ -26,6 +26,10 @@
         {% include "PCPlatformBundle:ShoppingList:view_menu.html.twig" %}
     {% endblock %}
 
+    {% block no_recipe_found %}
+        {% include 'PCPlatformBundle:ShoppingList:widget_no_recipe_found.html.twig' %}
+    {% endblock %}
+
     {# Pour effacer la pagination #}
     {% block pagination %}
     {% endblock %}
