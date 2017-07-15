@@ -9,7 +9,7 @@ use PC\PlatformBundle\Entity\RecipeListOption;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedException;
 use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
@@ -186,10 +186,10 @@ class RecipeController extends Controller
         Vérifie si un utilisateur est bien l'auteur d'une recette.
         Lève une erreur avec un message si ce n'est pas le cas.
     */
-    public function checkUser($recipe, $user, $message) {
+    private function checkUser($recipe, $user, $message) {
         $user = $this->getUser();
         if ($recipe->getUser() != $user) {
-            throw new AccessDeniedHttpException($message);
+            throw new AccessDeniedException($message);
         }
     }
     // Vérifie si l'utilisateur souhaitant effacer la recette en est l'auteur.

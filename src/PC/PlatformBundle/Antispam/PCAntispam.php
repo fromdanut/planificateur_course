@@ -3,6 +3,7 @@
 // src/PC/PlatformBundle/Antispam/PCAntispam.php
 
 namespace PC\PlatformBundle\Antispam;
+use PC\PlatformBundle\Entity\Recipe;
 
 class PCAntispam
 {
@@ -27,7 +28,7 @@ class PCAntispam
      * @param $recipe
      * @return bool
      */
-    public function isSpam($recipe)
+    public function isSpam(Recipe $recipe)
     {
         // diff entre la dernière recette et la nouvelle.
         $last_recipe = $this->em
@@ -44,7 +45,7 @@ class PCAntispam
         }
 
         // trop peu de tps entre 2 recettes.
-        if ($d->y == 0 AND $d->m == 0 AND $d->h == 0 AND $d->i == 0 AND
+        if ($d->y == 0 && $d->m == 0 && $d->h == 0 && $d->i == 0 &&
             $d->s < $this->insertion_limit_time) {
             return True;
         }

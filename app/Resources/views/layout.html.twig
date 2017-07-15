@@ -12,21 +12,21 @@
 	{% endblock %}
     </title>
     {% block stylesheets %}
+        <!-- bootstrap css viwht superhero theme from bootswatch -->
+        {% stylesheets 'bundles/pcplatform/css/darkly_bootstrap.css' filter='cssrewrite, scssphp' %}
+            <link rel="stylesheet" href="{{ asset_url }}">
+        {% endstylesheets %}
 
-    <!-- bootstrap css viwht superhero theme from bootswatch -->
-    {% stylesheets 'bundles/pcplatform/css/darkly_bootstrap.css' filter='cssrewrite, scssphp' %}
-        <link rel="stylesheet" href="{{ asset_url }}">
-    {% endstylesheets %}
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     {% endblock %}
+    <link href="favicon.ico" rel="icon" type="image/x-icon" />
   </head>
   <body>
 
