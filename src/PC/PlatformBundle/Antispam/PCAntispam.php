@@ -9,38 +9,46 @@ class PCAntispam
 
     protected $em;
     protected $insertion_limit_time;
+    protected $nb_max_ingredient;
 
     public function __construct(\Doctrine\ORM\EntityManager $em,
-                                $insertion_limit_time)
+                                $insertion_limit_time,
+                                $nb_max_ingredient)
     {
       $this->em = $em;
       $this->insertion_limit_time = $insertion_limit_time;
+      $this->nb_max_ingredient = $nb_max_ingredient;
     }
 
      /**
-     * Vérifie si la recette est du spam
-     *
+     * Vérifie 2 choses :
+     * - si aucune recette n'a déjà été enregistrée dans les XX dernières secondes.
+     * - si le nombre d'ingrédients est supérieur a XX
      * @param $recipe
      * @return bool
      */
     public function isSpam($recipe)
     {
-        // difference between date of the new and the last recipe.
+        // diff entre la dernière recette et la nouvelle.
         $last_recipe = $this->em
             ->getRepository('PCPlatformBundle:Recipe')
             ->findLastRecipe();
 
-        #delta
         $d = $recipe
             ->getDatePublication()
             ->diff($last_recipe->getDatePublication());
 
-        if ($d->y == 0 AND $d->m == 0 AND $d->h == 0 AND $d->i == 0 AND
-            $d->s < $this->insertion_limit_time) {
-            return False;
-        }
-        else {
+        // trop d'ingrédient dans la recette.
+        if (count($recipe->getRecipeIngredients()) > $this->nb_max_ingredient) {
             return True;
         }
+
+        // trop peu de tps entre 2 recettes.
+        if ($d->y == 0 AND $d->m == 0 AND $d->h == 0 AND $d->i == 0 AND
+            $d->s < $this->insertion_limit_time) {
+            return True;
+        }
+
+        return False;
     }
 }

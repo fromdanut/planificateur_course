@@ -98,7 +98,7 @@ class RecipeController extends Controller
             // On récupère le service antispam
             $antispam = $this->container->get('pc_platform.antispam');
 
-            if ($antispam->isSpam($recipe))
+            if (!$antispam->isSpam($recipe))
             {
                 foreach ($recipe->getRecipeIngredients() as $recipeIngredient) {
                     $recipeIngredient->setRecipe($recipe);
@@ -114,10 +114,7 @@ class RecipeController extends Controller
                 ));
             }
 
-            else
-            {
-                $request->getSession()->getFlashBag()->add('notice', 'Attendre un peu avant d\'ajouter une recette.');
-            }
+            $request->getSession()->getFlashBag()->add('notice', 'Attendre un peu avant d\'ajouter une recette.');
         }
 
         return $this->render('PCPlatformBundle:Recipe:add.html.twig', array(
