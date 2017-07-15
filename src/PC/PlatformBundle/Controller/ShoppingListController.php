@@ -148,7 +148,7 @@ class ShoppingListController extends Controller
             ->getRepository('PCPlatformBundle:Recipe')
             ->findOneBy(array('id' => $id));
 
-        if ($recipe == null) {
+        if ($recipe === null) {
             throw new NotFoundHttpException('Cette recette n\'existe pas impossible de l\'enlever de la shoppinglist !');
         }
 
