@@ -95,18 +95,29 @@ class RecipeController extends Controller
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            foreach ($recipe->getRecipeIngredients() as $recipeIngredient) {
-                $recipeIngredient->setRecipe($recipe);
+            // On récupère le service antispam
+            $antispam = $this->container->get('pc_platform.antispam');
+
+            if ($antispam->isSpam($recipe))
+            {
+                foreach ($recipe->getRecipeIngredients() as $recipeIngredient) {
+                    $recipeIngredient->setRecipe($recipe);
+                }
+                $recipe->setUser($this->getUser());
+                $em->persist($recipe);
+                $em->flush();
+
+                $request->getSession()->getFlashBag()->add('notice', 'Nouvelle recette enregistrée.');
+
+                return $this->redirectToRoute('pc_platform_view', array(
+                    'id' => $recipe->getId(),
+                ));
             }
-            $recipe->setUser($this->getUser());
-            $em->persist($recipe);
-            $em->flush();
 
-            $request->getSession()->getFlashBag()->add('notice', 'Nouvelle recette enregistrée.');
-
-            return $this->redirectToRoute('pc_platform_view', array(
-                'id' => $recipe->getId(),
-            ));
+            else
+            {
+                $request->getSession()->getFlashBag()->add('notice', 'Attendre un peu avant d\'ajouter une recette.');
+            }
         }
 
         return $this->render('PCPlatformBundle:Recipe:add.html.twig', array(

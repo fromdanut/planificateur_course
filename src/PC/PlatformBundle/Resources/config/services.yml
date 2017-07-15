@@ -1,3 +1,8 @@
 # src/PC/PlatformBundle/Resources/config/services.yml
 
 services:
+  pc_platform.antispam:
+    class: PC\PlatformBundle\Antispam\PCAntispam
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - %insertion_limit_time%

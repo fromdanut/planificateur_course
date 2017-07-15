@@ -6,7 +6,8 @@
 
     <div class="row">
     <h1>Ajout d'une recette</h1>
-        {{include("PCPlatformBundle:Recipe:add_form.html.twig")}}
+        {% include 'PCPlatformBundle:Default:widget_flashbag_success.html.twig' %}
+        {% include 'PCPlatformBundle:Recipe:add_form.html.twig' %}
     </div>
 
 {% endblock %}

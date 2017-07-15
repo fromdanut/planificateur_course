@@ -15,4 +15,5 @@ A Symfony project created on June 15, 2017, 10:34 pm.
 ## En vrac:
 
 - améliorer la création d'un compte (pour l'instant c'est moche, ca marche mais ca renvoit plusieurs fois vers l'accueil alors qu'on s'attend à être renvoyé directement dans l'espace membre).
-- deployer !
+- ajouter un service antispam (on retourne de la dernière recette )
+- deployer sur raspberry pi!

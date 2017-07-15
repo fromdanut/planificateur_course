@@ -159,4 +159,16 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function findLastRecipe()
+    {
+        $qb = $this->createQueryBuilder('r');
+        $qb
+            ->orderBy('r.datePublication', 'DESC')
+            ->setMaxResults(1);
+
+        return $qb
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

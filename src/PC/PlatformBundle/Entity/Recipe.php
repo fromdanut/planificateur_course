@@ -45,7 +45,7 @@ class Recipe
      * @var string
      *
      * @ORM\Column(name="long_description", type="text")
-     * @Assert\Length(min=100)
+     * @Assert\Length(min=100, max=500)
      */
     private $longDescription;
 
@@ -53,7 +53,7 @@ class Recipe
      * @var string
      *
      * @ORM\Column(name="short_description", type="string", length=255)
-     * @Assert\Length(min=50)
+     * @Assert\Length(min=50, max=500)
      */
     private $shortDescription;
 
