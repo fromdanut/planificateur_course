@@ -7,14 +7,13 @@
     <div class="col-xs-12">
         {% include 'PCPlatformBundle:Default:widget_flashbag_success.html.twig' %}
         <div id="header" class="jumbotron">
-            <h1>Content de vous revoir {{ app.user.username }} !</h1>
-            <p>Découvrez les dernières recettes ajoutées...</p>
+            <h1 class="text-center">Content de vous revoir <strong>{{ app.user.username }}</strong> !
+                <small>Découvrez les différentes fonctionnalités du site</small>
+            </h1>
             <div class="row">
-                {% for recipe in suggestions %}
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    {% include 'PCPlatformBundle:Recipe:widget_small_recipe.html.twig' %}
+                <div class="col-xs-8 col-xs-push-2">
+                    {% include 'PCPlatformBundle:Default:widget_carrousel.html.twig' %}
                 </div>
-                {% endfor %}
             </div>
         </div>
     </div>
