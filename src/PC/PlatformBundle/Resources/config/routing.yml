@@ -43,6 +43,11 @@ pc_platform_edit:
     requirements:
         id: \d*
 
+pc_platform_ingredient_add:
+    path:    /ingredient/add
+    defaults:
+        _controller: PCPlatformBundle:Ingredient:add
+
 pc_platform_shoppinglist_view:
     path:     /shoppingList/view/
     defaults:

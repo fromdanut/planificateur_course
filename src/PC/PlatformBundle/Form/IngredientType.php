@@ -5,6 +5,8 @@ namespace PC\PlatformBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,7 +21,20 @@ class IngredientType extends AbstractType
         $builder
             ->add('name',    TextType::class)
             ->add('price',   IntegerType::class )
-            ->add('calorie', IntegerType::class );
+            ->add('calorie', IntegerType::class )
+            ->add('unit',    EntityType::class, array(
+                'class'        => 'PCPlatformBundle:Unit',
+                'choice_label' => 'name',
+                'multiple'     => false,
+                'expanded'     => false,
+            ))
+            ->add('category',    EntityType::class, array(
+                'class'        => 'PCPlatformBundle:CategoryIngredient',
+                'choice_label' => 'name',
+                'multiple'     => false,
+                'expanded'     => false,
+            ))
+            ->add('save',    SubmitType::class);
     }
 
     /**

@@ -1,9 +1,17 @@
-PlanificateurCourses
-====================
+Planificateur de courses
+========================
 
 A Symfony project created on June 15, 2017, 10:34 pm.
 
-# Amélioration pour la version 2.0:
+# Fonctionnement
+
+Ce site permet de stocker des recettes de cuisine, à partir desquelles il va générer une liste de course.
+
+On peut donc ajouter des ingrédients, des recettes, les sélectionner et enfin exporter une liste de courses.
+
+A voir sur le [site](www.fromdanut.hd.free.fr/pc)
+
+# Amélioration prévue pour la version suivante :
 - lien pour envoyer la liste de course.
 - ajouter filtre User et Categories à findByOption pour les recettes.
 - version bilingue.
@@ -15,6 +23,6 @@ A Symfony project created on June 15, 2017, 10:34 pm.
 
 ## En vrac:
 
-
-- améliorer la création d'un compte (pour l'instant c'est moche, ca marche mais ca renvoit plusieurs fois vers l'accueil alors qu'on s'attend à être renvoyé directement dans l'espace membre).
-- deployer sur raspberry pi!
+- ajouter sécutité sur l'ajout d'ingrédient.
+- informer l'utilisateur sur la procédure à suivre s'il ne trouve pas son ingrédient (rediriger vers ingredient_add)
+-

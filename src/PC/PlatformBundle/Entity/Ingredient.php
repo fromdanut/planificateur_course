@@ -29,7 +29,7 @@ class Ingredient
     private $name;
 
     /**
-     * @var string
+     * @var int
      *
      * @ORM\Column(name="price", type="decimal", precision=10, scale=5)
      */
