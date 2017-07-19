@@ -20,8 +20,10 @@ class IngredientType extends AbstractType
     {
         $builder
             ->add('name',    TextType::class)
-            ->add('price',   IntegerType::class )
-            ->add('calorie', IntegerType::class )
+            ->add('price',   IntegerType::class, array(
+                'attr'         => array('min' => 0, 'max' => 999)))
+            ->add('calorie', IntegerType::class, array(
+                'attr'         => array('min' => 0, 'max' => 999)))
             ->add('unit',    EntityType::class, array(
                 'class'        => 'PCPlatformBundle:Unit',
                 'choice_label' => 'name',

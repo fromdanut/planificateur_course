@@ -98,7 +98,7 @@ class RecipeController extends Controller
             // On récupère le service antispam
             $antispam = $this->container->get('pc_platform.antispam');
 
-            if (!$antispam->isSpam($recipe))
+            if (!$antispam->recipeIsSpam($recipe))
             {
                 foreach ($recipe->getRecipeIngredients() as $recipeIngredient) {
                     $recipeIngredient->setRecipe($recipe);

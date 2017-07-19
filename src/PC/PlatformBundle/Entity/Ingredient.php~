@@ -67,14 +67,6 @@ class Ingredient
     private $category;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->datePublication = new \DateTime();
-    }
-
-    /**
      * Get id
      *
      * @return int
@@ -202,29 +194,5 @@ class Ingredient
     public function getCategory()
     {
         return $this->category;
-    }
-
-    /**
-     * Set datePublication
-     *
-     * @param \DateTime $datePublication
-     *
-     * @return Ingredient
-     */
-    public function setDatePublication($datePublication)
-    {
-        $this->datePublication = $datePublication;
-
-        return $this;
-    }
-
-    /**
-     * Get datePublication
-     *
-     * @return \DateTime
-     */
-    public function getDatePublication()
-    {
-        return $this->datePublication;
     }
 }

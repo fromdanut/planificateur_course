@@ -10,4 +10,15 @@ namespace PC\PlatformBundle\Repository;
  */
 class IngredientRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findLast()
+    {
+        $qb = $this->createQueryBuilder('i');
+        $qb
+            ->orderBy('i.datePublication', 'DESC')
+            ->setMaxResults(1);
+
+        return $qb
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

@@ -3,7 +3,9 @@
 // src/PC/PlatformBundle/Antispam/PCAntispam.php
 
 namespace PC\PlatformBundle\Antispam;
+
 use PC\PlatformBundle\Entity\Recipe;
+use PC\PlatformBundle\Entity\Ingredient;
 
 class PCAntispam
 {
@@ -28,7 +30,7 @@ class PCAntispam
      * @param $recipe
      * @return bool
      */
-    public function isSpam(Recipe $recipe)
+    public function recipeIsSpam(Recipe $recipe)
     {
         // diff entre la dernière recette et la nouvelle.
         $last_recipe = $this->em
@@ -39,10 +41,31 @@ class PCAntispam
             ->getDatePublication()
             ->diff($last_recipe->getDatePublication());
 
-        // trop d'ingrédient dans la recette.
+
         if (count($recipe->getRecipeIngredients()) > $this->nb_max_ingredient) {
             return True;
         }
+
+
+        // trop peu de tps entre 2 recettes.
+        if ($d->y == 0 && $d->m == 0 && $d->h == 0 && $d->i == 0 &&
+            $d->s < $this->insertion_limit_time) {
+            return True;
+        }
+
+        return False;
+    }
+
+    public function ingredientIsSpam(Ingredient $ingredient)
+    {
+        // diff entre la dernière recette et la nouvelle.
+        $last_ingredient = $this->em
+            ->getRepository('PCPlatformBundle:Ingredient')
+            ->findLast();
+
+        $d = $ingredient
+            ->getDatePublication()
+            ->diff($last_ingredient->getDatePublication());
 
         // trop peu de tps entre 2 recettes.
         if ($d->y == 0 && $d->m == 0 && $d->h == 0 && $d->i == 0 &&

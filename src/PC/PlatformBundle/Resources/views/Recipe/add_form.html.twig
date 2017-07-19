@@ -48,10 +48,23 @@
           {{ form_widget(form.recipeIngredients, {'attr': {'class': 'form-inline'}}) }}
       </div>
       <div class="row">
-          <div class="col-xs-6 col-xs-push-3">
-              <a href="#" class="btn btn-block btn-primary" id="add_ingredient"><span class="glyphicon glyphicon-plus-sign"></span> Ajouter un ingrédient</a>
+          <div class="col-xs-2">
+
+          </div>
+          <div class="col-xs-4">
+              <a href="#" class="btn btn-block btn-primary" id="add_ingredient" data-toggle="tooltip" title="Parmis les ingrédients déjà créé.">
+                  <span class="glyphicon glyphicon-plus-sign">
+                  </span> Ajouter un ingrédient
+              </a>
+          </div>
+          <div class="col-xs-4">
+              <a href="{{path('pc_platform_ingredient_add')}}" data-toggle="tooltip" title="S'il n'est pas déjà dans la liste !" class="btn btn-default">
+                  <span class="glyphicon glyphicon-pencil">
+                  </span> Créer un ingrédient
+              </a>
           </div>
       </div>
+      <br>
   </div>
 
   {{ form_row(form.cookingTime) }}

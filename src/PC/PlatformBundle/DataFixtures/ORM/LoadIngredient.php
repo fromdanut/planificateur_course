@@ -14,6 +14,9 @@ class LoadIngredient implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
+
+        $date = new \DateTime();
+
         // 3 unités différentes.
         $clUnit = new Unit();
         $clUnit->setName('cl');
@@ -45,11 +48,11 @@ class LoadIngredient implements FixtureInterface
 
         // 5 ingrédient (nom, prix, calorie, unité, cat)
         $rows = array(
-            array('fraise', 0.01,'150', $gUnit, $fl),
-            array('sucre', 0.001,'600', $gUnit, $esu),
-            array('farine', 0.002,'300', $gUnit, $esa),
-            array('lait', 0.003,'90', $clUnit, $pl),
-            array('oeuf', 0.20,'80', $unit, $esa),
+            array('fraise', 0.01,'150', $gUnit, $fl, $date),
+            array('sucre', 0.001,'600', $gUnit, $esu, $date),
+            array('farine', 0.002,'300', $gUnit, $esa, $date),
+            array('lait', 0.003,'90', $clUnit, $pl, $date),
+            array('oeuf', 0.20,'80', $unit, $esa, $date),
         );
 
         foreach ($rows as $row) {
@@ -59,6 +62,7 @@ class LoadIngredient implements FixtureInterface
             $ingredient->setCalorie($row[2]);
             $ingredient->setUnit($row[3]);
             $ingredient->setCategory($row[4]);
+            $ingredient->setDatePublication($row[5]);
             $manager->persist($ingredient);
         }
         $manager->flush();

@@ -5,9 +5,9 @@ A Symfony project created on June 15, 2017, 10:34 pm.
 
 # Fonctionnement
 
-Ce site permet de stocker des recettes de cuisine, à partir desquelles il va générer une liste de course.
+Ce site permet de stocker des recettes de cuisine, à partir desquelles l'utilisateur peut générer une liste de courses.
 
-On peut donc ajouter des ingrédients, des recettes, les sélectionner et enfin exporter une liste de courses.
+On peut donc ajouter des ingrédients, des recettes, les sélectionner et enfin exporter une liste de courses classée par catégorie d'ingrédient.
 
 A voir sur le [site](www.fromdanut.hd.free.fr/pc)
 
@@ -19,10 +19,3 @@ A voir sur le [site](www.fromdanut.hd.free.fr/pc)
 - ajouter un bouton "supprimer tous les filtres".
 - faire en sorte de pouvoir ajouter plusieurs fois la meme recette à la shopping list.
 - faire la méthode findSuggestionsWithImageAndCat du RecipeRepository.
-
-
-## En vrac:
-
-- ajouter sécutité sur l'ajout d'ingrédient.
-- informer l'utilisateur sur la procédure à suivre s'il ne trouve pas son ingrédient (rediriger vers ingredient_add)
--
