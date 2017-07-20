@@ -9,6 +9,7 @@
 </div>
 
 {# Ajouter à la shoppingList #}
+{% if not isInUserShoppingList %}
 <div class="row" style="margin-top:10px">
     <div class="col-xs-12">
         <a href="{{path('pc_platform_shoppinglist_add_recipe', {'id': recipe.id})}}" class="btn btn-block btn-success">
@@ -17,8 +18,10 @@
         </a>
     </div>
 </div>
+{% endif %}
 
-{# Enlever à la shoppingList #}
+{# Enlever de la shoppingList #}
+{% if isInUserShoppingList %}
 <div class="row" style="margin-top:10px">
     <div class="col-xs-12">
         <a href="{{path('pc_platform_shoppinglist_remove_recipe', {'id': recipe.id})}}" class="btn btn-block btn-warning">
@@ -27,6 +30,8 @@
         </a>
     </div>
 </div>
+{% endif %}
+
 
 {# edit  accessible seulement pour l'auteur de la recette #}
 {% if app.user.username == recipe.user.username %}

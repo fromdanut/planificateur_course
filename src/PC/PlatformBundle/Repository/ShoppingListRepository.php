@@ -34,7 +34,25 @@ class ShoppingListRepository extends \Doctrine\ORM\EntityRepository
                     ->setParameter('user', $user);
         return $qb
           ->getQuery()
-          // La 1ere fois, l'utilisateur n'a pas encore de shoppingLinst
+          // First time user has no Shopphing list
+          ->getOneOrNullResult();
+    }
+
+    // Used in RecipeController:viewAction
+    public function findIfRecipeIsInList($recipe, $user)
+    {
+        $qb = $this
+                ->createQueryBuilder('s')
+                ->leftJoin('s.recipes', 'recipes')
+                    ->addSelect('recipes')
+                ->where('recipes = :recipe')
+                    ->setParameter('recipe', $recipe)
+                ->andWhere('s.user = :user')
+                    ->setParameter('user', $user)
+                ->setMaxResults(1);
+
+        return $qb
+          ->getQuery()
           ->getOneOrNullResult();
     }
 

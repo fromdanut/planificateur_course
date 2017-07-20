@@ -19,3 +19,7 @@ A voir sur le [site](www.fromdanut.hd.free.fr/pc)
 - ajouter un bouton "supprimer tous les filtres".
 - faire en sorte de pouvoir ajouter plusieurs fois la meme recette à la shopping list.
 - faire la méthode findSuggestionsWithImageAndCat du RecipeRepository.
+
+# A faire :
+
+- redéployer avec la dernière version.

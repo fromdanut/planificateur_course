@@ -71,19 +71,24 @@ class RecipeController extends Controller
     public function viewAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('PCPlatformBundle:Recipe');
-        $recipe = $repo->findOneWithImageCatAndIngredients($id);
+        $recipeRepo = $em->getRepository('PCPlatformBundle:Recipe');
+        $recipe = $recipeRepo->findOneWithImageCatAndIngredients($id);
 
         if (null === $recipe) {
             throw new NotFoundHttpException('Recette n°"'.$id.'" inexistante.');
         }
 
         $nb = $this->getParameter('nb_small_recipe_view_menu');
-        $suggestions = $repo->findSuggestionsWithImageAndCat($nb);
+        $suggestions = $recipeRepo->findSuggestionsWithImageAndCat($nb);
+
+        // Check if the recipe is in the shopping list of the user (to enable/disable the "retire" button)
+        $shoppingListRepo = $em->getRepository('PCPlatformBundle:ShoppingList');
+        $isInUserShoppingList = $shoppingListRepo->findIfRecipeIsInList($recipe, $this->getUser());
 
         return $this->render('PCPlatformBundle:Recipe:view.html.twig', array(
             'recipe' => $recipe,
             'suggestions' => $suggestions,
+            'isInUserShoppingList' => $isInUserShoppingList
         ));
     }
 
