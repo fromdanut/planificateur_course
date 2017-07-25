@@ -20,10 +20,6 @@ class LoadRecipe implements FixtureInterface, OrderedFixtureInterface
         for ($i=0; $i < 30; $i++) {
 
             /*
-                Ce Datafixtures doit permettre d'avoir un panel de recette avec des attributs différents afin,
-                notamment de tester la génération de liste de recette en fonction de critères (temps de préparation,
-                prix, diététique)
-                !! Il est nécessaire de créer un user avec l'attribut username = jean !!
             */
 
             // La recette

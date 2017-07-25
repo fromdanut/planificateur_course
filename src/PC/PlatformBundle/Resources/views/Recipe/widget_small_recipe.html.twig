@@ -86,7 +86,7 @@
             {# COURTE DESCRIPTION #}
             <div class="row">
                 <div class="col-xs-12">
-                    <p>{{recipe.shortDescription|length > 50 ? recipe.shortDescription|slice(0, 50) ~ '...' : recipe.shortDescription}}</p>
+                    <p>{{recipe.shortDescription|length >= 50 ? recipe.shortDescription|slice(0, 47) ~ '...' : recipe.shortDescription}}</p>
                 </div>
             </div>
         </div>
