@@ -29,10 +29,9 @@ class IngredientController extends Controller
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            // On récupère le service antispam
             $antispam = $this->container->get('pc_platform.antispam');
 
-            if (!$antispam->ingredientIsSpam($ingredient))
+            if (!$antispam->isSpam($ingredient))
             {
                 $em->persist($ingredient);
                 $em->flush();

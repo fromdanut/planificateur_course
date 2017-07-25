@@ -6,4 +6,3 @@ services:
     arguments:
       - "@doctrine.orm.entity_manager"
       - %insertion_limit_time%
-      - %nb_max_ingredient%

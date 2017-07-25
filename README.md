@@ -3,23 +3,16 @@ Planificateur de courses
 
 A Symfony project created on June 15, 2017, 10:34 pm.
 
-# Fonctionnement
+# Presentation :
 
-Ce site permet de stocker des recettes de cuisine, à partir desquelles l'utilisateur peut générer une liste de courses.
+It's a "marmiton" like website. User can stock/create/edit recipes and ingredients. Plus, the user can create a shopping list from a list of recipes. The shopping list is ordered by ingredients (with total price).
 
-On peut donc ajouter des ingrédients, des recettes, les sélectionner et enfin exporter une liste de courses classée par catégorie d'ingrédient.
+See the result on [website](www.fromdanut.hd.free.fr/pc)
 
-A voir sur le [site](www.fromdanut.hd.free.fr/pc)
+# Improvement for next version :
 
-# Amélioration prévue pour la version suivante :
-- lien pour envoyer la liste de course.
-- ajouter filtre User et Categories à findByOption pour les recettes.
-- version bilingue.
-- ajouter slug à recipe et l'utiliser dans les url.
-- ajouter un bouton "supprimer tous les filtres".
-- faire en sorte de pouvoir ajouter plusieurs fois la meme recette à la shopping list.
-- faire la méthode findSuggestionsWithImageAndCat du RecipeRepository.
-
-# A faire :
-
-- redéployer avec la dernière version.
+- add a service to send the shopping list via mail.
+- add a User and Categories filter for recipe search.
+- translate in english.
+- use slug for recipe instead of recipe number.
+- add a button remove all filter in the recipe search menu.

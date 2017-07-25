@@ -11,11 +11,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 class ShoppingListController extends Controller
 {
-
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
     public function viewAction(Request $request)
     {
         $shoppingList = $this
@@ -24,7 +27,7 @@ class ShoppingListController extends Controller
             ->getRepository('PCPlatformBundle:ShoppingList')
             ->findWithAllFeatures($this->getUser());
 
-        // Lors de la première utilisation l'utilisateur n'a pas de shoppingList.
+        // The first time the user hasn't yet a shoppingList.
         if ($shoppingList === null) {
             $request->getSession()->getFlashBag()->add('notice', 'Vous n\'avez pas encore de shopping list, créez en une !');
             return $this->redirectToRoute('pc_platform_shoppinglistoption_edit');
@@ -42,42 +45,39 @@ class ShoppingListController extends Controller
             'recipes'            => $shoppingList->getRecipes()
         ));
     }
-    /*
-        Formulaire pour ajouter une shopping list sur laquelle on l'utilisateur
-        ne voit uniquement que la liste des recettes (qu'il peut modifier).
-    */
+
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
     public function addAction(Request $request)
     {
-        // Créé l'entity manager.
         $em = $this->getDoctrine()->getManager();
 
-        // Récupère la ShoppingListOption de l'utilisateur.
+        // Get the ShoppingListOption of the current user.
         $shoppingListOption = $em
             ->getRepository('PCPlatformBundle:ShoppingListOption')
             ->findOneBy(array('user' => $this->getUser()));
 
-        // Récupère la ShoppingList de l'utilisateur.
         $shoppingList = $em
             ->getRepository('PCPlatformBundle:ShoppingList')
             ->findOneBy(array('user' => $this->getUser()));
 
-        // Si l'utilisateur créer sa première shoppingList.
+        // Case where the user create his first shoppingList.
         if ($shoppingList === null) {
             $shoppingList = new ShoppingList();
             $shoppingList->setUser($this->getUser());
         }
 
-        // On enlève toutes les recettes rattaché à cette shoppingList.
+        // Remove all recipe from this shoppingList.
         foreach ($shoppingList->getRecipes() as $recipe) {
             $shoppingList->removeRecipe($recipe);
         }
 
-        // Génère la liste de recette en fonction de la shoppingListOption.
+        // Create a shoppingList from options.
         $recipes = $em
             ->getRepository('PCPlatformBundle:Recipe')
             ->findByOption($shoppingListOption);
 
-        // Ajoute les recettes à la shoppingList.
         foreach ($recipes as $recipe) {
             $shoppingList->addRecipe($recipe);
         }
@@ -88,21 +88,18 @@ class ShoppingListController extends Controller
         return $this->redirectToRoute('pc_platform_shoppinglist_view');
     }
 
-    /*
-        ajoute une recette la shoppinglist de l'utilisateur
-        (int) id
-    */
+    /**
+     * Add a recipe to the shoppingList.
+     * @Security("has_role('ROLE_USER')")
+     */
     public function addRecipeAction($id)
     {
-        // Récupère l'entity manager.
-        $em = $this->getDoctrine()->getManager();
 
-        // Récupère la ShoppingListOption de l'utilisateur.
+        $em = $this->getDoctrine()->getManager();
         $shoppingList = $em
             ->getRepository('PCPlatformBundle:ShoppingList')
             ->findOneBy(array('user' => $this->getUser()->getId()));
 
-        // Récupère la recette
         $recipe = $em
             ->getRepository('PCPlatformBundle:Recipe')
             ->findOneBy(array('id' => $id));
@@ -111,11 +108,7 @@ class ShoppingListController extends Controller
             throw new NotFoundHttpException('Cette recette n\'existe pas impossible de l\'ajouter !');
         }
 
-        /*
-            Pour empécher un utilisateur d'ajouter une recette déjà selectionnée.
-            Normalement il devriat pouvoir le faire mais il faudra créer une entity
-            ShoppingList_Recipe (ave une relation OneToManyToOne)...
-        */
+        // A user can't add a recipe that is already in the shoppingList.
 
         foreach ($shoppingList->getRecipes() as $recipeSelected) {
             if($recipe === $recipeSelected) {
@@ -129,21 +122,18 @@ class ShoppingListController extends Controller
         return $this->redirectToRoute('pc_platform_shoppinglist_view');
     }
 
-    /*
-        retire une recette la shoppinglist de l'utilisateur
-        (int) id
-    */
+    /**
+     * Add a recipe to the shoppingList.
+     * @Security("has_role('ROLE_USER')")
+     */
     public function removeRecipeAction($id)
     {
-        // Récupère l'entity manager.
-        $em = $this->getDoctrine()->getManager();
 
-        // Récupère la ShoppingListOption de l'utilisateur.
+        $em = $this->getDoctrine()->getManager();
         $shoppingList = $em
             ->getRepository('PCPlatformBundle:ShoppingList')
             ->findOneBy(array('user' => $this->getUser()->getId()));
 
-        // Récupère la recette
         $recipe = $em
             ->getRepository('PCPlatformBundle:Recipe')
             ->findOneBy(array('id' => $id));

@@ -20,42 +20,37 @@ class RecipeController extends Controller
      */
     public function indexAction(Request $request, $page)
     {
-        // Récupère l'utilisateur courant.
         $user = $this->getUser();
 
-        // Créé l'entity manager et récupère l'option de recette de l'utilisateur.
         $em = $this->getDoctrine()->getManager();
         $option = $em
             ->getRepository('PCPlatformBundle:RecipeListOption')
             ->findOneByUser($user);
 
-        // Si l'utilisateur n'avait pas déjà d'option de recette, en créer une nouvelle.
+        // Case the user hasn't yet a RecipeListOption, create a new one.
         if ($option === null) {
             $option = new RecipeListOption();
             $option->setUser($user);
         }
 
-        // Créé le formulaire à partir d'$option.
         $form = $this->get('form.factory')->create(RecipeListOptionType::class, $option);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-
-            // Persiste la nouvelle recipeListOption
             $em->persist($option);
             $em->flush();
         }
 
-        // récupère le paramètre pour le nombre de recette à afficher par page.
+        // use a parameter to get the nb of recipe per page.
         $nbPerPage = $this->container->getParameter('nb_recipe_per_page_index');
 
-        // génère la liste de recipes à partir des options.
+        // Find recipe by options.
         $recipeRepository = $em->getRepository('PCPlatformBundle:Recipe');
         $recipes = $recipeRepository->findByOptionPaginated($option, $page, $nbPerPage);
 
-        // calcule le nb de pages nécessaire (1 dans le cas ou la liste de recette est vide)
+        // compute the nb of page, at least 1.
         $nbPages = (count($recipes) == 0) ? 1 : ceil(count($recipes) / $nbPerPage);
 
-        // Si la page n'existe pas, on retourne une 404
+        // return 404 error if the page doesn't exist.
         if ($page > $nbPages) {
             throw $this->createNotFoundException("La page ".$page." n'existe pas.");
         }
@@ -68,6 +63,9 @@ class RecipeController extends Controller
           ));
     }
 
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
     public function viewAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -79,7 +77,7 @@ class RecipeController extends Controller
         }
 
         $nb = $this->getParameter('nb_small_recipe_view_menu');
-        $suggestions = $recipeRepo->findSuggestionsWithImageAndCat($nb);
+        $suggestions = $recipeRepo->findWithImageAndCat($nb);
 
         // Check if the recipe is in the shopping list of the user (to enable/disable the "retire" button)
         $shoppingListRepo = $em->getRepository('PCPlatformBundle:ShoppingList');
@@ -92,6 +90,9 @@ class RecipeController extends Controller
         ));
     }
 
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
     public function addAction(Request $request)
     {
         $recipe = new Recipe();
@@ -100,10 +101,11 @@ class RecipeController extends Controller
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            // On récupère le service antispam
             $antispam = $this->container->get('pc_platform.antispam');
+            $nbMaxIngredient = $this->getParameter('nb_max_ingredient');
 
-            if (!$antispam->recipeIsSpam($recipe))
+            // if not spam and not with too many ingredient
+            if (!$antispam->isSpam($recipe) && count($recipe->getRecipeIngredients()) < $nbMaxIngredient )
             {
                 foreach ($recipe->getRecipeIngredients() as $recipeIngredient) {
                     $recipeIngredient->setRecipe($recipe);
@@ -127,20 +129,23 @@ class RecipeController extends Controller
         ));
     }
 
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
     public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('PCPlatformBundle:Recipe');
         $recipe = $repo->find($id);
 
-        // Vérifie si la recette existe.
+        // Check if the recipe exists.
         if (null === $recipe) {
             throw new NotFoundHttpException("La recette n°".$id." n'existe pas.");
         }
-        // Vérifie que l'auteur de la recette correspond au user authetifié.
+
         $this->checkUser($recipe, $this->getUser(), "C'est pas cool d'essayer de supprimer les recettes des autres...");
 
-        // Supprime l'ensemble des recipeIngredients.
+        // Delete all recipeIngredients.
         foreach ($recipe->getRecipeIngredients() as $recipeIngredient) {
             $em->remove($recipeIngredient);
         }
@@ -151,21 +156,20 @@ class RecipeController extends Controller
         return $this->redirectToRoute('pc_platform_recipe_index');
     }
 
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
     public function editAction(Request $request, $id)
     {
-
-        // récupère la recette
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('PCPlatformBundle:Recipe');
         $recipe = $repo->find($id);
-        // Vérifie que la recette existe.
+
         if (null === $recipe) {
             throw new NotFoundHttpException("La recette n°".$id." n'existe pas.");
         }
-        // Vérifie que l'auteur de la recette correspond au user authetifié.
-        $this->checkUser($recipe, $this->getUser(), "Pas touche aux recettes des autres !");
 
-        // créé le formulaire
+        $this->checkUser($recipe, $this->getUser(), "Pas touche aux recettes des autres !");
         $form = $this->get('form.factory')->create(RecipeType::class, $recipe);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
@@ -176,9 +180,7 @@ class RecipeController extends Controller
 
             $em->persist($recipe);
             $em->flush();
-
             $request->getSession()->getFlashBag()->add('notice', 'Recette modifiée.');
-
             return $this->redirectToRoute('pc_platform_view', array('id' => $recipe->getId()));
 
         }
@@ -187,17 +189,12 @@ class RecipeController extends Controller
             'form' => $form->createView(),
         ));
     }
-    /*
-        Vérifie si un utilisateur est bien l'auteur d'une recette.
-        Lève une erreur avec un message si ce n'est pas le cas.
-    */
+
+    // Check if the author is the current authenficated user.
     private function checkUser($recipe, $user, $message) {
         $user = $this->getUser();
         if ($recipe->getUser() != $user) {
             throw new AccessDeniedException($message);
         }
     }
-    // Vérifie si l'utilisateur souhaitant effacer la recette en est l'auteur.
-
-
 }

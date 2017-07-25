@@ -11,7 +11,9 @@ namespace PC\PlatformBundle\Repository;
 class ShoppingListRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    // Utilisé dans la view du ShoppingListController
+    /*
+        Used in ShoppingListController:viewAction.
+    */
     public function findWithAllFeatures($user)
     {
         $qb = $this

@@ -8,7 +8,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        if ($this->getUser() === null) { # s'il l'utilisateur n'est pas authentifié.
+        if ($this->getUser() === null) { # in case the user isn't authenficated
             return $this->redirectToRoute('pc_platform_login');
         }
         else {

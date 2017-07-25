@@ -7,6 +7,16 @@
 
 {% block body %}
 <div class="row">
+    {# On affiche les messages flash que définissent les contrôleurs du bundle #}
+    {% for key, messages in app.session.flashbag.all() %}
+    {% for message in messages %}
+    <div class="alert alert-{{ key }}">
+        {{ message|trans({}, 'FOSUserBundle') }}
+    </div>
+    {% endfor %}
+    {% endfor %}
+</div>
+<div class="row">
     <div class="row well">
         <div class="col-xs-10 pull-right">
             {{ render(controller("FOSUserBundle:Security:login")) }}
@@ -29,8 +39,3 @@
 </div>
 
 {% endblock %}
-
-{#
-    <a class="btn btn-primary btn-lg" href="{{path('fos_user_registration_register')}}">S'inscrire</a>
-    <a class="btn btn-primary btn-lg" href="{{path('fos_user_security_login')}}">Se connecter</a>
-#}

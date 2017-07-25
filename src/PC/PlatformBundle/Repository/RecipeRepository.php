@@ -15,7 +15,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class RecipeRepository extends \Doctrine\ORM\EntityRepository
 {
     /*
-        Permet de charger l'image des recettes.
+        To load the image of recipe.
     */
     public function withImage(QueryBuilder $qb)
     {
@@ -25,9 +25,6 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
       ;
     }
 
-    /*
-        Permet de charger les catégories des recettes.
-    */
     public function withCategories(QueryBuilder $qb)
     {
       $qb
@@ -36,9 +33,6 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
       ;
     }
 
-    /*
-        Permet de charger les ingrédients (avec nom et unité)
-    */
     public function withIngredients(QueryBuilder $qb)
     {
       $qb
@@ -52,10 +46,8 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /*
-        Applique un ensemble de clause Where en fonction des $option :
-        ajoute les condition communes : correspondant aux attributs de l'entity RecipeOption.
-        Puis, en fonction du type d'instance du parametre $option rajoute
-        les conditions correspondant aux attributs de l'instance.
+
+        Apply a set of where clause from $option.
     */
     public function byOption(QueryBuilder $qb, $option)
     {
@@ -75,12 +67,12 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         ->setParameter('rating', $option->getRating());
 
         if ($option instanceof ShoppingListOption) {
-            // Limité au nombre de repas voulu par l'utilisateur.
+            // limit is nb of meal the user wants.
             $qb->setMaxResults($option->getNbMeal());
         }
 
         elseif ($option instanceof RecipeListOption) {
-            // Filtre par mot clé.
+            // key-word filter.
             if ($option->getKeyword() ==! null) {
                 $qb->andWhere('r.name LIKE :exp')
                 ->setParameter('exp', '%'.$option->getKeyword().'%');
@@ -89,7 +81,7 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /*
-        Permet de faire une pagination.
+        Enables pagination.
     */
     public function findByOptionPaginated($option, $page, $nbPerPage)
     {
@@ -100,9 +92,9 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         $query = $qb->getQuery();
 
         $query
-          // On définit l'annonce à partir de laquelle commencer la liste
+          // Set first recipe.
           ->setFirstResult(($page-1) * $nbPerPage)
-          // Ainsi que le nombre d'annonce à afficher sur une page
+          // Set number of recipe.
           ->setMaxResults($nbPerPage)
           ;
 
@@ -126,12 +118,8 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         int nb
         return list of recipe Entity
     */
-    public function findSuggestionsWithImageAndCat($nb)
+    public function findWithImageAndCat($nb)
     {
-        /*
-            Functionnalité à écrire :
-            retourner une liste de recette en fonction des gouts de l'utilisateur
-        */
         $qb = $this->createQueryBuilder('r');
         $this->withImage($qb);
         $this->withCategories($qb);
@@ -143,8 +131,8 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /*
-        Retourne une recette avec image, catégories et ingrédients
-        Utilisé dans la methode RecipeController:viewAction
+        Return a recipe with the image, categories and ingredients.
+        Used in RecipeController:viewAction.
     */
     public function findOneWithImageCatAndIngredients($id)
     {
@@ -160,7 +148,7 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
             ->getOneOrNullResult();
     }
 
-    public function findLastRecipe()
+    public function findLast()
     {
         $qb = $this->createQueryBuilder('r');
         $qb

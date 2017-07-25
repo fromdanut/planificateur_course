@@ -11,7 +11,7 @@ parameters:
     nb_recipe_per_page_index: 9
     nb_small_recipe_view_menu: 3
     insertion_limit_time: 30 # impose 30s d'attente entre chaque insertion de recette.
-    nb_max_ingredient: 40
+    nb_max_ingredient: 50
 
 framework:
     #esi: ~
