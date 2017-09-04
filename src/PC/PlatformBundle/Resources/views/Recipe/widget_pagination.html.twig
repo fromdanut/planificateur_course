@@ -1,15 +1,19 @@
 
 <ul class="pagination">
-
-    <li{% if page == 1 %} class="disabled"{% endif %}>
-      <a href="{{ path('pc_platform_recipe_index', {'page': page - 1 }) }}"><</a>
-    </li>
+    {# N'affiche pas la page en dessous de 0 #}
+    {% if page > 1 %}
+        <li>
+          <a href="{{ path('pc_platform_recipe_index', {'page': page - 1 }) }}"><</a>
+        </li>
+    {% endif %}
 
     <li class="active" >
         <a href="{{ path('pc_platform_recipe_index', {'page': page }) }}">{{page}}</a>
     </li>
-
-    <li {% if page == nbPages %} class="disabled" {% endif %}>
-      <a href="{{ path('pc_platform_recipe_index', {'page': (page + 1) }) }}">></a>
-    </li>
+    {# N'affiche pas la page x + 1 si le nb de page vaut x #}
+    {% if page < nbPages %}
+        <li>
+          <a href="{{ path('pc_platform_recipe_index', {'page': (page + 1) }) }}">></a>
+        </li>
+    {% endif %}
 </ul>
