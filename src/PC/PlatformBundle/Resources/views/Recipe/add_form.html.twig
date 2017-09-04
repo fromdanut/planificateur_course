@@ -55,18 +55,25 @@
                   </span> Ajouter un ingrédient
               </a>
           </div>
-          <div class="col-xs-4">
-              <a href="{{path('pc_platform_ingredient_add')}}" data-toggle="tooltip" title="S'il n'est pas déjà dans la liste !" class="btn btn-default">
-                  <span class="glyphicon glyphicon-pencil">
-                  </span> Créer un ingrédient
-              </a>
-          </div>
       </div>
       <br>
   </div>
 
   {{ form_row(form.cookingTime) }}
-  {{ form_row(form.rating) }}
+
+  {# rating : Génération manuelle et éclatée #}
+      <div class="form-group">
+        {{ form_label(form.rating, 'Note', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.rating) }}
+        <div class="col-sm-10">
+        {# Génération de l'input.
+            On utilise une classe spé 'rating', avec 'hidden' qui permet d'afficher
+            des étoiles pour choisir la note.
+        #}
+          {{ form_widget(form.rating, {'attr': {'class':'rating hidden'}}) }}
+        </div>
+      </div>
+
   {{ form_row(form.categories) }}
 
   {# Image #}

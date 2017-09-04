@@ -23,6 +23,3 @@ See the result on [website](https://fromdanut.hd.free.fr/pc)
 
 - faire la bdd pour les ingrédients... (ne pas laisser les utilisateurs toucher cette partie).
 - index recipe trié par date création desc : ne fonctionne pas voir https://openclassrooms.com/forum/sujet/symfony-3-order-by-error-paginator
-- enlever mail (rajouter un mail automatiquement si nécessaire).
-- modifier "rating" -> "note" + ajouter js pour les étoiles du rating.
-- mettre le login dans un conteneur ! (pb d'affichage pour l'instant).
