@@ -23,7 +23,6 @@ See the result on [website](https://fromdanut.hd.free.fr/pc)
 
 - faire la bdd pour les ingrédients... (ne pas laisser les utilisateurs faie ça)
 - recette add :
-    - pas de alt (automatiquement écrire le nom de la recette)
     - ne pas limiter à 500 char pour description longue (Préparation) et augmenter la taille par défault !
     - pas de minimum pour description courte (min 10)
     -

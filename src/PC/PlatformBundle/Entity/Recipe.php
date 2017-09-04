@@ -45,7 +45,7 @@ class Recipe
      * @var string
      *
      * @ORM\Column(name="long_description", type="text")
-     * @Assert\Length(min=100, max=500)
+     * @Assert\Length(min=100, max=7000)
      */
     private $longDescription;
 
