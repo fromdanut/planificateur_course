@@ -16,13 +16,13 @@ See the result on [website](https://fromdanut.hd.free.fr/pc)
 - translate in english.
 - use slug for recipe instead of recipe number.
 - add a button remove all filter in the recipe search menu.
-- add an attribute 'number of preson' in recipe entity.
+- add an attribute 'number of person' in recipe entity.
 
 
 ## 1rst test
 
-- faire la bdd pour les ingrédients... (ne pas laisser les utilisateurs faie ça).
+- faire la bdd pour les ingrédients... (ne pas laisser les utilisateurs toucher cette partie).
 - index recipe trié par date création desc : ne fonctionne pas voir https://openclassrooms.com/forum/sujet/symfony-3-order-by-error-paginator
 - enlever mail (rajouter un mail automatiquement si nécessaire).
 - modifier "rating" -> "note" + ajouter js pour les étoiles du rating.
-- mettre le login dans un conteneur ! (pb d'affichage pour l'isntant).
+- mettre le login dans un conteneur ! (pb d'affichage pour l'instant).

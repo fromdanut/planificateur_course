@@ -6,6 +6,10 @@ pc_platform_login:
     path:     /login
     defaults: { _controller: PCPlatformBundle:Default:login }
 
+pc_platform_register_confirmed:
+    path: /register/confirmed
+    defaults:  {_controller: PCPlatformBundle:Default:login}
+
 pc_platform_homepage:
     path:     /home
     defaults: { _controller: PCPlatformBundle:Default:home }

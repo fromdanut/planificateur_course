@@ -39,7 +39,8 @@ class RecipeType extends AbstractType
                       'multiple'     => true,
                     ))
             ->add('rating',            RangeType::class,  array(
-                    'attr' => array(
+                    'label' => 'Note',
+                    'attr'  => array(
                         'min' => 0,
                         'max' => 5)))
             ->add('image',             ImageType::class)
