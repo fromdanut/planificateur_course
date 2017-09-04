@@ -29,7 +29,7 @@ class ShoppingListController extends Controller
 
         // The first time the user hasn't yet a shoppingList.
         if ($shoppingList === null) {
-            $request->getSession()->getFlashBag()->add('notice', 'Vous n\'avez pas encore de shopping list, créez en une !');
+            $request->getSession()->getFlashBag()->add('notice', 'Vous n\'avez pas encore de liste de courses, créez en une !');
             return $this->redirectToRoute('pc_platform_shoppinglistoption_edit');
         }
 

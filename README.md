@@ -22,9 +22,7 @@ See the result on [website](https://fromdanut.hd.free.fr/pc)
 ## 1rst test
 
 - faire la bdd pour les ingrédients... (ne pas laisser les utilisateurs faie ça).
-- traduire shopping list en "liste de course"
-- dans menu modifier : ajouter à la liste -> ajouter à la liste de courses.
-- index recipe trié par date création desc
+- index recipe trié par date création desc : ne fonctionne pas voir https://openclassrooms.com/forum/sujet/symfony-3-order-by-error-paginator
 - enlever mail (rajouter un mail automatiquement si nécessaire).
 - ajouter author dans widget_small_view.
 - modifier "save" dans les formulaire par "chercher".

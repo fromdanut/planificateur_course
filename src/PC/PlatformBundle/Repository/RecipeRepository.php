@@ -78,6 +78,7 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
                 ->setParameter('exp', '%'.$option->getKeyword().'%');
             }
         }
+
     }
 
     /*
@@ -89,6 +90,8 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         $this->byOption($qb, $option);
         $this->withImage($qb);
         $this->withCategories($qb);
+        // $qb->orderBy('r.datePublication', 'DESC'); !!! Doesn't word, issue with mysql !
+        // See https://openclassrooms.com/forum/sujet/symfony-3-order-by-error-paginator
         $query = $qb->getQuery();
 
         $query
