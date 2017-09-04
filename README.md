@@ -21,11 +21,7 @@ See the result on [website](https://fromdanut.hd.free.fr/pc)
 
 ## 1rst test
 
-- faire la bdd pour les ingrédients... (ne pas laisser les utilisateurs faie ça)
-- recette add :
-    - ne pas limiter à 500 char pour description longue (Préparation) et augmenter la taille par défault !
-    - pas de minimum pour description courte (min 10)
-    -
+- faire la bdd pour les ingrédients... (ne pas laisser les utilisateurs faie ça).
 - traduire shopping list en "liste de course"
 - dans menu modifier : ajouter à la liste -> ajouter à la liste de courses.
 - index recipe trié par date création desc

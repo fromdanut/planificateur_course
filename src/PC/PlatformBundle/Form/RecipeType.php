@@ -27,7 +27,7 @@ class RecipeType extends AbstractType
             ->add('cookingTime',        IntegerType::class, array(
                 'attr'         => array('min' => 0)))
             ->add('longDescription',    TextareaType::class)
-            ->add('shortDescription',   TextareaType::class)
+            ->add('shortDescription',   TextareaType::class, array('required' => false))
             ->add('recipeIngredients',  CollectionType::class, array(
                     'entry_type'   => RecipeIngredientType::class,
                     'allow_add'    => true,

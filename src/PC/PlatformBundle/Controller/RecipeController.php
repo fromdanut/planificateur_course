@@ -111,8 +111,12 @@ class RecipeController extends Controller
                     $recipeIngredient->setRecipe($recipe);
                 }
                 $recipe->setUser($this->getUser());
-                // L'attribut alt équivaut au nom de la recette.
+                // alt is set to recipe's name.
                 $recipe->getImage()->setAlt($recipe->getName());
+                // Add 20 first char from long description to short description if empty.
+                if (strlen($recipe->getShortDescription()) == 0) {
+                    $recipe->setShortDescription(substr($recipe->getLongDescription(), 0, 30) . "...");
+                }
                 $em->persist($recipe);
                 $em->flush();
 
