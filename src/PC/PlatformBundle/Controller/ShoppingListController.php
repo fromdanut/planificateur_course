@@ -62,7 +62,7 @@ class ShoppingListController extends Controller
             ->getRepository('PCPlatformBundle:ShoppingList')
             ->findOneBy(array('user' => $this->getUser()));
 
-        // Case where the user create his first shoppingList.
+        // Plateau where the user create his first shoppingList.
         if ($shoppingList === null) {
             $shoppingList = new ShoppingList();
             $shoppingList->setUser($this->getUser());

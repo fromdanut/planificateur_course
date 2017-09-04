@@ -27,7 +27,7 @@ class RecipeController extends Controller
             ->getRepository('PCPlatformBundle:RecipeListOption')
             ->findOneByUser($user);
 
-        // Case the user hasn't yet a RecipeListOption, create a new one.
+        // Plateau the user hasn't yet a RecipeListOption, create a new one.
         if ($option === null) {
             $option = new RecipeListOption();
             $option->setUser($user);
@@ -111,6 +111,8 @@ class RecipeController extends Controller
                     $recipeIngredient->setRecipe($recipe);
                 }
                 $recipe->setUser($this->getUser());
+                // L'attribut alt équivaut au nom de la recette.
+                $recipe->getImage()->setAlt($recipe->getName());
                 $em->persist($recipe);
                 $em->flush();
 

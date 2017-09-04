@@ -2,9 +2,9 @@
 
 namespace PC\PlatformBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestPlateau;
 
-class DefaultControllerTest extends WebTestCase
+class DefaultControllerTest extends WebTestPlateau
 {
     public function testIndex()
     {
