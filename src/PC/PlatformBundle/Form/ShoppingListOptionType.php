@@ -21,7 +21,7 @@ class ShoppingListOptionType extends AbstractType
     {
         $builder
             ->add('nbMeal', IntegerType::class)
-            ->add('save', SubmitType::class);
+            ->add('save', SubmitType::class, array('label' => 'Creer une liste de courses'));
     }
 
     public function getParent()

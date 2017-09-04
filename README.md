@@ -24,8 +24,6 @@ See the result on [website](https://fromdanut.hd.free.fr/pc)
 - faire la bdd pour les ingrédients... (ne pas laisser les utilisateurs faie ça).
 - index recipe trié par date création desc : ne fonctionne pas voir https://openclassrooms.com/forum/sujet/symfony-3-order-by-error-paginator
 - enlever mail (rajouter un mail automatiquement si nécessaire).
-- ajouter author dans widget_small_view.
-- modifier "save" dans les formulaire par "chercher".
 - dernière pagination -> rendre non-clickable !
 - modifier "rating" -> "note" + ajouter js pour les étoiles du rating.
 - mettre le login dans un conteneur ! (pb d'affichage pour l'isntant).

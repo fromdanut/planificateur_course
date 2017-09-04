@@ -43,7 +43,7 @@ class RecipeType extends AbstractType
                         'min' => 0,
                         'max' => 5)))
             ->add('image',             ImageType::class)
-            ->add('save',              SubmitType::class);
+            ->add('save',              SubmitType::class, array('label' => 'Enregistrer la recette'));
     }
 
     /**
