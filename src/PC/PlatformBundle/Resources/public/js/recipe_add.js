@@ -1,7 +1,9 @@
 /*
     Script repris du cours OpenClassRoom sur Symfony.
-    Il permet à l'utilisateur d'ajouter des ingrédients lors de la création
+    1. Il permet à l'utilisateur d'ajouter des ingrédients lors de la création
     de la recette.
+    2. Il permet également le chosen-select (qui permet de faire une recherche sur l'input d'ingrédient)
+    3. Enfin on a le chosen-select multiple sur les catégories.
 */
 
 $(document).ready(function() {
@@ -45,6 +47,24 @@ $(document).ready(function() {
     // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
     addDeleteLink($prototype);
 
+    // 2. Ajoute le chosen-select au select d'option ingrédient.
+    var chosenSelect = $prototype.find('select[class="form-control"]');
+    chosenSelect.prepend('<option value=""></option>');
+
+
+    chosenSelect.chosen({
+        no_results_text: "Oups, aucun ingrédient trouvé pour : ",
+        allow_single_deselect: true,
+        placeholder_text_single: "Choisir un ingrédient",
+        width: "95%"
+    });
+
+    // Grosse bidouille pour afficher "Choisir votre ingrédient" en première option.
+    var bidouille = chosenSelect.next().find('a[class="chosen-single chosen-single-with-deselect"]');
+    bidouille.attr('class', 'chosen-single chosen-single-with-deselect chosen-default');
+    bidouille.find('span').text("Choisir un ingrédient");
+
+
     // On ajoute le prototype modifié à la fin de la balise <div>
     $container.append($prototype);
 
@@ -55,7 +75,7 @@ $(document).ready(function() {
   // La fonction qui ajoute un lien de suppression d'une catégorie
   function addDeleteLink($prototype) {
     // Création du lien
-    var $deleteLink = $('<a href="#" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span></a>');
+    var $deleteLink = $('<a href="#" style="margin-right:30px" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span></a>');
 
     // Ajout du lien
     $prototype.append($deleteLink);
@@ -68,4 +88,12 @@ $(document).ready(function() {
       return false;
     });
   }
+
+  // 3. Ajoute l'option chosen-select multiple sur catégorie.
+  var categorieSelect = $('label[for="pc_platformbundle_recipe_categories"]').next().children();
+  //categorieSelect.prepend('<option value=""> </option>');
+  categorieSelect.chosen({
+      no_results_text: "Oups, aucune catégorie trouvée pour : ",
+      placeholder_text_multiple: "Ajouter une catégorie",
+  });
 });

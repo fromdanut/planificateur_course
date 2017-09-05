@@ -19,9 +19,6 @@ class LoadRecipe implements FixtureInterface, OrderedFixtureInterface
     {
         for ($i=0; $i < 30; $i++) {
 
-            /*
-            */
-
             // La recette
             $recipe = new Recipe();
 
@@ -53,10 +50,10 @@ class LoadRecipe implements FixtureInterface, OrderedFixtureInterface
 
             // Les ingrédients
             $ingredients = $manager->getRepository('PCPlatformBundle:Ingredient')->findAll();
-            foreach ($ingredients as $ingredient) {
+            for ($j=0; $j < 5 ; $j++) {
                 $RecipeIngredient = new RecipeIngredient();
                 $RecipeIngredient->setRecipe($recipe); // lie à la recette.
-                $RecipeIngredient->setIngredient($ingredient); // lie à l'ingrédient.
+                $RecipeIngredient->setIngredient($ingredients[$j]); // lie à l'ingrédient.
                 $RecipeIngredient->setQuantity($i + (2 * $i * ($i % 2))); // On aura des recette avec des quantité différentes mais mini 1
                 $manager->persist($RecipeIngredient);
             }

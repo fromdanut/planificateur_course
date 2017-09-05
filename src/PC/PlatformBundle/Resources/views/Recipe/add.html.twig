@@ -14,13 +14,19 @@
 
 {% block javascripts %}
     {{parent()}}
+    {# Pour le rating #}
+    {% javascripts 'bundles/pcplatform/js/rating.js' filter='jsqueeze' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {# Pour le chosen select #}
+    {% javascripts 'bundles/pcplatform/js/chosen.jquery.js' filter='jsqueeze' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    
     {# Pour l'ajout d'ingrédient #}
     {% javascripts 'bundles/pcplatform/js/recipe_add.js' filter='jsqueeze' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
-    {# Pour le rating #}
-    {% javascripts 'bundles/pcplatform/js/rating.js' filter='jsqueeze' %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
 {% endblock %}

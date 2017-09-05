@@ -12,8 +12,13 @@
 	{% endblock %}
     </title>
     {% block stylesheets %}
-        <!-- bootstrap css viwht superhero theme from bootswatch -->
+        <!-- bootstrap css with superhero theme from bootswatch -->
         {% stylesheets 'bundles/pcplatform/css/darkly_bootstrap.css' filter='cssrewrite, scssphp' %}
+            <link rel="stylesheet" href="{{ asset_url }}">
+        {% endstylesheets %}
+
+        <!-- chosen.select css -->
+        {% stylesheets 'bundles/pcplatform/css/chosen.css' filter='cssrewrite, scssphp' %}
             <link rel="stylesheet" href="{{ asset_url }}">
         {% endstylesheets %}
 

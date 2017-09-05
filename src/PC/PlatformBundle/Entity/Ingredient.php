@@ -109,6 +109,21 @@ class Ingredient
     }
 
     /**
+     * Get name with unit between () -> 'fraise (g)', 'pomme (unité)', 'lait (ml)'
+     *
+     * @return string
+     */
+    public function getNameWithUnit()
+    {
+        $name = $this->getName();
+        $unit = $this->getUnit()->getName();
+
+        return $name . ' (' . $unit . ')';
+    }
+
+
+
+    /**
      * Set price
      *
      * @param integer $price

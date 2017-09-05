@@ -18,10 +18,11 @@ class RecipeIngredientType extends AbstractType
     {
         $builder
             ->add('quantity',   IntegerType::class, array(
+                'label'        => 'Quantité',
                 'attr'         => array('min' => 0)))
             ->add('ingredient', EntityType::class, array(
                 'class'        => 'PCPlatformBundle:Ingredient',
-                'choice_label' => 'name',
+                'choice_label' => 'nameWithUnit',
                 'multiple'     => false,
                 'expanded'     => false,
             ));

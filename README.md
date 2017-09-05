@@ -21,5 +21,6 @@ See the result on [website](https://fromdanut.hd.free.fr/pc)
 
 ## 1rst test
 
-- faire la bdd pour les ingrédients... (ne pas laisser les utilisateurs toucher cette partie).
 - index recipe trié par date création desc : ne fonctionne pas voir https://openclassrooms.com/forum/sujet/symfony-3-order-by-error-paginator
+- agrandir la bdd pour les ingrédients.
+- qd l'utilisateur n'a pas encore crée de shopping list il y a un bug s'il appui sur 'ajouter aux courses' dans la vue d'une recette.
