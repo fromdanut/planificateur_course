@@ -62,7 +62,7 @@ class ShoppingListController extends Controller
             ->getRepository('PCPlatformBundle:ShoppingList')
             ->findOneBy(array('user' => $this->getUser()));
 
-        // Plateau where the user create his first shoppingList.
+        // Case where the user create his first shoppingList.
         if ($shoppingList === null) {
             $shoppingList = new ShoppingList();
             $shoppingList->setUser($this->getUser());
@@ -92,13 +92,19 @@ class ShoppingListController extends Controller
      * Add a recipe to the shoppingList.
      * @Security("has_role('ROLE_USER')")
      */
-    public function addRecipeAction($id)
+    public function addRecipeAction(Request $request, $id)
     {
 
         $em = $this->getDoctrine()->getManager();
         $shoppingList = $em
             ->getRepository('PCPlatformBundle:ShoppingList')
             ->findOneBy(array('user' => $this->getUser()->getId()));
+        // A user may not have a shopping list, if so he is redirected to edit it.
+        if ($shoppingList === null) {
+            $request->getSession()->getFlashBag()->add('notice', 'Impossible d\'ajouter une recette à votre liste de courses car vous n\'en n\'avez pas encore. Créez en une ici.');
+            return $this->redirectToRoute('pc_platform_shoppinglistoption_edit');
+        }
+
 
         $recipe = $em
             ->getRepository('PCPlatformBundle:Recipe')
@@ -109,7 +115,6 @@ class ShoppingListController extends Controller
         }
 
         // A user can't add a recipe that is already in the shoppingList.
-
         foreach ($shoppingList->getRecipes() as $recipeSelected) {
             if($recipe === $recipeSelected) {
                 throw new NotAcceptableHttpException('Vous avez déjà ajouté cette recette à votre liste de course ! Vous n\'allez pas manger que des ' . $recipe->getName());
