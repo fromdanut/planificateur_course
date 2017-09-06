@@ -25,6 +25,7 @@ class RecipeType extends AbstractType
         $builder
             ->add('name' ,              TextType::class)
             ->add('cookingTime',        IntegerType::class, array(
+                'label'        => 'Temps de préparation (mn)',
                 'attr'         => array('min' => 0)))
             ->add('longDescription',    TextareaType::class)
             ->add('shortDescription',   TextareaType::class, array('required' => false))
@@ -43,6 +44,9 @@ class RecipeType extends AbstractType
                     'attr'  => array(
                         'min' => 0,
                         'max' => 5)))
+            ->add('nbPerson',          IntegerType::class, array(
+                'label'        => 'Nombre de personne',
+                'attr'         => array('min' => 1)))
             ->add('image',             ImageType::class)
             ->add('save',              SubmitType::class, array('label' => 'Enregistrer la recette'));
     }

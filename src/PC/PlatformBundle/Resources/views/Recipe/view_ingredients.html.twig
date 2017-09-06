@@ -31,7 +31,8 @@
                       <p>{% include 'PCPlatformBundle:Recipe:widget_rating.html.twig' %}</p>
                       <p><span class="glyphicon glyphicon-hourglass"></span>{{recipe.cookingTime}} mn</p>
                       <p><span class="glyphicon glyphicon-euro"></span> {{recipe.price|number_format(2, '.', ',')}}</p>
-                      <p><span class="glyphicon glyphicon-scale"></span> {{recipe.calorie}} calories.</p>
+                      <p><span class="glyphicon glyphicon-scale"></span> {{recipe.calorie}} cal</p>
+                      <p><span class="glyphicon glyphicon-user"></span> x {{recipe.nbPerson}}</p>
                   </div>
               </div>
         </div>

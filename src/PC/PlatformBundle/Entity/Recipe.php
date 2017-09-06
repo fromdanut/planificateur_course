@@ -42,6 +42,14 @@ class Recipe
     private $cookingTime;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="nb_personne", type="integer", options={"unsigned"=true})
+     * @Assert\Range(min=1)
+     */
+    private $nbPerson;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="long_description", type="text")
@@ -399,6 +407,7 @@ class Recipe
         foreach ($this->getRecipeIngredients() as $recipeIngredient) {
             $price += ( $recipeIngredient->getIngredient()->getPrice() * $recipeIngredient->getQuantity() );
         }
+
         $this->setPrice($price);
     }
 
@@ -436,6 +445,10 @@ class Recipe
         foreach ($this->getRecipeIngredients() as $recipeIngredient) {
             $calorie += ( $recipeIngredient->getIngredient()->getCalorie() * $recipeIngredient->getQuantity() );
         }
+
+        // Calories per person.
+        $calorie = ceil($calorie / $this->getNbPerson());
+
         $this->setCalorie($calorie);
     }
 
@@ -463,4 +476,28 @@ class Recipe
         return $this->user;
     }
 
+
+    /**
+     * Set nbPerson
+     *
+     * @param integer $nbPerson
+     *
+     * @return Recipe
+     */
+    public function setNbPerson($nbPerson)
+    {
+        $this->nbPerson = $nbPerson;
+
+        return $this;
+    }
+
+    /**
+     * Get nbPerson
+     *
+     * @return integer
+     */
+    public function getNbPerson()
+    {
+        return $this->nbPerson;
+    }
 }

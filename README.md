@@ -20,6 +20,5 @@ See the result on [website](https://fromdanut.hd.free.fr/pc)
 ## 1rst test
 
 - index recipe trié par date création desc : ne fonctionne pas voir https://openclassrooms.com/forum/sujet/symfony-3-order-by-error-paginator
-- agrandir la bdd pour les ingrédients.
-- add a button remove all filter in the recipe search menu.
-- add an attribute 'number of person' in recipe entity.
+- agrandir la bdd pour les ingrédients, les catégories.
+- add a button remove all filter in the recipe search menu. (retenter le ResetType dans form, n'a pas fonctionné la 1ere fois).

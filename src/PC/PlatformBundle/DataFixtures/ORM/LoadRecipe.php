@@ -24,6 +24,7 @@ class LoadRecipe implements FixtureInterface, OrderedFixtureInterface
 
             $recipe->setName("recette n°".$i);
             $recipe->setCookingTime(2*$i);
+            $recipe->setNbPerson(4);
             $recipe->setLongDescription('
                 PÂTE:
                 Blanchir les jaunes et le sucre au fouet et détendre le mélange avec un peu d eau.
