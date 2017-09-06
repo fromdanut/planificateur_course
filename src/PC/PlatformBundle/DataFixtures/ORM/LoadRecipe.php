@@ -60,7 +60,7 @@ class LoadRecipe implements FixtureInterface, OrderedFixtureInterface
             }
              // Deux catégories
             $catItalien = $manager->getRepository('PCPlatformBundle:Category')->findOneBy(array('name' => 'italien'));
-            $catAsiatique = $manager->getRepository('PCPlatformBundle:Category')->findOneBy(array('name' => 'asiatique'));
+            $catAsiatique = $manager->getRepository('PCPlatformBundle:Category')->findOneBy(array('name' => 'chinois'));
 
             // Petite bidouille pour obtenir des recettes avec des cat et des notes (rating) différentes
 

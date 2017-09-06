@@ -55,8 +55,26 @@ class LoadIngredient implements FixtureInterface
             array('riz', 0.002, 1, $g, $esa, $date),
             array('riz complet', 0.003, 1, $g, $esa, $date),
             array('semoule', 0.002, 3, $g, $esa, $date),
+                // viandes
+            array('lardons', 0.010, 4, $g, $vp, $date),
+            array('saucisse de Toulouse', 0.012, 3, $g, $vp, $date),
+            array('saucisse de Morteau', 0.015, 4, $g, $vp, $date),
+            array('jambon blanc', 0.008, 2, $g, $vp, $date),
+            array('jambon de bayonne', 0.012, 3, $g, $vp, $date),
+            array('steak haché', 0.015, 3, $g, $vp, $date),
+            array('steak', 0.016, 3, $g, $vp, $date),
+            array('côte de boeuf', 0.025, 4, $g, $vp, $date),
+            array('faux-filet', 0.025, 2, $g, $vp, $date),
+                // poissons
+            array('cabillaud', 0.020, 1, $g, $vp, $date),
+            array('dorade', 0.020, 1, $g, $vp, $date),
+            array('maquereau', 0.012, 3, $g, $vp, $date),
+            array('crevette rose', 0.015, 1, $g, $vp, $date),
+            array('crevette grise', 0.012, 1, $g, $vp, $date),
+            array('homard', 0.040, 1, $g, $vp, $date),
                 // legumes
             array('pomme de terre', 0.002, 1, $g, $fl, $date),
+            array('carotte', 0.003, 1, $g, $fl, $date),
             array('courgette', 0.002, 0, $g, $fl, $date),
             array('aubergine', 0.005, 0, $g, $fl, $date),
             array('poivron', 0.005, 0, $g, $fl, $date),
@@ -65,6 +83,8 @@ class LoadIngredient implements FixtureInterface
             array('pois chiche', 0.002, 4, $g, $fl, $date),
             array('lentille verte', 0.003, 3, $g, $fl, $date),
             array('tomate', 0.004, 0, $g, $fl, $date),
+            array('oignon', 0.002, 1, $g, $fl, $date),
+            array('échalotte', 0.003, 1, $g, $fl, $date),
             array('tomate concassée', 0.01, 1, $g, $fl, $date),
                 // fruits
             array('fraise', 0.010 , 1, $g, $fl, $date),
@@ -73,11 +93,14 @@ class LoadIngredient implements FixtureInterface
             array('pomme', 0.003 , 1, $g, $fl, $date),
             array('poire', 0.004 , 1, $g, $fl, $date),
             array('pêche', 0.004 , 1, $g, $fl, $date),
+            array('annanas', 0.008 , 1, $g, $fl, $date),
+
                 // produits laitiers
             array('beurre', 0.008, 7, $g, $pl, $date),
-            array('gruyère rapé', 0.020, 4, $g, $pl, $date),
+            array('gruyère rapé', 0.010, 4, $g, $pl, $date),
             array('parmesan rapé', 0.025, 5, $g, $pl, $date),
             array('camembert', 0.016, 3, $g, $pl, $date),
+            array('reblochon', 0.020, 3, $g, $pl, $date),
             array('crème fraiche', 0.008, 2, $g, $pl, $date),
 
             // En ml

@@ -25,10 +25,12 @@ $(document).ready(function() {
   if (index == 0) {
     addIngredient($container);
   } else {
-    // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
+    // S'il existe déjà des ingrédients, on ajoute un lien de suppression pour chacune d'entre elles
     $container.children('div').each(function() {
       addDeleteLink($(this));
     });
+
+    $container.find('select[class="form-control"]').chosen();
   }
 
   // La fonction qui ajoute un formulaire CategoryType
@@ -44,7 +46,7 @@ $(document).ready(function() {
     // On crée un objet jquery qui contient ce template
     var $prototype = $(template);
 
-    // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+    // On ajoute au prototype un lien pour pouvoir supprimer la ingrédient
     addDeleteLink($prototype);
 
     // 2. Ajoute le chosen-select au select d'option ingrédient.
@@ -72,7 +74,7 @@ $(document).ready(function() {
     index++;
   }
 
-  // La fonction qui ajoute un lien de suppression d'une catégorie
+  // La fonction qui ajoute un lien de suppression d'un ingrédient
   function addDeleteLink($prototype) {
     // Création du lien
     var $deleteLink = $('<a href="#" style="margin-right:30px" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span></a>');
@@ -80,7 +82,7 @@ $(document).ready(function() {
     // Ajout du lien
     $prototype.append($deleteLink);
 
-    // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
+    // Ajout du listener sur le clic du lien pour effectivement supprimer l'ingrédient
     $deleteLink.click(function(e) {
       $prototype.remove();
 

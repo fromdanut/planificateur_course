@@ -42,9 +42,9 @@
                         <div class="col-xs-3">
                             <div class="row">
                                 {# affiche un euro en vert/rouge en fonction du prix #}
-                                {% if recipe.price > 15 %}
+                                {% if recipe.price > 20 %}
                                 <p style="color:IndianRed">
-                                {% elseif recipe.price < 5 %}
+                                {% elseif recipe.price < 10 %}
                                 <p style="color:#4cae4c">
                                 {% else %}
                                 <p style="color:#ebebeb">
@@ -57,9 +57,9 @@
                         <div class="col-xs-3">
                             <div class="row">
                                 {# affiche une balance en vert/rouge en fonction des calorie #}
-                                {% if recipe.calorie > 15000 %}
+                                {% if recipe.calorie > 700 %}
                                 <p style="color:IndianRed">
-                                {% elseif recipe.calorie > 10000 %}
+                                {% elseif recipe.calorie > 300 %}
                                 <p style="color:#ebebeb">
                                 {% else %}
                                 <p style="color:#4cae4c">
@@ -86,7 +86,7 @@
             {# COURTE DESCRIPTION #}
             <div class="row">
                 <div class="col-xs-12">
-                    <p>{{recipe.shortDescription|length >= 50 ? recipe.shortDescription|slice(0, 47) ~ '...' : recipe.shortDescription}}</p>
+                    <p>{{recipe.shortDescription|length >= 50 ? recipe.shortDescription|slice(0, 40) ~ '...' : recipe.shortDescription}}</p>
                 </div>
             </div>
         </div>
