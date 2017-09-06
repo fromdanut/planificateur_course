@@ -20,7 +20,7 @@ class ShoppingListOptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nbMeal', IntegerType::class)
+            ->add('nbMeal', IntegerType::class, array('label' => 'Nb repas'))
             ->add('save', SubmitType::class, array('label' => 'Creer une liste de courses'));
     }
 
