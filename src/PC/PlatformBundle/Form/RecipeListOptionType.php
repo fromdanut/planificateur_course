@@ -19,6 +19,11 @@ class RecipeListOptionType extends AbstractType
     {
         $builder
             ->add('keyword', SearchType::class, array('required' => false))
+            ->add('categories', EntityType::class, array(
+                      'class'        => 'PCPlatformBundle:Category',
+                      'choice_label' => 'name',
+                      'multiple'     => true,
+                    ))
             ->add('save', SubmitType::class, array(
                  'label' => 'Rechercher'
              ));

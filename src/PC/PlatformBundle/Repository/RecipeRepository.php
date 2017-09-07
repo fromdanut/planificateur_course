@@ -33,6 +33,14 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
       ;
     }
 
+    public function withUser(QueryBuilder $qb)
+    {
+      $qb
+        ->leftJoin('r.user', 'user')
+            ->addSelect('user')
+      ;
+    }
+
     public function withIngredients(QueryBuilder $qb)
     {
       $qb
@@ -72,10 +80,11 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         }
 
         elseif ($option instanceof RecipeListOption) {
-            // key-word filter.
+            // key-word filter (for recipe and user names)
             if ($option->getKeyword() ==! null) {
-                $qb->andWhere('r.name LIKE :exp')
-                ->setParameter('exp', '%'.$option->getKeyword().'%');
+
+                $qb->andWhere('r.name LIKE :keyword OR user.username LIKE :keyword')
+                ->setParameter('keyword', '%'.$option->getKeyword().'%');
             }
         }
 
@@ -87,9 +96,10 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
     public function findByOptionPaginated($option, $page, $nbPerPage)
     {
         $qb = $this->createQueryBuilder('r');
-        $this->byOption($qb, $option);
         $this->withImage($qb);
         $this->withCategories($qb);
+        $this->withUser($qb);
+        $this->byOption($qb, $option);
         // $qb->orderBy('r.datePublication', 'DESC'); !!! Doesn't word, issue with mysql !
         // See https://openclassrooms.com/forum/sujet/symfony-3-order-by-error-paginator
         $query = $qb->getQuery();

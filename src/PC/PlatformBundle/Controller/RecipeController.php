@@ -56,8 +56,8 @@ class RecipeController extends Controller
         }
 
         return $this->render('PCPlatformBundle:Recipe:index.html.twig', array(
-             'recipes' => $recipes,
-             'form' => $form->createView(),
+             'recipes'     => $recipes,
+             'form'        => $form->createView(),
              'nbPages'     => $nbPages,
              'page'        => $page,
           ));

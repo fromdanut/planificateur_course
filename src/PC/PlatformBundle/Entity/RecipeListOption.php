@@ -23,14 +23,14 @@ class RecipeListOption extends RecipeOption
      * @ORM\ManyToMany(targetEntity="PC\PlatformBundle\Entity\Category", cascade={"persist"})
      * @ORM\JoinTable(name="pc_recipelistoption_category")
      */
-    protected $styles;
+    protected $categories;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->styles = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -188,37 +188,37 @@ class RecipeListOption extends RecipeOption
     }
 
     /**
-     * Add style
+     * Add category
      *
-     * @param \PC\PlatformBundle\Entity\Category $style
+     * @param \PC\PlatformBundle\Entity\Category $category
      *
      * @return RecipeListOption
      */
-    public function addStyle(\PC\PlatformBundle\Entity\Category $style)
+    public function addCategory(\PC\PlatformBundle\Entity\Category $category)
     {
-        $this->styles[] = $style;
+        $this->categories[] = $category;
 
         return $this;
     }
 
     /**
-     * Remove style
+     * Remove category
      *
-     * @param \PC\PlatformBundle\Entity\Category $style
+     * @param \PC\PlatformBundle\Entity\Category $category
      */
-    public function removeStyle(\PC\PlatformBundle\Entity\Category $style)
+    public function removeCategory(\PC\PlatformBundle\Entity\Category $category)
     {
-        $this->styles->removeElement($style);
+        $this->categories->removeElement($category);
     }
 
     /**
-     * Get styles
+     * Get categories
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getStyles()
+    public function getcategories()
     {
-        return $this->styles;
+        return $this->categories;
     }
 
     /**
