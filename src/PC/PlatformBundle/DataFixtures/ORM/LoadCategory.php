@@ -14,7 +14,7 @@ class LoadCategory implements FixtureInterface
     {
         $names = array(
             'italien',
-            'français',
+            'traditionnel',
             'chinois',
             'fast-food',
             'indien',
@@ -25,7 +25,7 @@ class LoadCategory implements FixtureInterface
             'libanais',
             'grec',
             'japonais',
-                        
+
         );
 
         foreach ($names as $name) {

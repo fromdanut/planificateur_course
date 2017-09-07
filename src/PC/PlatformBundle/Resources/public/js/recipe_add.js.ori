@@ -38,19 +38,13 @@ $(document).ready(function() {
     // Dans le contenu de l'attribut « data-prototype », on remplace :
     // - le texte "__name__label__" qu'il contient par le label du champ
     // - le texte "__name__" qu'il contient par le numéro du champ
-    var template = $container.attr('data-prototype').replace(/__name__label__/g, 'Ingrédient n°' + (index+1)).replace(/__name__/g,  index);
+    var template = $container.attr('data-prototype')
+      .replace(/__name__label__/g, 'Ingrédient n°' + (index+1))
+      .replace(/__name__/g,  index)
+    ;
 
     // On crée un objet jquery qui contient ce template
     var $prototype = $(template);
-
-    // On modifie le prototype pour avoir des input en ligne (ingrédient, puis quantité).
-
-    $($prototype).find('div[class="col-sm-10"]:first').attr('class', 'col-xs-8');                    // Fait de la place pour le bouton supprimer                                                    // Supprime tous les labels.
-    $($prototype).find('div label').remove();                                                       // Supprime tous les labels.
-    $($prototype).find('div div div div:first').attr('class', 'col-xs-4');                          // Pour l'input quantité.
-    $($prototype).find('div div div div:first input').attr('placeholder', '0').css('width', '100%');// Mise en forme de l'input
-    $($prototype).find('div div div div:last').attr('class', 'col-xs-8'); // Pour les ingrédients.
-    $($prototype).find('div [class="form-group"]').attr('class', 'form-inline');
 
     // On ajoute au prototype un lien pour pouvoir supprimer la ingrédient
     addDeleteLink($prototype);
@@ -63,14 +57,14 @@ $(document).ready(function() {
     chosenSelect.chosen({
         no_results_text: "Oups, aucun ingrédient trouvé pour : ",
         allow_single_deselect: true,
-        placeholder_text_single: "ingrédient",
-        width: "100%"
+        placeholder_text_single: "Choisir un ingrédient",
+        width: "95%"
     });
 
     // Grosse bidouille pour afficher "Choisir votre ingrédient" en première option.
     var bidouille = chosenSelect.next().find('a[class="chosen-single chosen-single-with-deselect"]');
     bidouille.attr('class', 'chosen-single chosen-single-with-deselect chosen-default');
-    bidouille.find('span').text("ingrédient");
+    bidouille.find('span').text("Choisir un ingrédient");
 
 
     // On ajoute le prototype modifié à la fin de la balise <div>
@@ -83,7 +77,7 @@ $(document).ready(function() {
   // La fonction qui ajoute un lien de suppression d'un ingrédient
   function addDeleteLink($prototype) {
     // Création du lien
-    var $deleteLink = $('<a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>');
+    var $deleteLink = $('<a href="#" style="margin-right:30px" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span></a>');
 
     // Ajout du lien
     $prototype.append($deleteLink);
