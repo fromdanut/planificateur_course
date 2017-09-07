@@ -1,8 +1,8 @@
 {# src/PC/PlatformBundle/Resources/views/Recipe/widget_small_recipe.html.twig #}
 <div style="padding:10px">
-    <a href="{{ path('pc_platform_view', {'id': recipe.id}) }}" style="color:#000000 !important; text-decoration:none;">
+    <a href="{{ path('pc_platform_view', {'id': recipe.id}) }}" class="SmallRecipeLink">
         {# Conteneur #}
-        <div class="row" style="background-color:#485563; padding:10px" >
+        <div class="row SmallRecipeContainer" >
             {# TITRE #}
             <div class="row">
                 <div class="col-xs-12">
@@ -17,7 +17,7 @@
                 {# IMAGE #}
                 {% if recipe.image is defined %}
                 <div class="col-xs-6">
-                    <img class="img-responsive" style='border-radius:3px;' src="{{recipe.image.url}}" alt="{{recipe.image.alt}}">
+                    <img class="img-responsive" src="{{recipe.image.url}}" alt="{{recipe.image.alt}}">
                 </div>
                 {% endif %}
 
@@ -86,7 +86,7 @@
             {# COURTE DESCRIPTION #}
             <div class="row">
                 <div class="col-xs-12">
-                    <p>{{recipe.shortDescription|length >= 50 ? recipe.shortDescription|slice(0, 40) ~ '...' : recipe.shortDescription}}</p>
+                    <p>{{recipe.shortDescription|length >= 65 ? recipe.shortDescription|slice(0, 62) ~ '...' : recipe.shortDescription}}</p>
                 </div>
             </div>
         </div>

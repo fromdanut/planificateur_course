@@ -219,7 +219,7 @@ class Recipe
      * @return string
      */
     public function getShortDescription()
-    {
+    {   
         return $this->shortDescription;
     }
 

@@ -4,3 +4,13 @@
 .label-as-badge {
     border-radius: 1em;
 }
+
+.SmallRecipeLink {
+    text-decoration: none;
+    color:#000000 !important;
+}
+
+.row .SmallRecipeContainer {
+    background-color:#485563;
+    padding:10px
+}
