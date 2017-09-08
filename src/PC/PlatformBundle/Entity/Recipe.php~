@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use PC\PlatformBundle\Validator\Antiflood;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Recipe
@@ -119,7 +118,6 @@ class Recipe
     protected $user;
 
     /**
-     * @Gedmo\Slug(fields={"name"}, updatable=false)
      * @ORM\Column(length=255, unique=true)
      */
     protected $slug;
@@ -507,29 +505,5 @@ class Recipe
     public function getNbPerson()
     {
         return $this->nbPerson;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     *
-     * @return Recipe
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 }

@@ -735,7 +735,7 @@ class SymfonyRequirements extends RequirementCollection
             $this->addRecommendation(
                 $this->getRealpathCacheSize() >= 5 * 1024 * 1024,
                 'realpath_cache_size should be at least 5M in php.ini',
-                'Setting "<strong>realpath_cache_size</strong>" to e.g. "<strong>5242880</strong>" or "<strong>5M</strong>" in php.ini<a href="#phpini">*</a> may improve performance on Windows significantly in some plateaus.'
+                'Setting "<strong>realpath_cache_size</strong>" to e.g. "<strong>5242880</strong>" or "<strong>5M</strong>" in php.ini<a href="#phpini">*</a> may improve performance on Windows significantly in some cases.'
             );
         }
 
@@ -780,11 +780,11 @@ class SymfonyRequirements extends RequirementCollection
             $size = (int) substr($size, 0, -1);
         }
         switch ($unit) {
-            plateau 'g':
+            case 'g':
                 return $size * 1024 * 1024 * 1024;
-            plateau 'm':
+            case 'm':
                 return $size * 1024 * 1024;
-            plateau 'k':
+            case 'k':
                 return $size * 1024;
             default:
                 return (int) $size;

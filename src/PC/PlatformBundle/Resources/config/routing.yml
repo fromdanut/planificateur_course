@@ -23,11 +23,9 @@ pc_platform_recipe_index:
         page: \d*
 
 pc_platform_view:
-    path:     /recipe/{id}
+    path:     /recipe/view/{slug}
     defaults:
         _controller: PCPlatformBundle:Recipe:view
-    requirements:
-        id: \d*
 
 pc_platform_add:
     path:     /recipe/add

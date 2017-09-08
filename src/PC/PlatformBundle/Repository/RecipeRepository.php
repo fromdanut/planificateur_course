@@ -156,11 +156,11 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         Return a recipe with the image, categories and ingredients.
         Used in RecipeController:viewAction.
     */
-    public function findOneWithImageCatAndIngredients($id)
+    public function findOneWithImageCatAndIngredients($slug)
     {
         $qb = $this->createQueryBuilder('r');
-        $qb->where('r.id = :id')
-                ->setParameter('id', $id);
+        $qb->where('r.slug = :slug')
+                ->setParameter('slug', $slug);
         $this->withImage($qb);
         $this->withCategories($qb);
         $this->withIngredients($qb);

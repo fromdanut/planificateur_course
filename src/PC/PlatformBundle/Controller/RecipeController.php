@@ -66,18 +66,18 @@ class RecipeController extends Controller
     /**
      * @Security("has_role('ROLE_USER')")
      */
-    public function viewAction($id)
+    public function viewAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
         $recipeRepo = $em->getRepository('PCPlatformBundle:Recipe');
-        $recipe = $recipeRepo->findOneWithImageCatAndIngredients($id);
+        $recipe = $recipeRepo->findOneWithImageCatAndIngredients($slug);
 
         if (null === $recipe) {
-            throw new NotFoundHttpException('Recette n°"'.$id.'" inexistante.');
+            throw new NotFoundHttpException('Recette "'.$slug.'" inexistante.');
         }
 
-        $nb = $this->getParameter('nb_small_recipe_view_menu');
-        $suggestions = $recipeRepo->findWithImageAndCat($nb);
+        $nb_sug = $this->getParameter('nb_small_recipe_view_menu');
+        $suggestions = $recipeRepo->findWithImageAndCat($nb_sug);
 
         // Check if the recipe is in the shopping list of the user (to enable/disable the "retire" button)
         $shoppingListRepo = $em->getRepository('PCPlatformBundle:ShoppingList');
@@ -123,7 +123,7 @@ class RecipeController extends Controller
                 $request->getSession()->getFlashBag()->add('notice', 'Nouvelle recette enregistrée.');
 
                 return $this->redirectToRoute('pc_platform_view', array(
-                    'id' => $recipe->getId(),
+                    'slug' => $recipe->getSlug(),
                 ));
             }
 
@@ -187,7 +187,7 @@ class RecipeController extends Controller
             $em->persist($recipe);
             $em->flush();
             $request->getSession()->getFlashBag()->add('notice', 'Recette modifiée.');
-            return $this->redirectToRoute('pc_platform_view', array('id' => $recipe->getId()));
+            return $this->redirectToRoute('pc_platform_view', array('slug' => $recipe->getSlug()));
 
         }
 
