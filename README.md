@@ -12,6 +12,4 @@ See the result on [website](https://fromdanut.hd.free.fr/pc)
 ## Improvement for next version :
 
 - add a service to send the shopping list via mail.
-- add a User and Categories filter for recipe search.
 - translate in english.
-- use slug for recipe instead of recipe number.

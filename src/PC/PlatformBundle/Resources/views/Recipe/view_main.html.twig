@@ -1,6 +1,6 @@
 {# src/PC/PlatformBundle/Resources/views/Recipe/view_main.html.twig #}
 
-{# TITTRE DE LA RECETTE, avec auteur, note et tps de préparation. #}
+{# TITTRE DE LA RECETTE, avec auteur#}
 <div class="row">
     <div class="col-xs-12">
         {% include 'PCPlatformBundle:Default:widget_flashbag_success.html.twig' %}
@@ -20,6 +20,11 @@
 {# DESCRIPTION #}
 <div class="row">
     <div class="col-xs-12">
+        {% if recipe.shortDescription %}
+        <h1>Description</h1>
+        <p class="text-justify">{{recipe.shortDescription|nl2br}}</p>
+        {% endif %}
+        <h1>Préparation</h1>
         <p class="text-justify">{{recipe.longDescription|nl2br}}</p>
     </div>
 </div>
