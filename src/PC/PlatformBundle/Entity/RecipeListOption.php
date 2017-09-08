@@ -216,7 +216,7 @@ class RecipeListOption extends RecipeOption
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getcategories()
+    public function getCategories()
     {
         return $this->categories;
     }

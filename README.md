@@ -15,6 +15,3 @@ See the result on [website](https://fromdanut.hd.free.fr/pc)
 - add a User and Categories filter for recipe search.
 - translate in english.
 - use slug for recipe instead of recipe number.
-
-- requete recherche recipe ne fonctionne que quand on précise une catégorie (filtre qui ne fonctionne pas par ailleurs.)
-- affecter une image de base si l'url ne fonctionne pas.

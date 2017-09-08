@@ -75,7 +75,7 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         ->setParameter('rating', $option->getRating());
 
         if ($option instanceof ShoppingListOption) {
-            // limit is nb of meal the user wants.
+            // the limit is nb of meal the user wants.
             $qb->setMaxResults($option->getNbMeal());
         }
 
@@ -84,10 +84,19 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
             if ($option->getKeyword() ==! null) {
 
                 $qb->andWhere('r.name LIKE :keyword OR user.username LIKE :keyword')
-                ->setParameter('keyword', '%'.$option->getKeyword().'%');
+                    ->setParameter('keyword', '%'.$option->getKeyword().'%');
+            }
+            // filter categories.
+            if (count($option->getCategories()) > 0) {
+                // Create a array with all categories
+                $categoriesName = [];
+                foreach ($option->getCategories() as $cat) {
+                    array_push($categoriesName, $cat->getName());
+                }
+                // Check if categories name are in $categoriesName
+                $qb->andWhere($qb->expr()->in('categories.name', $categoriesName));
             }
         }
-
     }
 
     /*

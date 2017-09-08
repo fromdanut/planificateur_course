@@ -27,7 +27,7 @@ class RecipeController extends Controller
             ->getRepository('PCPlatformBundle:RecipeListOption')
             ->findOneByUser($user);
 
-        // Plateau the user hasn't yet a RecipeListOption, create a new one.
+        // case the user hasn't yet a RecipeListOption, create a new one.
         if ($option === null) {
             $option = new RecipeListOption();
             $option->setUser($user);
