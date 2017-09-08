@@ -31,6 +31,7 @@ class Recipe
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=True)
+     * @Assert\Length(min=5, max=150)
      */
     private $name;
 

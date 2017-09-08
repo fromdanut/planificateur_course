@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     {# Limite le nombre de caractère à 50 dans le titre. #}
-                    <strong>{{ recipe.name|length > 50 ? recipe.name|slice(0, 50) ~ '...' : recipe.name  }}</strong>
+                    <strong>{{ recipe.name|length > 30 ? recipe.name|slice(0, 27) ~ '...' : recipe.name  }}</strong>
                 </div>
             </div>
 
@@ -30,43 +30,45 @@
                     {# tps / prix / calorie #}
                     <div class="row">
                         {# tps #}
-                        <div class="col-xs-6">
-                            <div class="row">
-                                {# affiche 1, 2 ou 3 au max sablier en fonction du temps de préparation #}
-                                {% for i in range(0, (recipe.cookingTime // 20) ) if i <= 2 %}
+                        <div class="col-xs-6 small-view-info">
+                            {# affiche 1, 2 ou 3 au max sablier en fonction du temps de préparation #}
+                            {% for i in range(0, (recipe.cookingTime // 20) ) if i <= 2 %}
                                 <span class="glyphicon glyphicon-hourglass" style="color:#ebebeb"></span>
-                                {% endfor %}
-                            </div>
+                            {% endfor %}
+
+                            {# affiche 1 ou 2 sabliers en grisé. #}
+                            {% if (recipe.cookingTime // 20) < 1 %}
+                                <span class="glyphicon glyphicon-hourglass" style="color:grey"></span>
+                                <span class="glyphicon glyphicon-hourglass" style="color:grey"></span>
+                            {% elseif (recipe.cookingTime // 20) < 2 %}
+                                <span class="glyphicon glyphicon-hourglass" style="color:grey"></span>
+                            {% endif %}
                         </div>
                         {# prix #}
-                        <div class="col-xs-3">
-                            <div class="row">
-                                {# affiche un euro en vert/rouge en fonction du prix #}
-                                {% if recipe.price > 20 %}
-                                <p style="color:IndianRed">
-                                {% elseif recipe.price < 10 %}
-                                <p style="color:#4cae4c">
-                                {% else %}
-                                <p style="color:#ebebeb">
-                                {% endif %}
-                                <span class="glyphicon glyphicon-eur"></span>
-                                </p>
-                            </div>
+                        <div class="col-xs-3 small-view-info">
+                            {# affiche un euro en vert/rouge en fonction du prix #}
+                            {% if recipe.price > 20 %}
+                            <p style="color:IndianRed">
+                            {% elseif recipe.price < 10 %}
+                            <p style="color:#4cae4c">
+                            {% else %}
+                            <p style="color:#ebebeb">
+                            {% endif %}
+                            <span class="glyphicon glyphicon-eur" data-toggle="tooltip" title="{{recipe.price|number_format(2)}} euros"></span>
+                            </p>
                         </div>
                         {# calorie #}
-                        <div class="col-xs-3">
-                            <div class="row">
-                                {# affiche une balance en vert/rouge en fonction des calorie #}
-                                {% if recipe.calorie > 700 %}
-                                <p style="color:IndianRed">
-                                {% elseif recipe.calorie > 300 %}
-                                <p style="color:#ebebeb">
-                                {% else %}
-                                <p style="color:#4cae4c">
-                                {% endif %}
-                                <span class="glyphicon glyphicon-scale"></span>
-                                </p>
-                            </div>
+                        <div class="col-xs-3 small-view-info">
+                            {# affiche une balance en vert/rouge en fonction des calorie #}
+                            {% if recipe.calorie > 700 %}
+                            <p style="color:IndianRed">
+                            {% elseif recipe.calorie > 300 %}
+                            <p style="color:#ebebeb">
+                            {% else %}
+                            <p style="color:#4cae4c">
+                            {% endif %}
+                            <span class="glyphicon glyphicon-scale" data-toggle="tooltip" title="{{recipe.calorie}} cal./personne"></span>
+                            </p>
                         </div>
 
                     </div>
@@ -74,13 +76,13 @@
                     <div class="row">
                         {% include 'PCPlatformBundle:Recipe:widget_rating.html.twig' %}
                     </div>
-                    {# 2 premières catégories + ... s'il y en a plus. #}
+                    {# La première catégorie + ... s'il y en a plusieurs. #}
                     <div class="row">
-                        {% for cat in recipe.categories|slice(0,2) %}
+                        {% for cat in recipe.categories|slice(0,1) %}
                         <span class="label label-default">{{cat.name}}</span>
                         {% endfor %}
-                        {% if recipe.categories|length > 2 %}
-                        <span class="label label-default">...</span>
+                        {% if recipe.categories|length > 1 %}
+                        <span class="label label-default" data-toggle="tooltip" title="{{recipe.categories|join(', ')}}">...</span>
                         {% endif %}
                     </div>
                 </div>
@@ -101,46 +103,58 @@
                     {# tps / prix / calorie #}
                         {# tps #}
                         <div class="col-xs-6">
-                                {# affiche 1, 2 ou 3 au max sablier en fonction du temps de préparation #}
-                                {% for i in range(0, (recipe.cookingTime // 20) ) if i <= 2 %}
-                                    <span class="glyphicon glyphicon-hourglass" style="color:#ebebeb"></span>
-                                {% endfor %}
+                            {# affiche 1, 2 ou 3 au max sablier en fonction du temps de préparation #}
+                            {% for i in range(0, (recipe.cookingTime // 20) ) if i <= 2 %}
+                                <span class="glyphicon glyphicon-hourglass" style="color:#ebebeb"></span>
+                            {% endfor %}
+
+                            {# affiche 1 ou 2 sabliers en grisé. #}
+                            {% if (recipe.cookingTime // 20) < 1 %}
+                                <span class="glyphicon glyphicon-hourglass" style="color:grey"></span>
+                                <span class="glyphicon glyphicon-hourglass" style="color:grey"></span>
+                            {% elseif (recipe.cookingTime // 20) < 2 %}
+                                <span class="glyphicon glyphicon-hourglass" style="color:grey"></span>
+                            {% endif %}
                         </div>
                         {# prix #}
                         <div class="col-xs-3">
-                                {# affiche un euro en vert/rouge en fonction du prix #}
-                                {% if recipe.price > 20 %}
-                                <p style="color:IndianRed">
-                                {% elseif recipe.price < 10 %}
-                                <p style="color:#4cae4c">
-                                {% else %}
-                                <p style="color:#ebebeb">
-                                {% endif %}
-                                <span class="glyphicon glyphicon-eur"></span>
-                                </p>
+                            {# affiche un euro en vert/rouge en fonction du prix #}
+                            {% if recipe.price > 20 %}
+                            <p style="color:IndianRed">
+                            {% elseif recipe.price < 10 %}
+                            <p style="color:#4cae4c">
+                            {% else %}
+                            <p style="color:#ebebeb">
+                            {% endif %}
+                            <span class="glyphicon glyphicon-eur" data-toggle="tooltip" title="{{recipe.price|number_format(2)}} euros"></span>
+                            </p>
                         </div>
                         {# calorie #}
                         <div class="col-xs-3">
-                                {# affiche une balance en vert/rouge en fonction des calorie #}
-                                {% if recipe.calorie > 700 %}
-                                <p style="color:IndianRed">
-                                {% elseif recipe.calorie > 300 %}
-                                <p style="color:#ebebeb">
-                                {% else %}
-                                <p style="color:#4cae4c">
-                                {% endif %}
-                                <span class="glyphicon glyphicon-scale"></span>
-                                </p>
+                            {# affiche une balance en vert/rouge en fonction des calorie #}
+                            {% if recipe.calorie > 700 %}
+                            <p style="color:IndianRed">
+                            {% elseif recipe.calorie > 300 %}
+                            <p style="color:#ebebeb">
+                            {% else %}
+                            <p style="color:#4cae4c">
+                            {% endif %}
+                            <span class="glyphicon glyphicon-scale" data-toggle="tooltip" title="{{recipe.calorie}} cal./personne"></span>
+                            </p>
                         </div>
                     {# note #}
-                    <div class="col-md-8 col-md-push-2">
+                    <div class="col-md-12">
                         {% include 'PCPlatformBundle:Recipe:widget_rating.html.twig' %}
                     </div>
-                    {# 3 premières catégories #}
+                    {# Les deux premières catégories + ... s'il y en a plus. #}
                     <div class="col-md-12">
                         {% for cat in recipe.categories|slice(0,2) %}
                         <span class="label label-default">{{cat.name}}</span>
                         {% endfor %}
+                        {% if recipe.categories|length > 2 %}
+                        <span class="label label-default" data-toggle="tooltip" title="{{recipe.categories|join(', ')}}">...</span>
+                        {% endif %}
+
                     </div>
                 </div>
             </div>
