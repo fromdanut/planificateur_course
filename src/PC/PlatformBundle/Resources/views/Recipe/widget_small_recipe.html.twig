@@ -12,17 +12,17 @@
             </div>
 
             {# IMAGE + INFOS DIVERSES#}
-            <div class="row">
+            <div class="row hidden-md">
 
                 {# IMAGE #}
                 {% if recipe.image is defined %}
-                <div class="col-xs-6 col-md-12 col-lg-6">
-                    <img class="img-responsive" src="{{recipe.image.url}}" alt="{{recipe.image.alt}}">
+                <div class="col-xs-6">
+                    <img class="img-smallRecipe recipe-default-img" src="{{recipe.image.url}}" alt="">
                 </div>
                 {% endif %}
 
                 {# INFOS #}
-                <div class="col-xs-6 hidden-md">
+                <div class="col-xs-6">
                     {# auteur #}
                     <div class="row">
                         <p class="text-center"><span class="glyphicon glyphicon-pencil"></span><strong>{{recipe.user}}</strong></p>
@@ -83,28 +83,28 @@
                 </div>
             </div>
 
-            {# Special pour md : les infos sont sous l'images qui est à 12 col#}
-            <div class="visible-md-block">
+            {# Seulement pour la classe md : les infos sont sous l'images qui est à 12 col#}
+            <div class="row visible-md-block">
+                {# IMAGE #}
+                {% if recipe.image is defined %}
+                <div class="col-md-12">
+                    <img class="img-smallRecipe recipe-default-img" src="{{recipe.image.url}}" alt="">
+                </div>
+                {% endif %}
                 <div class="col-md-12">
                     <br>
                     {# auteur #}
-                    <div class="row">
-                        <p class="text-center"><span class="glyphicon glyphicon-pencil"></span><strong>{{recipe.user}}</strong></p>
-                    </div>
+                    <p class="text-center"><span class="glyphicon glyphicon-pencil"></span><strong>{{recipe.user}}</strong></p>
                     {# tps / prix / calorie #}
-                    <div class="row">
                         {# tps #}
                         <div class="col-xs-6">
-                            <div class="row">
                                 {# affiche 1, 2 ou 3 au max sablier en fonction du temps de préparation #}
                                 {% for i in range(0, (recipe.cookingTime // 20) ) if i <= 2 %}
                                 <span class="glyphicon glyphicon-hourglass" style="color:#ebebeb"></span>
                                 {% endfor %}
-                            </div>
                         </div>
                         {# prix #}
                         <div class="col-xs-3">
-                            <div class="row">
                                 {# affiche un euro en vert/rouge en fonction du prix #}
                                 {% if recipe.price > 20 %}
                                 <p style="color:IndianRed">
@@ -115,11 +115,9 @@
                                 {% endif %}
                                 <span class="glyphicon glyphicon-eur"></span>
                                 </p>
-                            </div>
                         </div>
                         {# calorie #}
                         <div class="col-xs-3">
-                            <div class="row">
                                 {# affiche une balance en vert/rouge en fonction des calorie #}
                                 {% if recipe.calorie > 700 %}
                                 <p style="color:IndianRed">
@@ -130,27 +128,20 @@
                                 {% endif %}
                                 <span class="glyphicon glyphicon-scale"></span>
                                 </p>
-                            </div>
                         </div>
-
-                    </div>
                     {# note #}
-                    <div class="row">
                         {% include 'PCPlatformBundle:Recipe:widget_rating.html.twig' %}
-                    </div>
                     {# 3 premières catégories #}
-                    <div class="row">
                         {% for cat in recipe.categories|slice(0,2) %}
                         <span class="label label-default">{{cat.name}}</span>
                         {% endfor %}
-                    </div>
                 </div>
             </div>
 
             {# COURTE DESCRIPTION #}
             <div class="row">
                 <div class="col-xs-12">
-                    <p>{{recipe.shortDescription|length >= 65 ? recipe.shortDescription|slice(0, 62) ~ '...' : recipe.shortDescription}}</p>
+                    <p>{{recipe.shortDescription|length >= 40 ? recipe.shortDescription|slice(0, 37) ~ '...' : recipe.shortDescription}}</p>
                 </div>
             </div>
         </div>
