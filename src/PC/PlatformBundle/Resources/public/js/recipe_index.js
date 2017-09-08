@@ -6,10 +6,10 @@ $(document).ready(function() {
     });
 
     // Change color on hover on small recipe.
-    $('div[class="row SmallRecipeContainer"]').mouseenter(function() {
+    $('div[class="row smallRecipeContainer"]').mouseenter(function() {
         $(this).css('background-color', 'rgb(255,165,0)');
     })
-    $('div[class="row SmallRecipeContainer"]').mouseleave(function() {
+    $('div[class="row smallRecipeContainer"]').mouseleave(function() {
         $(this).css('background-color', '#485563');
     })
 

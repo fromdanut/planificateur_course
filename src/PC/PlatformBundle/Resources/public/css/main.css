@@ -5,12 +5,12 @@
     border-radius: 1em;
 }
 
-.SmallRecipeLink {
+.smallRecipeLink {
     text-decoration: none;
     color:#000000 !important;
 }
 
-.row .SmallRecipeContainer {
+.row .smallRecipeContainer {
     background-color:#485563;
     padding:10px
 }
