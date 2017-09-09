@@ -10,7 +10,7 @@
                     </th>
                 </tr>
                 {% for ingredient in cat %}
-                    <tr id="{{ingredient.name}}" class="ingredient-table-row">
+                    <tr id="{{ingredient.slug}}" class="ingredient-table-row">
                         <td>{{ingredient.name}}</td>
                         <td>{{ingredient.quantity}} {{ingredient.unit.name}}
                             <span class="label label-default label-as-badge pull-right">

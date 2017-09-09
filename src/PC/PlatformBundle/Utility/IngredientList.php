@@ -28,6 +28,7 @@ class IngredientList
                 $ingredient = $recipeIngredient->getIngredient();
                 $ingCat = $ingredient->getCategory()->getName();
                 $ingName = $ingredient->getName();
+                $ingSlug = $ingredient->getSlug();
                 // Si la catégory de l'ingrédient est déjà renseignée dans la liste d'ingrédient.
                 if (array_key_exists($ingCat, $ingList)) {
                     // Si l'ingrédient est déjà renseigné.
@@ -39,6 +40,7 @@ class IngredientList
                     else {
                         $ingList[$ingCat][$ingName] = array(
                             "name"     => $ingredient->getName(),
+                            "slug"     => $ingredient->getSlug(),
                             "quantity" => $recipeIngredient->getQuantity(),
                             "price"    => $ingredient->getPrice(),
                             "unit"     => $ingredient->getUnit(),
@@ -49,6 +51,7 @@ class IngredientList
                 else {
                     $ingList[$ingCat][$ingName] = array(
                         "name"     => $ingredient->getName(),
+                        "slug"     => $ingredient->getSlug(),
                         "quantity" => $recipeIngredient->getQuantity(),
                         "price"    => $ingredient->getPrice(),
                         "unit"     => $ingredient->getUnit(),
