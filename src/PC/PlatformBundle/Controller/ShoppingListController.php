@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 
 class ShoppingListController extends Controller
@@ -91,8 +92,9 @@ class ShoppingListController extends Controller
     /**
      * Add a recipe to the shoppingList.
      * @Security("has_role('ROLE_USER')")
+     * @ParamConverter("recipe", options={"mapping": {"id": "id"}})
      */
-    public function addRecipeAction(Request $request, $id)
+    public function addRecipeAction(Request $request, Recipe $recipe)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -104,11 +106,6 @@ class ShoppingListController extends Controller
             $request->getSession()->getFlashBag()->add('notice', 'Impossible d\'ajouter une recette à votre liste de courses car vous n\'en n\'avez pas encore. Créez en une ici.');
             return $this->redirectToRoute('pc_platform_shoppinglistoption_edit');
         }
-
-
-        $recipe = $em
-            ->getRepository('PCPlatformBundle:Recipe')
-            ->findOneBy(array('id' => $id));
 
         if ($recipe === null) {
             throw new NotFoundHttpException('Cette recette n\'existe pas impossible de l\'ajouter !');
@@ -127,21 +124,19 @@ class ShoppingListController extends Controller
         return $this->redirectToRoute('pc_platform_shoppinglist_view');
     }
 
+
     /**
-     * Add a recipe to the shoppingList.
+     * Remove a recipe of the shoppingList.
      * @Security("has_role('ROLE_USER')")
+     * @ParamConverter("recipe", options={"mapping": {"id": "id"}})
      */
-    public function removeRecipeAction($id)
+    public function removeRecipeAction(Recipe $recipe)
     {
 
         $em = $this->getDoctrine()->getManager();
         $shoppingList = $em
             ->getRepository('PCPlatformBundle:ShoppingList')
             ->findOneBy(array('user' => $this->getUser()->getId()));
-
-        $recipe = $em
-            ->getRepository('PCPlatformBundle:Recipe')
-            ->findOneBy(array('id' => $id));
 
         if ($recipe === null) {
             throw new NotFoundHttpException('Cette recette n\'existe pas impossible de l\'enlever de la shoppinglist !');
@@ -153,4 +148,11 @@ class ShoppingListController extends Controller
         return $this->redirectToRoute('pc_platform_shoppinglist_view');
     }
 
+    /**
+     * When the user is doing his shopping.
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function shoppingAction() {
+
+    }
 }

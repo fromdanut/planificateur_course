@@ -86,6 +86,11 @@ class ShoppingList
         return $this->recipes;
     }
 
+    /**
+     * Get ingredients list
+     *\Doctrine\Common\Collections\Collection
+     * @return PC\PlatformBundle\Utility\IngredientList
+     */
     public function getIngredientList()
     {
         $ingList = new IngredientList($this->getRecipes());
