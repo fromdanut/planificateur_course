@@ -7,13 +7,15 @@
 
 {% extends "PCPlatformBundle::layout.html.twig" %}
 
-
 {% block pcplatform_article %}
-    <h1>Reste à acheter</h1>
     {% include 'PCPlatformBundle:ShoppingList:widget_ingredient_table.html.twig' %}
-    <h1 id="caddie-title">Dans mon caddie</h1>
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="caddie">
+            </div>
+        </div>
+    </div>
 {% endblock %}
-
 
 {% block javascripts %}
     {{parent()}}

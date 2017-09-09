@@ -48,26 +48,11 @@ h1 {
     Pour le lors de la selection des ingrédients dans shoppingList_shopping
     cf ingredient_table.js
 */
-.selected-ingredient-table-row {
-    background-color: blue;
+
+#caddie {
+    padding:20px;
 }
 
 .ingredient-caddie {
-    margin: 3px;
-}
-
-/* Enlève le pointeur text */
-span .ingredient-caddie:hover,  {
-    pointer-events: none;
-}
-
-#caddie {
-    margin: 30px;
-    padding: 30px;
-    border: solid 1px black;
-    background-color: grey;
-}
-
-#ingredient-black-box {
-    display: none;
+    margin: 5px;
 }
