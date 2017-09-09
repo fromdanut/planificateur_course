@@ -36,17 +36,26 @@
 <div class="well">
     <div class="row">
         <div class="col-xs-12">
-            {% include 'PCPlatformBundle:ShoppingList:widget_add_recipe.html.twig' %}
+            <a href="{{path('pc_platform_recipe_index')}}" class="btn btn-primary btn-block">
+                <span class="glyphicon glyphicon-plus-sign">
+                </span> Ajouter une recette
+            </a>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
-            {% include 'PCPlatformBundle:ShoppingList:widget_add_shopping_list.html.twig'%}
+            <a href="{{path('pc_platform_shoppinglistoption_edit')}}" class="btn btn-success btn-block" style="margin-top: 10px">
+                <span class="glyphicon glyphicon- glyphicon glyphicon-list-alt">
+                </span> Nouvelles courses
+            </a>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
-            {% include 'PCPlatformBundle:ShoppingList:widget_import_shopping_list.html.twig'%}
+            <a href="{{path('pc_platform_shoppinglist_shopping')}}" class="btn btn-default btn-block" style="margin-top: 10px">
+                <span class="glyphicon glyphicon-shopping-cart">
+                </span> Faire mes courses
+            </a>
         </div>
     </div>
 </div>

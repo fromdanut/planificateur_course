@@ -1,3 +1,8 @@
+h1 {
+    color: #df691a;
+    text-align: center;
+}
+
 /*
     pour le rendu de src/PC/PlatformBundle/Resources/views/ShoppingList/view_shoppinglist.html.twig
 */
@@ -39,6 +44,30 @@
     padding: 0px 10px 0px 0px;
 }
 
-h1 {
-    color: #df691a;
+/*
+    Pour le lors de la selection des ingrédients dans shoppingList_shopping
+    cf ingredient_table.js
+*/
+.selected-ingredient-table-row {
+    background-color: blue;
+}
+
+.ingredient-caddie {
+    margin: 3px;
+}
+
+/* Enlève le pointeur text */
+span .ingredient-caddie:hover,  {
+    pointer-events: none;
+}
+
+#caddie {
+    margin: 30px;
+    padding: 30px;
+    border: solid 1px black;
+    background-color: grey;
+}
+
+#ingredient-black-box {
+    display: none;
 }

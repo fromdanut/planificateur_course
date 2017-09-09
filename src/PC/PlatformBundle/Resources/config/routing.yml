@@ -69,10 +69,16 @@ pc_platform_shoppinglist_remove_recipe:
     requirements:
       id: \d*
 
+pc_platform_shoppinglist_shopping:
+    path:    /shoppingList/shopping
+    defaults:
+        _controller: PCPlatformBundle:ShoppingList:shopping
+
 pc_platform_shoppinglistoption_edit:
     path: /shoppingListOption/edit/
     defaults:
         _controller: PCPlatformBundle:ShoppingListOption:edit
+
 
 # config du fosUserBundle
 fos_user_security:

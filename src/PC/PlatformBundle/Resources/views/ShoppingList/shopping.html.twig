@@ -1,0 +1,25 @@
+{# src/PC/PlatformBundle/Resources/views/ShoppingList/shopping.html.twig #}
+
+{# 
+    Vue qui liste l'ensemble des courses à faire.
+#}
+{# src/PC/PlatformBundle/Resources/views/Recipe/list.html.twig #}
+
+{% extends "PCPlatformBundle::layout.html.twig" %}
+
+
+{% block pcplatform_article %}
+    <h1>Reste à acheter</h1>
+    {% include 'PCPlatformBundle:ShoppingList:widget_ingredient_table.html.twig' %}
+    <h1 id="caddie-title">Dans mon caddie</h1>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{parent()}}
+    {# Pour le rating #}
+    {% javascripts 'bundles/pcplatform/js/ingredient_table.js' filter='jsqueeze' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}

@@ -152,7 +152,22 @@ class ShoppingListController extends Controller
      * When the user is doing his shopping.
      * @Security("has_role('ROLE_USER')")
      */
-    public function shoppingAction() {
+    public function shoppingAction(Request $request) {
+        $shoppingList = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('PCPlatformBundle:ShoppingList')
+            ->findWithAllFeatures($this->getUser());
+
+        // The first time the user hasn't yet a shoppingList.
+        if ($shoppingList === null) {
+            $request->getSession()->getFlashBag()->add('notice', 'Vous n\'avez pas encore de liste de courses, créez en une !');
+            return $this->redirectToRoute('pc_platform_shoppinglistoption_edit');
+        }
+
+        return $this->render('PCPlatformBundle:ShoppingList:shopping.html.twig', array(
+            'shoppingList' => $shoppingList
+        ));
 
     }
 }

@@ -1,16 +1,16 @@
-<div class="panel panel-default">
+<div class="panel panel-default" id="ingredient-table">
       <!-- Default panel contents -->
       <div class="panel-heading text-center">Courses</div>
       <table class="table table-bordered table-striped table-condensed">
           <tbody>
               {% for catName, cat in shoppingList.IngredientList %}
-                <tr>
+                <tr class="cat-ingredient-table-row" length="{{cat|length}}">
                     <th class="bg-default" scope="rowgroup" colspan="3" class="text-center">
                         <h5 class="text-center">{{catName}}</h5>
                     </th>
                 </tr>
                 {% for ingredient in cat %}
-                    <tr>
+                    <tr id="{{ingredient.name}}" class="ingredient-table-row">
                         <td>{{ingredient.name}}</td>
                         <td>{{ingredient.quantity}} {{ingredient.unit.name}}
                             <span class="label label-default label-as-badge pull-right">
