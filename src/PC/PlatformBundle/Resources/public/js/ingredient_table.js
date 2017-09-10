@@ -17,7 +17,7 @@ $(document).ready(function(){
             // Efface la permière partie du tableau avec la liste des ingrédients.
             $('#ingredient-table').hide();
             // Message de félicitation
-            $('<img class="img-responsive" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Toiletpapier_%28Gobran111%29.jpg/1024px-Toiletpapier_%28Gobran111%29.jpg">').insertAfter($('#ingredient-table'));
+            $('<img class="img-responsive" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Toiletpapier_%28Gobran111%29.jpg/1024px-Toiletpapier_%28Gobran111%29.jpg">').appendTo($('#img-pq-container'));
             $('<p class="text-center">Bravo vous avez fini vos courses ! N\'oubliez pas le...</p>').insertAfter($('#ingredient-table'));
             //$('<img class="img-responsive" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Toiletpapier_%28Gobran111%29.jpg/330px-Toiletpapier_%28Gobran111%29.jpg"></img>').after($('#ingredient-table div:first'));
         }
