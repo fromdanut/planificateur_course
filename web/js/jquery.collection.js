@@ -172,7 +172,7 @@
 
         // if we need to change CollectionType_field_42_value to CollectionType_field_84_value, this method
         // will change it in id="CollectionType_field_42_value", but also data-id="CollectionType_field_42_value"
-        // or anywhere else just in plateau it could be used otherwise.
+        // or anywhere else just in case it could be used otherwise.
         var replaceAttrData = function (elements, index, toReplace, replaceWith) {
 
             var replaceAttrDataNode = function (node) {
@@ -610,7 +610,7 @@
 
             var settings = $.extend(true, {}, defaults, options);
 
-            // usage of $.fn.on events using a static container just in plateau there would be some
+            // usage of $.fn.on events using a static container just in case there would be some
             // ajax interactions inside the collection
             if ($(settings.container).length === 0) {
                 console.log("jquery.collection.js: a container should exist to handle events (basically, a <body> tag).");

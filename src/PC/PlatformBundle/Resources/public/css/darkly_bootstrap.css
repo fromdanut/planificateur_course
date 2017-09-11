@@ -704,7 +704,7 @@ th {
 .glyphicon-filter:before {
   content: "\e138";
 }
-.glyphicon-briefplateau:before {
+.glyphicon-briefcase:before {
   content: "\e139";
 }
 .glyphicon-fullscreen:before {
@@ -1328,11 +1328,11 @@ mark,
 .text-nowrap {
   white-space: nowrap;
 }
-.text-lowerplateau {
-  text-transform: lowerplateau;
+.text-lowercase {
+  text-transform: lowercase;
 }
-.text-upperplateau {
-  text-transform: upperplateau;
+.text-uppercase {
+  text-transform: uppercase;
 }
 .text-capitalize {
   text-transform: capitalize;
@@ -1476,7 +1476,7 @@ abbr[data-original-title] {
 }
 .initialism {
   font-size: 90%;
-  text-transform: upperplateau;
+  text-transform: uppercase;
 }
 blockquote {
   padding: 10.5px 21px;

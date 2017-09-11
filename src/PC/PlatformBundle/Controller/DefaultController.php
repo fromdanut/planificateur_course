@@ -8,7 +8,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        if ($this->getUser() === null) { # in plateau the user isn't authenficated
+        if ($this->getUser() === null) { # in case the user isn't authenficated
             return $this->redirectToRoute('pc_platform_login');
         }
         else {

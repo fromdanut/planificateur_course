@@ -13,3 +13,9 @@ See the result on [website](https://fromdanut.hd.free.fr/pc)
 
 - add a service to send the shopping list via mail.
 - translate in english.
+
+
+## 2nd test :
+
+- Intervertir quantité et ingrédient dans le formulaire
+- améliorer la recherche (rendre insensible à la case)
