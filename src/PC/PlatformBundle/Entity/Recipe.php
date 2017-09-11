@@ -407,7 +407,8 @@ class Recipe
 
 
     /**
-     * @ORM\PreFlush
+     * Compute price from quantity and price of each ingredients.
+     * @return int
      */
     public function computePrice()
     {
@@ -417,9 +418,17 @@ class Recipe
             $price += ( $recipeIngredient->getIngredient()->getPrice() * $recipeIngredient->getQuantity() );
         }
 
-        $this->setPrice($price);
+        return $price;
     }
 
+    /**
+     * @ORM\PreFlush
+     */
+    public function updatePrice()
+    {
+        $price = $this->computePrice();
+        $this->setPrice($price);
+    }
     /**
      * Set calorie
      *
