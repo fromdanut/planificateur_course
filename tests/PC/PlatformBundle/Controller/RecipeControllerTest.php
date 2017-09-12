@@ -34,7 +34,7 @@ class RecipeControllerTest extends WebTestCase
         // Soumettre le formulaire et suivre la redirection.
         $client->submit($form);
         $client->followRedirect();
-        $this->assertTrue($client->getResponse()->isRedirect());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         // Suivre la redirection après création du compte.
         $crawler = $client->followRedirect();
