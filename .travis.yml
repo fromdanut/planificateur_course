@@ -1,7 +1,10 @@
 language: php
 php:
-  - '7.1'
+   - '7.1'
 
 script:
-   - composer install
-   - phpunit
+    - composer install
+    - phpunit
+
+services:
+    - mysql
