@@ -21,7 +21,7 @@ class RecipeControllerTest extends WebTestCase
       */
     public function testLoginAddUser()
     {
-        $client = static::createClient(array(), array('HTTP_HOST' => 'localhost:8000'));
+        $client = static::createClient();
         $crawler = $client->request('GET', '/login');
         // Récupère le form grace au crawler.
         $form = $crawler->selectButton('Créer un compte')->form();
