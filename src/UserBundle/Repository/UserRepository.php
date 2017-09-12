@@ -10,13 +10,5 @@ namespace UserBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findJean()
-    {
-        $qb = $this->createQueryBuilder('u')
-                   ->where('u.id LIKE :username')
-                   ->setParameter('username', '%fred%');
-        return $qb
-          ->getQuery()
-          ->getSingleResult();
-    }
+
 }

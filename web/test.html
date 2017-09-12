@@ -1,0 +1,161 @@
+PHPUnit 6.3.0 by Sebastian Bergmann and contributors.
+
+.<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>
+			Planificateur de courses
+	    </title>
+            <!-- bootstrap css with superhero theme from bootswatch -->
+                    <link rel="stylesheet" href="/css/d484ba7_darkly_bootstrap_1.css">
+        
+        <!-- chosen.select css -->
+                    <link rel="stylesheet" href="/css/ada3532_chosen_1.css">
+        
+        <!-- main css css -->
+                    <link rel="stylesheet" href="/css/e8b2bb6_main_1.css">
+        
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+        <link href="favicon.ico" rel="icon" type="image/x-icon" />
+  </head>
+  <body>
+
+        <div class="container">
+                
+            <div class="row">
+        </div>
+<div class="row">
+    <div class="row well">
+        <div class="col-xs-10 pull-right">
+            
+
+    
+
+<form action="/login_check" method="post">
+            <input type="hidden" name="_csrf_token" value="Psfb2HMaL3zPvJspmG6mY-6aeiNNFgfj0AW0FOq7Y_I" />
+    
+    <label for="username">Nom d&#039;utilisateur</label>
+    <input type="text" id="username" name="_username" value="" required="required" />
+
+    <label for="password">Mot de passe</label>
+    <input type="password" id="password" name="_password" required="required" />
+
+    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+    <label for="remember_me">Se souvenir de moi</label>
+
+    <input type="submit" id="_submit" name="_submit" value="Connexion" />
+</form>
+
+
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div id="header" class="jumbotron">
+            <h1>Planificateur de courses<small> à partir de vos recettes !</small></h1>
+            <p>
+                Ce site permet de gérer un livre de recettes, à partir desquelles on peut générer des listes de courses...
+            </p>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-sm-push-3">
+                    <p>Pas encore de compte ? Inscrivez-vous :</p>
+                    
+
+
+<form name="fos_user_registration_form" method="post" action="/register/" class="fos_user_registration_register form-horizontal">
+    <div id="fos_user_registration_form"><div class="form-group"><label class="col-sm-2 control-label required" for="fos_user_registration_form_email">Adresse e-mail</label><div class="col-sm-10"><input type="email" id="fos_user_registration_form_email" name="fos_user_registration_form[email]" required="required" class="form-control" /></div>
+</div><div class="form-group"><label class="col-sm-2 control-label required" for="fos_user_registration_form_username">Nom d&#039;utilisateur</label><div class="col-sm-10"><input type="text" id="fos_user_registration_form_username" name="fos_user_registration_form[username]" required="required" maxlength="180" pattern=".{2,}" class="form-control" /></div>
+</div><div class="form-group"><label class="col-sm-2 control-label required" for="fos_user_registration_form_plainPassword_first">Mot de passe</label><div class="col-sm-10"><input type="password" id="fos_user_registration_form_plainPassword_first" name="fos_user_registration_form[plainPassword][first]" required="required" class="form-control" /></div>
+</div><div class="form-group"><label class="col-sm-2 control-label required" for="fos_user_registration_form_plainPassword_second">Répéter le mot de passe</label><div class="col-sm-10"><input type="password" id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" required="required" class="form-control" /></div>
+</div><input type="hidden" id="fos_user_registration_form__token" name="fos_user_registration_form[_token]" value="hRDL-Lg0dL5f-AASVbCAIixVX8SvPaMuHjdzvYT02Ug" />
+    </div>
+    <div>
+        <input type="submit" value="Créer un compte" />
+    </div>
+
+    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                            <footer class="footer navbar-default" style="border: 1px solid black; background-color:#333333;">
+  <div class="container-fluid">
+    <div class="row" style="padding-top: 10px">
+                <div class="col-xs-8 col-sm-4">
+            <div class="row">
+                <p class="text-center"><strong>Projet réalisé dans le cadre du cours</strong><br><br>
+                    "Développez votre site web avec le framework Symfony sur"
+                    <a href="https://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony?status=published">
+                        Open Class Rooms
+                    </a>
+                </p>
+            </div>
+        </div>
+                <div class="col-xs-4 col-sm-2">
+            <div class="row">
+                <p class="text-center">
+                    <strong>Voir le projet sur GitHub</strong><br><br>
+                    <a href="https://github.com/fromdanut/planificateur_course">
+                        <img class="img-responsive center-block" style="height: 30px;" src="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png" alt="Github logo">
+                    </a>
+                </p>
+            </div>
+        </div>
+                <div class="col-xs-12 col-sm-6">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <p class="text-center">
+                            <strong>Technologies utilisées :</strong>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <p class="text-center">
+                            Langage : <a href="http://php.net"><img class="img-reponsive" style="height: 15px;"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/1024px-PHP-logo.svg.png" alt="php_logo"></a><br>
+                            Framework back-end : <a href="https://symfony.com/"><img class="img-reponsive" style="height: 15px;" src="https://symfony.com/images/v5/logos/header-logo.svg" alt="symfony_logo"></a><br>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <p class="text-center">
+                            Framework front-end : <a href="http://getbootstrap.com/"><img class="img-reponsive" style="height: 15px;" src="http://3.bp.blogspot.com/-_OfUzB5cZYc/VfsuVYmDcSI/AAAAAAAAD2Q/7cPrm2_UUbg/s1600/bootstrap2_logo.png" alt="bootsrap_logo"></a><br>
+                            Theme : <a href="https://bootswatch.com/">Bootswatch</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</footer>
+                    </div>
+
+                    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            <!-- Latest compiled and minified JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+          </body>
+</html>
+.                                                                  2 / 2 (100%)
+
+Time: 191 ms, Memory: 22.00MB
+
+OK (2 tests, 2 assertions)
