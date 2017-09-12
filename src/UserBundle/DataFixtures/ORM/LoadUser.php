@@ -14,9 +14,10 @@ class LoadUser implements FixtureInterface, OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
+        // Create 2 users, minus and cortex.
         $names = array(
-            'jean',
-            'fred',
+            'minus',
+            'cortex',
         );
 
         foreach ($names as $name) {

@@ -46,7 +46,7 @@ class LoadRecipe implements FixtureInterface, OrderedFixtureInterface
             $recipe->setShortDescription('Petite tarte aux fraises de saison qui ravira les petits comme les grands.');
 
             // L'auteur
-            $user = $manager->getRepository('UserBundle:User')->findOneBy(array('username' => 'jean'));
+            $user = $manager->getRepository('UserBundle:User')->findOneBy(array('username' => 'minus'));
             $recipe->setUser($user);
 
             // Les ingrédients
