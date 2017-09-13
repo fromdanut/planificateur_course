@@ -38,6 +38,7 @@ class RecipeController extends Controller
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $em->persist($option);
             $em->flush();
+            $page = 1; // Always returns the first page.
         }
 
         // use a parameter to get the nb of recipe per page.
