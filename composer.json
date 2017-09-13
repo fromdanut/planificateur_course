@@ -59,6 +59,10 @@
         ],
         "post-update-cmd": [
             "@symfony-scripts"
+        ],
+        "compile": [
+            "rm web/app_dev.php",
+            "php app/console assetic:dump --env=prod --no-debug"
         ]
     },
     "config": {
