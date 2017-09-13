@@ -21,7 +21,8 @@
         ]
     },
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=7",
+        "ext-intl": "*",
         "coresphere/console-bundle": "~0.4",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-fixtures-bundle": "~2.3",
