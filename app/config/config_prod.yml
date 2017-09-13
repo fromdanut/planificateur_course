@@ -1,6 +1,7 @@
 # Config for heroku site.
 
 imports:
+    - { resource: parameters-production.php }
     - { resource: config.yml }
 
 
