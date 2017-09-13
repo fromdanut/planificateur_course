@@ -14,19 +14,25 @@ class LoadUser implements FixtureInterface, OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        // Create 2 users, minus and cortex.
-        $names = array(
-            'minus',
-            'cortex',
-        );
 
-        foreach ($names as $name) {
-            $user = new User();
-            $user->setUsername($name);
-            $user->setEmail($name.'@mail.net');
-            $user->setPassword($name);
-            $manager->persist($user);
+        $user = new User();
+        $user->setUsername('minus');
+        $user->setEmail('minus@mail.com');
+
+        // Simule FOSUserBundle encryption to get a functioning user.
+        $password = 'minus';
+        $salt = '1234';
+        $salted = $password.'{'.$salt.'}';
+        $digest = hash('sha512', $salted, true);
+        for ($i=1; $i<5000; $i++) {
+            $digest = hash('sha512', $digest.$salted, true);
         }
+        $encodedPassword = base64_encode($digest);
+
+        $user->setSalt($salt);
+        $user->setPassword($encodedPassword);
+        $user->setEnabled(true);
+        $manager->persist($user);
         $manager->flush();
     }
 
