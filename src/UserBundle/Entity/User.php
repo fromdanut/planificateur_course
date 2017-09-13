@@ -15,10 +15,21 @@ use PC\PlatformBundle\Entity\ShoppingList;
  */
 class User extends BaseUser
 {
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->enabled = true;
+        $this->roles = array();
+    }
+
   /**
    * @ORM\Column(name="id", type="integer")
    * @ORM\Id
    * @ORM\GeneratedValue(strategy="AUTO")
    */
   protected $id;
+
+
 }

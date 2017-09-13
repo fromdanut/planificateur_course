@@ -13,4 +13,4 @@ See the result on [website](#)
 
 - add a service to send the shopping list via mail.
 - translate in English.
-- extend database with more ingredients.
+- extend database with new ingredients.
