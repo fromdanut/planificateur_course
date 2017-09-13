@@ -67,6 +67,10 @@
             "php bin/console doctrine:database:create",
             "php bin/console doctrine:schema:create --env=prod",
             "php bin/console doctrine:fixtures:load --no-interaction --no-debug --env=prod"
+        ],
+        "warmup": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
         ]
     },
     "config": {
