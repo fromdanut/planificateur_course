@@ -63,7 +63,6 @@
         "compile": [
             "rm web/app_dev.php",
             "php bin/console assetic:dump --env=prod --no-debug",
-            "php bin/console doctrine:schema:create --env=prod",
             "php bin/console doctrine:fixtures:load --no-interaction --no-debug --env=prod"
         ],
         "warmup": [
