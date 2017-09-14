@@ -1,13 +1,18 @@
 language: php
 php:
-   - '7.1'
-
+- '7.1'
 services:
-   - mysql
-
+- mysql
 script:
-    - composer install
-    - php bin/console doctrine:database:create
-    - php bin/console doctrine:schema:create --env=test
-    - php bin/console doctrine:fixtures:load --no-interaction --no-debug --env=test
-    - phpunit
+- composer install
+- php bin/console doctrine:database:create
+- php bin/console doctrine:schema:create --env=test
+- php bin/console doctrine:fixtures:load --no-interaction --no-debug --env=test
+- phpunit
+deploy:
+  provider: heroku
+  api_key:
+    secure: iDtJC/quRmISHWV2oP/Yt5vnWvOE/a62Yskf4b2iYkQPptCSb7Y4UQlKJx7g/jAkSxgMq0ecrrjAaNPcRaJl/qYFhB9JgOfAamnLyduGcQXgy4dTue3o+ruGuSChrkwY4UI3+aQWo8s8w+UsRJ66LaHfZoasb1zzRL7+jarVQUwWZiG5RaENo3G2g9VQfFVKbcUoKQ3o61Mo1QYyKkcmP+x/dHMR7sPrDSwy76l85hjVDWiXeCRZdL75QJWmMvWDIVmO8a9+lgegxMlvk0yFqjkIk+quNTBGT2ZDcO44I4ldg41jfaiB+AAB8Pa5u/Sx9JrENBL+TN2sMGTFlk78zLN/K6MJUlwiczux6cBnoX0JvXOgkL9xLk4o/twnZbtEobxGYElzR8XwmHmXZbJFFJotmp8F3hdW3KcHsh1SdetohzkI2Q78S417LwRDGEGrFfBHMyEZhschl/ZEzvCx0lqiiiNeNXBGt3dBWkd9mtiVLkAdWOT+EU7z3uReUgeSpWALoow55Ja/XfzbhEibwv7TNSzMapZQm3Ub1MPVzkj7NP+DRIwSPkuqWuftUrfPWH/bsrgxJm9FGLxDTAWlMrfEcCs4F0Jall11HGtjYuMj+hpuOJ57MvhdQ4B5SOqwTGVMIIIE3vI5t7Pk8vX8tSlcIQ7hl9ozSt/gtlUwzEY=
+  app: planificateur-de-course
+  on:
+    repo: fromdanut/planificateur_course
