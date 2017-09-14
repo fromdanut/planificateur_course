@@ -11,8 +11,8 @@ if(isset($_ENV['CLEARDB_DATABASE_URL'])) {
     $container->setParameter('database_password', $db['pass']);
     $container->setParameter('secret', getenv('SECRET'));
     $container->setParameter('locale', 'fr');
-    $container->setParameter('mailer_transport', null);
-    $container->setParameter('mailer_host', null);
-    $container->setParameter('mailer_user', null);
-    $container->setParameter('mailer_password', null);
+    $container->setParameter('mailer_transport', "null");
+    $container->setParameter('mailer_host', "null");
+    $container->setParameter('mailer_user', "null");
+    $container->setParameter('mailer_password', "null");
 }
