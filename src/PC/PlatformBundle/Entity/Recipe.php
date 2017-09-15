@@ -429,6 +429,7 @@ class Recipe
         $price = $this->computePrice();
         $this->setPrice($price);
     }
+    
     /**
      * Set calorie
      *

@@ -19,9 +19,18 @@ class LoadUser implements FixtureInterface, OrderedFixtureInterface
         $user->setUsername('minus');
         $user->setEmail('minus@mail.com');
 
-        // Simule FOSUserBundle encryption to get a functioning user.
-        $password = 'minus';
-        $salt = '1234';
+        // Simule FOSUserBundle encryption to get a functioning user...
+
+        // for prod env we don't want the password to be in plaintext.
+        if(isset($_ENV['PASSWORD_USER'])) {
+            $password = $_ENV['PASSWORD_USER'];
+            $salt = String(random_int(1000, 9999));
+        }
+        // for test env, we need a user with a known password.
+        else {
+            $password = 'minus';
+            $salt = '1234';
+        }
         $salted = $password.'{'.$salt.'}';
         $digest = hash('sha512', $salted, true);
         for ($i=1; $i<5000; $i++) {
