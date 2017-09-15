@@ -17,72 +17,100 @@ class LoadRecipe implements FixtureInterface, OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        for ($i=0; $i < 30; $i++) {
+        // Une recette de tarte aux fraises.
+        $recipe = new Recipe();
 
-            // La recette
-            $recipe = new Recipe();
+        $recipe->setName("Tarte aux fraises");
+        $recipe->setCookingTime(50);
+        $recipe->setNbPerson(4);
+        $recipe->setLongDescription('
+            PÂTE:
+            Blanchir les jaunes et le sucre au fouet et détendre le mélange avec un peu d eau.
+            Mélanger au doigt la farine et le beurre coupé en petites parcelles pour obtenir une consistance sableuse et que tout le beurre soit absorbé (!!! Il faut faire vite pour que le mélange ne ramollisse pas trop!).
+            Verser au milieu de ce "sable" le mélange liquide.
+            Incorporer au couteau les éléments rapidement sans leur donner de corps.
+            Former une boule avec les paumes et fraiser 1 ou 2 fois pour rendre la boule + homogène.
+            Foncer un moule de 25 cm de diamètre avec la pâte, garnissez la de papier sulfurisé et de haricots secs.
+            Faire cuire à blanc 20 à 25 min, à 180°C (thermostat 6).
+            NB: après baisser le four à 120°C/150°C environ pour la meringue.
+            CRÈME PÂTISSIÈRE :
+            Mettre le lait à bouillir avec le parfum choisi (vanille ou autre).
+            Travailler l oeuf avec le sucre jusqu à ce que la pâte fasse le ruban, ajouter la farine.
+            Verser le lait bouillant sur le mélange en tournant bien.
+            Remettre dans la casserole sur le feu.
+            Faire cuire en tournant très soigneusement.
+            Retirer après ébullition.
+            Verser la crème sur le fond de tarte et disposer joliment les fraises coupées en 2.');
+        $recipe->setShortDescription('Petite tarte aux fraises de saison qui ravira les petits comme les grands.');
 
-            $recipe->setName("recette n°".$i);
-            $recipe->setCookingTime(2*$i);
-            $recipe->setNbPerson(4);
-            $recipe->setLongDescription('
-                PÂTE:
-                Blanchir les jaunes et le sucre au fouet et détendre le mélange avec un peu d eau.
-                Mélanger au doigt la farine et le beurre coupé en petites parcelles pour obtenir une consistance sableuse et que tout le beurre soit absorbé (!!! Il faut faire vite pour que le mélange ne ramollisse pas trop!).
-                Verser au milieu de ce "sable" le mélange liquide.
-                Incorporer au couteau les éléments rapidement sans leur donner de corps.
-                Former une boule avec les paumes et fraiser 1 ou 2 fois pour rendre la boule + homogène.
-                Foncer un moule de 25 cm de diamètre avec la pâte, garnissez la de papier sulfurisé et de haricots secs.
-                Faire cuire à blanc 20 à 25 min, à 180°C (thermostat 6).
-                NB: après baisser le four à 120°C/150°C environ pour la meringue.
-                CRÈME PÂTISSIÈRE :
-                Mettre le lait à bouillir avec le parfum choisi (vanille ou autre).
-                Travailler l oeuf avec le sucre jusqu à ce que la pâte fasse le ruban, ajouter la farine.
-                Verser le lait bouillant sur le mélange en tournant bien.
-                Remettre dans la casserole sur le feu.
-                Faire cuire en tournant très soigneusement.
-                Retirer après ébullition.
-                Verser la crème sur le fond de tarte et disposer joliment les fraises coupées en 2.');
-            $recipe->setShortDescription('Petite tarte aux fraises de saison qui ravira les petits comme les grands.');
+        // L'auteur
+        $user = $manager->getRepository('UserBundle:User')->findOneBy(array('username' => 'minus'));
+        $recipe->setUser($user);
 
-            // L'auteur
-            $user = $manager->getRepository('UserBundle:User')->findOneBy(array('username' => 'minus'));
-            $recipe->setUser($user);
+        // Les ingrédients
 
-            // Les ingrédients
-            $ingredients = $manager->getRepository('PCPlatformBundle:Ingredient')->findAll();
-            for ($j=0; $j < 5 ; $j++) {
-                $RecipeIngredient = new RecipeIngredient();
-                $RecipeIngredient->setRecipe($recipe); // lie à la recette.
-                $RecipeIngredient->setIngredient($ingredients[$j]); // lie à l'ingrédient.
-                $RecipeIngredient->setQuantity($i + (2 * $i * ($i % 2))); // On aura des recette avec des quantité différentes mais mini 1
-                $manager->persist($RecipeIngredient);
-            }
-             // Deux catégories
-            $catItalien = $manager->getRepository('PCPlatformBundle:Category')->findOneBy(array('name' => 'italien'));
-            $catAsiatique = $manager->getRepository('PCPlatformBundle:Category')->findOneBy(array('name' => 'chinois'));
+        $fraise = $manager->getRepository('PCPlatformBundle:Ingredient')->findOneBy(array('name' => 'fraise'));
+        $fraiseRI = new RecipeIngredient();
+        $fraiseRI->setRecipe($recipe);              // lie à la recette.
+        $fraiseRI->setIngredient($fraise);
+        $fraiseRI->setQuantity(400);
+        $manager->persist($fraiseRI);
 
-            // Petite bidouille pour obtenir des recettes avec des cat et des notes (rating) différentes
+        $sucre = $manager->getRepository('PCPlatformBundle:Ingredient')->findOneBy(array('name' => 'sucre'));
+        $sucreRI = new RecipeIngredient();
+        $sucreRI->setRecipe($recipe);              // lie à la recette.
+        $sucreRI->setIngredient($sucre);
+        $sucreRI->setQuantity(200);
+        $manager->persist($sucreRI);
 
-            if ($i % 2 == 0) {
-                $recipe->addCategory($catItalien);
-                $recipe->setRating(4);
-            }
-            else {
-                $recipe->addCategory($catAsiatique);
-                $recipe->setRating(2);
-            }
+        $oeuf = $manager->getRepository('PCPlatformBundle:Ingredient')->findOneBy(array('name' => 'oeuf'));
+        $oeufRI = new RecipeIngredient();
+        $oeufRI->setRecipe($recipe);              // lie à la recette.
+        $oeufRI->setIngredient($oeuf);
+        $oeufRI->setQuantity(4);
+        $manager->persist($oeufRI);
 
-            // L'image (la meme pour l'ensemble des recettes)
-            $image = new Image();
-            $image->setUrl("http://www.juliemyrtille.com/wp-content/uploads/2014/10/Tarteauxpommes_JulieMyrtille8.jpg");
-            $image->setAlt("Une tarte à la fraise");
-            $recipe->setImage($image);
-            $manager->persist($image);
+        $lait = $manager->getRepository('PCPlatformBundle:Ingredient')->findOneBy(array('name' => 'lait'));
+        $laitRI = new RecipeIngredient();
+        $laitRI->setRecipe($recipe);              // lie à la recette.
+        $laitRI->setIngredient($lait);
+        $laitRI->setQuantity(200);
+        $manager->persist($laitRI);
 
-            $manager->persist($recipe);
+        $farine = $manager->getRepository('PCPlatformBundle:Ingredient')->findOneBy(array('name' => 'farine'));
+        $farineRI = new RecipeIngredient();
+        $farineRI->setRecipe($recipe);              // lie à la recette.
+        $farineRI->setIngredient($farine);
+        $farineRI->setQuantity(200);
+        $manager->persist($farineRI);
 
-        }
+        $beurre = $manager->getRepository('PCPlatformBundle:Ingredient')->findOneBy(array('name' => 'beurre'));
+        $beurreRI = new RecipeIngredient();
+        $beurreRI->setRecipe($recipe);              // lie à la recette.
+        $beurreRI->setIngredient($beurre);
+        $beurreRI->setQuantity(100);
+        $manager->persist($beurreRI);
+
+         // Deux catégories tradi et dessert.
+        $recipe->addCategory(
+            $manager->getRepository('PCPlatformBundle:Category')->findOneBy(array('name' => 'tradi'))
+        );
+        $recipe->addCategory(
+            $manager->getRepository('PCPlatformBundle:Category')->findOneBy(array('name' => 'dessert'))
+        );
+
+        // Met la note à 4.
+        $recipe->setRating(4);
+
+        // L'image
+        $image = new Image();
+        $image->setUrl("http://images.freeimages.com/images/large-previews/c77/delicious-2-1515071.jpg");
+        $image->setAlt("Tarte à la fraise");
+        $recipe->setImage($image);
+        $manager->persist($image);
+
+        $manager->persist($recipe);
+
         $manager->flush();
     }
 

@@ -13,7 +13,12 @@
                           {% for recipeIngredient in recipe.recipeIngredients %}
                           <tr>
                               <td>{{recipeIngredient.ingredient.name}}</td>
-                              <td>{{recipeIngredient.quantity}} {{recipeIngredient.ingredient.unit.name}}</td>
+                              <td>
+                              {{recipeIngredient.quantity}}
+                              {% if recipeIngredient.ingredient.unit.name != 'unite' %}
+                                {{recipeIngredient.ingredient.unit.name}}
+                              {% endif %}
+                            </td>
                           </tr>
                           {% endfor %}
                       </tbody>

@@ -59,6 +59,7 @@ class LoadIngredient implements FixtureInterface
             array('lardons', 0.010, 4, $g, $vp, $date),
             array('saucisse de Toulouse', 0.012, 3, $g, $vp, $date),
             array('saucisse de Morteau', 0.015, 4, $g, $vp, $date),
+            array('chorizo', 0.020, 4, $g, $vp, $date),
             array('jambon blanc', 0.008, 2, $g, $vp, $date),
             array('jambon de bayonne', 0.012, 3, $g, $vp, $date),
             array('steak haché', 0.015, 3, $g, $vp, $date),
@@ -82,6 +83,7 @@ class LoadIngredient implements FixtureInterface
             array('coco de paimpol', 0.010, 1, $g, $fl, $date),
             array('pois chiche', 0.002, 4, $g, $fl, $date),
             array('lentille verte', 0.003, 3, $g, $fl, $date),
+            array('lentille corail', 0.003, 3, $g, $fl, $date),
             array('tomate', 0.004, 0, $g, $fl, $date),
             array('oignon', 0.002, 1, $g, $fl, $date),
             array('échalotte', 0.003, 1, $g, $fl, $date),
@@ -94,23 +96,31 @@ class LoadIngredient implements FixtureInterface
             array('poire', 0.004 , 1, $g, $fl, $date),
             array('pêche', 0.004 , 1, $g, $fl, $date),
             array('annanas', 0.008 , 1, $g, $fl, $date),
-
                 // produits laitiers
             array('beurre', 0.008, 7, $g, $pl, $date),
             array('gruyère rapé', 0.010, 4, $g, $pl, $date),
             array('parmesan rapé', 0.025, 5, $g, $pl, $date),
+            array('comté', 0.020, 5, $g, $pl, $date),
             array('camembert', 0.016, 3, $g, $pl, $date),
             array('reblochon', 0.020, 3, $g, $pl, $date),
             array('crème fraiche', 0.008, 2, $g, $pl, $date),
+            array('yahourt', 0.003, 1, $g, $pl, $date),
+            array('fromage frais', 0.003, 1, $g, $pl, $date),
+            array('crème soja', 0.008, 1, $g, $pl, $date),
 
             // En ml
             array('lait', 0.002 , 2, $ml, $pl, $date),
             array('huile d\'olive', 0.006 , 9, $ml, $esa, $date),
+            array('huile de colza', 0.005 , 9, $ml, $esa, $date),
+            array('huile d\'arachide', 0.004 , 9, $ml, $esa, $date),
             array('vinaigre', 0.006 , 0, $ml, $esa, $date),
 
             // A l'unité.
             array('oeuf', 0.20, 75, $u, $esa, $date),
             array('gousse d\'ail', 0.05, 10, $u, $fl, $date),
+            array('pâte brisée', 1.50, 900, $u, $esu, $date),
+            array('pâte feuilletée', 1.50, 1200, $u, $esu, $date),
+            array('pâte sablée', 1.50, 1000, $u, $esu, $date),
         );
 
         foreach ($rows as $row) {
