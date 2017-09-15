@@ -24,7 +24,7 @@ class LoadUser implements FixtureInterface, OrderedFixtureInterface
         // for prod env we don't want the password to be in plaintext.
         if(isset($_ENV['PASSWORD_USER'])) {
             $password = $_ENV['PASSWORD_USER'];
-            $salt = String(random_int(1000, 9999));
+            $salt = strval(random_int(1000, 9999));
         }
         // for test env, we need a user with a known password.
         else {
