@@ -75,7 +75,7 @@ class RecipeControllerTest extends WebTestCase
         // Le routeur execute une seconde redirection vers "/home"
         $crawler = $client->followRedirect();
         // Vérifie qu'on a bien le message de bienvenu dans un balise h1.
-        $this->assertSame(1, $crawler->filter('h1:contains("Content de vous revoir minus")')->count());
+        $this->assertSame(1, $crawler->filter('h1:contains("Bonjour minus")')->count());
 
         // Log out
         $link = $crawler->selectLink('Déconnexion')->link();
