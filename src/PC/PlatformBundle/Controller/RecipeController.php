@@ -121,6 +121,20 @@ class RecipeController extends Controller
                 $em->persist($recipe);
                 $em->flush();
 
+                // Send a mail to the admin
+                $message = \Swift_Message::newInstance()
+                    ->setFrom($this->container->getParameter('mailer_user'))
+                    ->setTo($this->container->getParameter('mail_admin'))
+                    ->setSubject('new recipe in planificateur')
+                    ->setBody(
+                        $this->renderView(
+                            'PCPlatformBundle:Recipe:email.txt.twig',
+                            array('recipe' => $recipe)
+                        )
+                    );
+
+                $this->get('mailer')->send($message);
+
                 $request->getSession()->getFlashBag()->add('notice', 'Votre recette sera disponible après modération par l\'admin.');
 
                 return $this->redirectToRoute('pc_platform_recipe_index');
