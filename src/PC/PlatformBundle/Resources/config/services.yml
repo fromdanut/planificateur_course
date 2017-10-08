@@ -6,3 +6,12 @@ services:
     arguments:
       - "@doctrine.orm.entity_manager"
       - %insertion_limit_time%
+  pc_platform.moderation:
+    class: PC\PlatformBundle\Moderation\PCModeration
+    arguments:
+      - "@mailer"
+      - "@templating"
+      - "@router"
+      - %secret%
+      - %mailer_user%
+      - %mail_admin%

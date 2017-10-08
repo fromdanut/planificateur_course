@@ -121,47 +121,9 @@ class RecipeController extends Controller
                 $em->persist($recipe);
                 $em->flush();
 
-                // Generate the url that will be sent to admin to valid the recipe
-                $sha1ed_secret = sha1($this->container->getParameter('secret'));
-                $recipe_id = $recipe->getId();
-
-                $url_valide = $this->generateUrl(
-                    'pc_platform_moderate_recipe',
-                    array(
-                        'sha' => $sha1ed_secret,
-                        'id'  => $recipe_id,
-                        'action' => 'valide',
-                    ),
-                    true
-                );
-
-                $url_delete = $this->generateUrl(
-                    'pc_platform_moderate_recipe',
-                    array(
-                        'sha' => $sha1ed_secret,
-                        'id'  => $recipe_id,
-                        'action' => 'delete',
-                    ),
-                    true
-                );
-
-                // Send a mail to the admin
-                $message = \Swift_Message::newInstance()
-                    ->setFrom($this->container->getParameter('mailer_user'))
-                    ->setTo($this->container->getParameter('mail_admin'))
-                    ->setSubject('new recipe in planificateur')
-                    ->setBody(
-                        $this->renderView(
-                            'PCPlatformBundle:Recipe:email.txt.twig',
-                            array(
-                                'recipe' => $recipe,
-                                'url_valide'    => $url_valide,
-                                'url_delete'    => $url_delete,
-                            )
-                        )
-                    );
-
-                $this->get('mailer')->send($message);
+                // Use the moderation service to moderate the new recipe.
+                $moderation = $this->container->get('pc_platform.moderation');
+                $moderation->moderate($recipe);
 
                 $request->getSession()->getFlashBag()->add('notice', 'Votre recette sera disponible après modération par l\'admin.');
 
@@ -261,6 +223,7 @@ class RecipeController extends Controller
             foreach ($recipe->getRecipeIngredients() as $recipeIngredient) {
                 $recipeIngredient->setRecipe($recipe);
             }
+
 
             $em->persist($recipe);
             $em->flush();
