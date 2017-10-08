@@ -121,6 +121,30 @@ class RecipeController extends Controller
                 $em->persist($recipe);
                 $em->flush();
 
+                // Generate the url that will be sent to admin to valid the recipe
+                $sha1ed_secret = sha1($this->container->getParameter('secret'));
+                $recipe_id = $recipe->getId();
+
+                $url_valide = $this->generateUrl(
+                    'pc_platform_moderate_recipe',
+                    array(
+                        'sha' => $sha1ed_secret,
+                        'id'  => $recipe_id,
+                        'action' => 'valide',
+                    ),
+                    true
+                );
+
+                $url_delete = $this->generateUrl(
+                    'pc_platform_moderate_recipe',
+                    array(
+                        'sha' => $sha1ed_secret,
+                        'id'  => $recipe_id,
+                        'action' => 'delete',
+                    ),
+                    true
+                );
+
                 // Send a mail to the admin
                 $message = \Swift_Message::newInstance()
                     ->setFrom($this->container->getParameter('mailer_user'))
@@ -129,7 +153,11 @@ class RecipeController extends Controller
                     ->setBody(
                         $this->renderView(
                             'PCPlatformBundle:Recipe:email.txt.twig',
-                            array('recipe' => $recipe)
+                            array(
+                                'recipe' => $recipe,
+                                'url_valide'    => $url_valide,
+                                'url_delete'    => $url_delete,
+                            )
                         )
                     );
 
@@ -146,6 +174,43 @@ class RecipeController extends Controller
         return $this->render('PCPlatformBundle:Recipe:add.html.twig', array(
             'form' => $form->createView(),
         ));
+    }
+
+
+    /**
+     * Function used to moderate new recipes. It validates the url sended to
+     * the admin by addAction.
+     */
+    public function moderateAction($sha, $id, $action)
+    {
+        $sha1ed_secret = sha1($this->container->getParameter('secret'));
+        if ($sha == $sha1ed_secret) {
+
+            $em = $this->getDoctrine()->getManager();
+            $repo = $em->getRepository('PCPlatformBundle:Recipe');
+            $recipe = $repo->find($id);
+
+            // Valide the recipe (enables it to be viewed on the siteweb)...
+            if ($action == 'valide') {
+                $recipe->setValid(true);
+                $em->persist($recipe);
+                // Redirect to the view of the moderated recipe
+                $response = $this->forward('PCPlatformBundle:Recipe:view', array(
+                    'slug'  => $recipe->getSlug()
+                ));
+            }
+            // ...if the recipe is not valide it's removed from bdd.
+            elseif ($action == 'delete') {
+                $em->remove($recipe);
+                $response = $this->redirectToRoute('pc_platform_recipe_index');
+            }
+            $em->flush();
+        }
+        else {
+            throw new NotFoundHttpException("sha incorrect");
+        }
+
+        return $response;
     }
 
     /**

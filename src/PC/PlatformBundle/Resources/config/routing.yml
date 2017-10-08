@@ -45,6 +45,15 @@ pc_platform_edit:
     requirements:
         id: \d*
 
+pc_platform_moderate_recipe:
+    path:     /recipe/moderate/{sha}/{action}/{id}
+    defaults:
+        _controller: PCPlatformBundle:Recipe:moderate
+    requirements:
+        action: delete|valide 
+        id: \d*
+
+
 pc_platform_shoppinglist_view:
     path:     /shoppingList/view/
     defaults:
