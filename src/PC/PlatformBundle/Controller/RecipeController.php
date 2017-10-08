@@ -224,11 +224,16 @@ class RecipeController extends Controller
                 $recipeIngredient->setRecipe($recipe);
             }
 
-
+            // The recipe becomes invalid untill the admin moderate it.
+            $recipe->setValid(false);
             $em->persist($recipe);
             $em->flush();
-            $request->getSession()->getFlashBag()->add('notice', 'Recette modifiée.');
-            return $this->redirectToRoute('pc_platform_view', array('slug' => $recipe->getSlug()));
+            // Use the moderation service to moderate the new recipe.
+            $moderation = $this->container->get('pc_platform.moderation');
+            $moderation->moderate($recipe);
+
+            $request->getSession()->getFlashBag()->add('notice', 'Recette modifiée, elle sera de nouveau disponible après modération par l\'admin.');
+            return $this->redirectToRoute('pc_platform_recipe_index', array('slug' => $recipe->getSlug()));
 
         }
 
