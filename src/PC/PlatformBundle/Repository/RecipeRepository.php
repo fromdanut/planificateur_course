@@ -14,9 +14,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class RecipeRepository extends \Doctrine\ORM\EntityRepository
 {
-    /*
-        To load the image of recipe.
-    */
+
     public function withImage(QueryBuilder $qb)
     {
       $qb
@@ -59,6 +57,9 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
     */
     public function byOption(QueryBuilder $qb, $option)
     {
+        // recipe must be valided (eg : moderate by administrator)
+        $qb->where('r.valid = true');
+
         if ($option->getQuick()) {
             $qb->where('r.cookingTime < 20');
         }
@@ -135,11 +136,7 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         ;
     }
 
-    /*
-        int id
-        int nb
-        return list of recipe Entity
-    */
+
     public function findWithImageAndCat($nb)
     {
         $qb = $this->createQueryBuilder('r');
@@ -164,7 +161,6 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
         $this->withImage($qb);
         $this->withCategories($qb);
         $this->withIngredients($qb);
-
         return $qb
             ->getQuery()
             ->getOneOrNullResult();

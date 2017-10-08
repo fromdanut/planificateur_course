@@ -45,5 +45,6 @@ class RecipeTest extends TestCase
 
         $this->assertFalse($recipe->getValid());
     }
+
 }
 ?>
