@@ -31,5 +31,19 @@ class RecipeTest extends TestCase
         // Assert total price is 70 (3*20 + 2*5)
         $this->assertSame(70, $recipe->computePrice());
     }
+
+    public function testValidIsSetToFalseByDefault()
+    {
+        // Create a single ingredient and recipe ingredient.
+        $ing = new Ingredient();
+        $ing->setPrice(10);
+        $rIng = new RecipeIngredient();
+        $rIng->setIngredient($ing)->setQuantity(2);
+        // Add it to a new recipe
+        $recipe = new Recipe();
+        $recipe->addRecipeIngredient($rIng);
+
+        $this->assertFalse($recipe->getValid());
+    }
 }
 ?>

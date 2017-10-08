@@ -27,6 +27,8 @@ class Recipe
      */
     private $id;
 
+
+
     /**
      * @var string
      *
@@ -75,6 +77,12 @@ class Recipe
      */
     private $rating;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="valid", type="boolean")
+     */
+    private $valid = false; // false by default, must be valided by admin.
 
     /**
      * @var string
@@ -429,7 +437,7 @@ class Recipe
         $price = $this->computePrice();
         $this->setPrice($price);
     }
-    
+
     /**
      * Set calorie
      *
@@ -542,5 +550,29 @@ class Recipe
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set valid
+     *
+     * @param boolean $valid
+     *
+     * @return Recipe
+     */
+    public function setValid($valid)
+    {
+        $this->valid = $valid;
+
+        return $this;
+    }
+
+    /**
+     * Get valid
+     *
+     * @return boolean
+     */
+    public function getValid()
+    {
+        return $this->valid;
     }
 }
