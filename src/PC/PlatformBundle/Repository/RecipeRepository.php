@@ -140,6 +140,7 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
     public function findWithImageAndCat($nb)
     {
         $qb = $this->createQueryBuilder('r');
+        $qb->where('r.valid = true');
         $this->withImage($qb);
         $this->withCategories($qb);
         $qb->setMaxResults($nb);
@@ -156,7 +157,8 @@ class RecipeRepository extends \Doctrine\ORM\EntityRepository
     public function findOneWithImageCatAndIngredients($slug)
     {
         $qb = $this->createQueryBuilder('r');
-        $qb->where('r.slug = :slug')
+        $qb->where('r.valid = true');
+        $qb->andWhere('r.slug = :slug')
                 ->setParameter('slug', $slug);
         $this->withImage($qb);
         $this->withCategories($qb);

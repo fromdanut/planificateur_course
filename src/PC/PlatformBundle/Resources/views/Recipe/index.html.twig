@@ -16,6 +16,10 @@
                     {% block article_title %}
                     {% endblock %}
                 </div>
+                <div class="">
+                    {# Show a messge when the user is redirected in index after adding a recipe #}
+                    {% include 'PCPlatformBundle:Default:widget_flashbag_success.html.twig' %}
+                </div>
             </div>
             <div class="row">
                 {% for recipe in recipes %}

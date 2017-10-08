@@ -121,11 +121,9 @@ class RecipeController extends Controller
                 $em->persist($recipe);
                 $em->flush();
 
-                $request->getSession()->getFlashBag()->add('notice', 'Nouvelle recette enregistrée.');
+                $request->getSession()->getFlashBag()->add('notice', 'Votre recette sera disponible après modération par l\'admin.');
 
-                return $this->redirectToRoute('pc_platform_view', array(
-                    'slug' => $recipe->getSlug(),
-                ));
+                return $this->redirectToRoute('pc_platform_recipe_index');
             }
 
             $request->getSession()->getFlashBag()->add('notice', 'Attendre un peu avant d\'ajouter une recette.');
