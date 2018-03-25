@@ -3,15 +3,14 @@
 A Symfony project created on June 15, 2017, 10:34 pm.
 Visite the [Website](http://planificateur-de-course.herokuapp.com/login)
 
-## Presentation :
+## Présentation :
+Site web de gestion de recette de cuisine. En plus de créer des recettes, l'utilisateur peut générer des listes de courses à partir d'une selection de recettes.
 
-It's a recipe website. User can stock/create/edit recipes. Plus, the user can create a shopping list from a list of recipes. The shopping list is ordered by group of ingredients (with price for each groups and the total price). Eventually users can use this shopping list while shopping.
+## Amélioration pour la prochaine version:
 
-## Improvement for next version :
-
-- add a service to send the shopping list via mail.
-- translate in English.
-- extend database with new ingredients.
+- proposer d'envoyer la liste de courses par mail.
+- traduire en anglais.
+- ajouter des ingrédients à la base de données...
 
 ## Auteur
 
